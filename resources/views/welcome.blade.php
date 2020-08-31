@@ -7,6 +7,6 @@
         <title>Skutik</title>
     </head>
     <body style="text-align: center">
-       <p>Tunggu aku atau loe gue end</p>
+       <p>Tunggu...!!! atau loe gue end</p>
     </body>
 </html>
