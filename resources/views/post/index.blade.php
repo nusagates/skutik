@@ -11,6 +11,9 @@
                 @if(Route::is('post.create'))
                     @include('post._create')
                 @endif
+                @if(Route::is('post.show'))
+                    @include('post._show')
+                @endif
             </div>
         </div>
     </div>

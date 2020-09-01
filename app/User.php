@@ -48,9 +48,18 @@ class User extends Authenticatable
     {
         return url($this->username);
     }
+
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;
         $this->attributes['username'] = strrev(Carbon::now()->timestamp);
+    }
+
+    public function getAvatarAttribute()
+    {
+        $email = "someone@somewhere.com";
+        $default = url('images/user.jfif');
+        $size = 40;
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->email))) . "?d=" . urlencode($default) . "&s=" . $size;
     }
 }

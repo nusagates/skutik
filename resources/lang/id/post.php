@@ -14,7 +14,7 @@ return [
     */
 
     'label_all' => "Semua Artikel",
-    'label_newest' => "Artikel Terbaru",
+    'label_newest' => "Terbaru",
     'label_create' => "Buat Artikel",
     'label_by' => "oleh",
     'label_title' => "Judul",

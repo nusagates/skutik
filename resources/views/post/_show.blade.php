@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <h3>{{$post->post_title}}</h3>
+        <a class="btn btn-outline-info" href="{{route('post.index')}}">{{trans('post.label_all')}}</a>
+    </div>
+    <div class="card-body">
+        <div class="media">
+            <div class="d-flex flex-column vote-controls">
+                <a href="#" title="This question is useful" class="vote-up">
+                    <i class="fa fa-caret-up fa-3x"></i>
+                </a>
+                <span class="votes-count">1230</span>
+                <a href="#" title="This question is not useful" class="vote-down off">
+                    <i class="fa fa-caret-down fa-3x"></i>
+                </a>
+                <a href="#" title="Click to mark as favorite question (Click again to undo)" class="favorite favorited">
+                    <i class="fa fa-star fa-1x"></i>
+                </a>
+                <span class="favorites-count">123</span>
+            </div>
+            <div class="media-body">
+                <p>{{$post->post_content}}</p>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <a class="btn btn-sm btn-outline-primary" href="">Edit</a>
+                        <a class="btn btn-sm btn-outline-danger" href="">Hapus</a>
+                    </div>
+                    <div>
+                        <span class="d-block">
+                            <img src="{{$post->user->avatar}}"/> <a href="{{$post->user->url}}">{{ $post->user->name }}</a>
+                        </span>
+                        <small class="text-muted d-block"><i class="fa fa-clock-o"></i> {{ $post->created_date }}
+                        </small>
+                        <div class="d-block">
+                            <small class="text-muted">
+                                @if($post->tags->count()>0)
+                                    <i class="fa fa-tags"></i>
+                                    @foreach($post->tags as $tag)
+                                        <a class="badge badge-success"
+                                           href="{{$tag->url}}">{{$tag->name}}</a>
+                                    @endforeach
+                                @endif
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>

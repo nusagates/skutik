@@ -22,7 +22,6 @@ class PostController extends Controller
     public function index()
     {
         $post = Post::with(['user', 'tags'])->latest()->paginate(20);
-        //
         return view('post.index', compact('post'));
     }
 
@@ -65,7 +64,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('post.index', compact('post'));
     }
 
     /**
