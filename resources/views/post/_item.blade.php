@@ -31,7 +31,7 @@
                             @endif
                         </small>
                     </p>
-                    <p>{{Str::limit(strip_tags($item->post_content), 200, '...')}}</p>
+                    <p>{!!Str::limit(strip_tags($item->post_content), 200, '...')!!}</p>
                     <hr>
                 </div>
             </div>
