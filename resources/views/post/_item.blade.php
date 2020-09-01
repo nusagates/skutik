@@ -6,17 +6,6 @@
     <div class="card-body">
         @foreach($post as $item)
             <div class="media">
-                <div class="d-flex flex-column counters">
-                    <div class="vote">
-                        <strong>777</strong> vote
-                    </div>
-                    <div class="status answered-accepted">
-                        <strong>997</strong> comment
-                    </div>
-                    <div class="view">
-                        566 view
-                    </div>
-                </div>
                 <div class="media-body">
                     <h3><a href="{{$item->url}}"> {{$item->post_title}}</a></h3>
                     <p class="lead">
