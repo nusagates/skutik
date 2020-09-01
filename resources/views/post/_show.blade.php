@@ -1,7 +1,11 @@
 <div class="card">
-    <div class="card-header d-flex justify-content-between">
-        <h3>{{$post->post_title}}</h3>
-    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('home')}}">{{trans('general.label_home')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('post.index')}}">{{trans('post.label_post')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{$post->post_title}}</li>
+        </ol>
+    </nav>
     <div class="card-body">
         <div class="media">
             <div class="d-flex flex-column vote-controls">
@@ -18,10 +22,12 @@
                 <span class="favorites-count">123</span>
             </div>
             <div class="media-body">
+                <h3>{{$post->post_title}}</h3>
                 <p>{{$post->post_content}}</p>
                 <div class="d-flex justify-content-between">
                     <div>
                         <div class="d-block">
+                            <i class="fa fa-"></i>
                             <small class="text-muted">
                                 @if($post->tags->count()>0)
                                     @foreach($post->tags as $tag)
@@ -51,3 +57,49 @@
         </div>
     </div>
 </div>
+<script type="application/ld+json">
+    [{
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "{{trans('general.label_home')}}",
+        "item": "{{route('home')}}"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{trans('post.label_post')}}",
+        "item": "{{route('post.index')}}"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{$post->post_title}}"
+      }]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{$post->url}}"
+      },
+      "headline": "{{$post->post_title}}",
+      "image":"{{$post->featured_image}}",
+      "datePublished": "2015-02-05T08:00:00+08:00",
+      "dateModified": "2015-02-05T09:20:00+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "{{$post->user->name}}"
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "Skutik",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{url('images/logo.png')}}"
+        }
+      }
+    }
+    ]
+    </script>

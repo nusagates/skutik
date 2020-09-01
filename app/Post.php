@@ -35,4 +35,15 @@ class Post extends Model
     {
         return route('post.show', $this->slug);
     }
+
+    public function getFeaturedImageAttribute()
+    {
+        return url("images/baner.png");
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return !is_null($this->post_excerpt) ? $this->post_excerpt : Str::limit(strip_tags($this->post_content), 160, '...');
+    }
+
 }

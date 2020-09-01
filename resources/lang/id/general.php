@@ -13,14 +13,18 @@ return [
     |
     */
 
-    'label_post' => "Artikel",
-    'label_all' => "Semua Artikel",
-    'label_newest' => "Terbaru",
-    'label_create' => "Buat Artikel",
-    'label_by' => "oleh",
-    'label_title' => "Judul",
-    'label_content' => "Isi Artikel",
-    'label_send' => "Kirim Artikel",
-    'label_create_success' => "Artikel Anda berhasil diterbitkan",
+    'label_all' => "Semua",
+    'label_home' => "Beranda",
+    'label_back' => "Kembali",
+    'label_send' => "Kirim",
+    'label_update' => "Perbarui",
+    'label_create' => "Buat",
+    'label_edit' => "Edit",
+    'label_delete' => "Hapus",
+    'label_cancel' => "Batal",
+    'label_success' => "Sukses",
+    'label_error' => "Kesalahan",
+    'label_new' => "Baru",
+    'label_old' => "Lama",
 
 ];
