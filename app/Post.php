@@ -20,6 +20,11 @@ class Post extends Model
         return $this->belongsToMany(Tags::class, 'post_tags', 'post_id', 'tag_id');
     }
 
+    public function attribute()
+    {
+        return $this->hasMany(PostTags::class);
+    }
+
     public function setPostTitleAttribute($value)
     {
         $this->attributes['post_title'] = $value;
@@ -29,6 +34,16 @@ class Post extends Model
     public function getCreatedDateAttribute()
     {
         return $this->created_at->diffForHumans();
+    }
+
+    public function getCreatedAtIsoAttribute()
+    {
+        return $this->created_at->format('c');
+    }
+
+    public function getUpdatedAtIsoAttribute()
+    {
+        return $this->updated_at->format('c');
     }
 
     public function getUrlAttribute()
@@ -44,6 +59,20 @@ class Post extends Model
     public function getDescriptionAttribute()
     {
         return !is_null($this->post_excerpt) ? $this->post_excerpt : Str::limit(strip_tags($this->post_content), 160, '...');
+    }
+
+    public function getAllTagsAttribute()
+    {
+        $tagId = [];
+        foreach ($this->attribute as $item) {
+            $tagId[] = [$item->tag_id];
+        }
+        $tags = Tags::find($tagId);
+        $t = array();
+        foreach ($tags as $tag) {
+            array_push($t, $tag->name);
+        }
+        return implode(",", $t);
     }
 
 }

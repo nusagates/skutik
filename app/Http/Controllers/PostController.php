@@ -75,7 +75,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.index', compact('post'));
     }
 
     /**
@@ -87,7 +87,17 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->update($request->only("post_title", "post_content"));
+        $post->tags()->detach();
+        if (!empty($request->post_tags)) {
+            $tags = array_unique(explode(",", $request->post_tags));
+            $tagIds = array();
+            foreach ($tags as $tagitem) {
+                $tagIds[] = Tags::firstOrCreate(['name' => $tagitem])->id;
+            }
+            $post->tags()->attach($tagIds);
+        }
+        return redirect()->route('post.show', $post->slug)->with('success', trans('post.label_update_success'));
     }
 
     /**
@@ -98,6 +108,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('post.index')->with('success', trans('post.label_delete_success'));
     }
 }

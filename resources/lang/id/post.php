@@ -22,5 +22,7 @@ return [
     'label_content' => "Isi Artikel",
     'label_send' => "Kirim Artikel",
     'label_create_success' => "Artikel Anda berhasil diterbitkan",
+    'label_update_success' => "Artikel Anda berhasil diperbarui",
+    'label_delete_success' => "Artikel Anda berhasil dihapus",
 
 ];

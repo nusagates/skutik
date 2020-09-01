@@ -8,5 +8,8 @@ class PostTags extends Model
 {
     protected $guarded = [];
 
-
+    public function tag()
+    {
+        return $this->belongsTo(Tags::class);
+    }
 }

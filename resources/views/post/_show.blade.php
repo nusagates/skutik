@@ -1,13 +1,3 @@
-@section('meta')
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="{{$post->url}}"/>
-    <meta property="og:site_name" content="Skutik"/>
-    <meta property="og:image" itemprop="image primaryImageOfPage" content="{{$post->featured_image}}"/>
-    <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:domain" content="skutik.comcom"/>
-    <meta name="twitter:title" property="og:title" itemprop="name" content="{{$post->post_title." - ".config('app.name')}}"/>
-    <meta name="twitter:description" property="og:description" itemprop="description" content="{{$post->description}}"/>
-@endsection
 <div class="card">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -33,13 +23,13 @@
             </div>
             <div class="media-body">
                 <h3>{{$post->post_title}}</h3>
-                <p>{{$post->post_content}}</p>
+                <p>{!! $post->post_content !!}</p>
                 <div class="d-flex justify-content-between">
                     <div>
                         <div class="d-block">
                             <i class="fa fa-"></i>
                             <small class="text-muted">
-                                @if($post->tags->count()>0)
+                                @if($post->tags && $post->tags->count()>0)
                                     @foreach($post->tags as $tag)
                                         <a class="badge badge-success"
                                            href="{{$tag->url}}">{{$tag->name}}</a>
@@ -56,9 +46,15 @@
                                 <small class="text-muted d-block">{{ $post->created_date }}</small>
                             </div>
                         </div>
-                        <div class="d-block mt-2">
-                            <a class="btn btn-sm btn-outline-primary" href="">Edit</a>
-                            <a class="btn btn-sm btn-outline-danger" href="">Hapus</a>
+                        <div class="d-block">
+                            <a class="btn btn-sm btn-outline-primary mt-2"
+                               href="{{route('post.edit', $post->id)}}">Edit</a>
+                            <form class="d-inline" action="{{route('post.destroy', $post->id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-sm btn-outline-danger mt-2"
+                                       value="{{trans('general.label_delete')}}">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -96,8 +92,8 @@
       },
       "headline": "{{$post->post_title}}",
       "image":"{{$post->featured_image}}",
-      "datePublished": "2015-02-05T08:00:00+08:00",
-      "dateModified": "2015-02-05T09:20:00+08:00",
+      "datePublished": "{{$post->created_at_iso}}",
+      "dateModified": "{{$post->updated_at_iso}}",
       "author": {
         "@type": "Person",
         "name": "{{$post->user->name}}"
@@ -112,4 +108,6 @@
       }
     }
     ]
-    </script>
+
+
+</script>
