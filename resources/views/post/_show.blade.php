@@ -1,7 +1,6 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <h3>{{$post->post_title}}</h3>
-        <a class="btn btn-outline-info" href="{{route('post.index')}}">{{trans('post.label_all')}}</a>
     </div>
     <div class="card-body">
         <div class="media">
