@@ -7,7 +7,7 @@
         @foreach($post as $item)
             <div class="media">
                 <div class="media-body">
-                    <h3><a href="{{$item->url}}"> {{$item->post_title}}</a></h3>
+                    <h2><small><a href="{{$item->url}}"> {{$item->post_title}}</a></small></h2>
                     <p class="lead">
 <div class='d-flex justify-content-between'>
                         <small class="text-muted d-block"><i class="fa fa-user-circle-o"></i> <a href="{{$item->user->url}}">{{ $item->user->name }}</a></small>
