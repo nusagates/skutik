@@ -22,25 +22,28 @@
                 <p>{{$post->post_content}}</p>
                 <div class="d-flex justify-content-between">
                     <div>
-                        <a class="btn btn-sm btn-outline-primary" href="">Edit</a>
-                        <a class="btn btn-sm btn-outline-danger" href="">Hapus</a>
-                    </div>
-                    <div>
-                        <span class="d-block">
-                            <img src="{{$post->user->avatar}}"/> <a href="{{$post->user->url}}">{{ $post->user->name }}</a>
-                        </span>
-                        <small class="text-muted d-block"><i class="fa fa-clock-o"></i> {{ $post->created_date }}
-                        </small>
                         <div class="d-block">
                             <small class="text-muted">
                                 @if($post->tags->count()>0)
-                                    <i class="fa fa-tags"></i>
                                     @foreach($post->tags as $tag)
                                         <a class="badge badge-success"
                                            href="{{$tag->url}}">{{$tag->name}}</a>
                                     @endforeach
                                 @endif
                             </small>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-block d-flex justify-content-between">
+                            <img class="img rounded-circle" src="{{$post->user->avatar}}"/>
+                            <div class="ml-2">
+                                <a href="{{$post->user->url}}">{{ $post->user->name }}</a>
+                                <small class="text-muted d-block">{{ $post->created_date }}</small>
+                            </div>
+                        </div>
+                        <div class="d-block mt-2">
+                            <a class="btn btn-sm btn-outline-primary" href="">Edit</a>
+                            <a class="btn btn-sm btn-outline-danger" href="">Hapus</a>
                         </div>
                     </div>
                 </div>
