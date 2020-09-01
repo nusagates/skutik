@@ -6,10 +6,10 @@
     <div class="card-body">
         <form action="{{$route}}" method="post">
             @csrf
-            {{!empty($method)?$method:''}}
+            {{$method??''}}
             <div class="form-group">
                 <label for="post_title">{{trans('post.label_title')}}</label>
-                <input autocomplete="off" value="{{old('post_title', $post->post_title)}}" type="text"
+                <input autocomplete="off" value="{{old('post_title', isset($post)?$post->post_title:'')}}" type="text"
                        class="form-control{{$errors->has('post_title')?' is-invalid':''}}"
                        name="post_title">
                 @if ($errors->has('post_title'))
@@ -21,7 +21,7 @@
             <div class="form-group">
                 <label for="post_content">{{trans('post.label_content')}}</label>
                 <textarea rows="7" class="form-control{{$errors->has('post_content')?' is-invalid':''}}
-                    " name="post_content" id="post_content">{{old('post_content',$post->post_content)}}</textarea>
+                    " name="post_content" id="post_content">{{old('post_content',isset($post)?$post->post_content:'')}}</textarea>
                 @if ($errors->has('post_content'))
                     <div class="invalid-feedback">
                         <strong>{{ $errors->first('post_content') }}</strong>
@@ -30,11 +30,11 @@
             </div>
             <div class="form-group">
                 <label for="post_tags">Tag</label>
-                <input type="text" class="form-control" name="post_tags" value="{{old('post_tags', $post->all_tags)}}"/>
+                <input type="text" class="form-control" name="post_tags" value="{{old('post_tags', isset($post)?$post->all_tags:'')}}"/>
                 <p><small>Pisahkan tag dengan koma</small></p>
             </div>
             <div class="form-group">
-                <input type="submit" value="{{$label}}" class="btn btn-outline-success">
+                <input type="submit" value="{{$label??''}}" class="btn btn-outline-success">
             </div>
         </form>
     </div>

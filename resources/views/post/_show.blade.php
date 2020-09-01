@@ -3,31 +3,15 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">{{trans('general.label_home')}}</a></li>
             <li class="breadcrumb-item"><a href="{{route('post.index')}}">{{trans('post.label_post')}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{$post->post_title}}</li>
         </ol>
     </nav>
     <div class="card-body">
         <div class="media">
-            <div class="d-flex flex-column vote-controls">
-                <a href="#" title="This question is useful" class="vote-up">
-                    <i class="fa fa-caret-up fa-3x"></i>
-                </a>
-                <span class="votes-count">1230</span>
-                <a href="#" title="This question is not useful" class="vote-down off">
-                    <i class="fa fa-caret-down fa-3x"></i>
-                </a>
-                <a href="#" title="Click to mark as favorite question (Click again to undo)" class="favorite favorited">
-                    <i class="fa fa-star fa-1x"></i>
-                </a>
-                <span class="favorites-count">123</span>
-            </div>
             <div class="media-body">
                 <h3>{{$post->post_title}}</h3>
-                <p>{!! $post->post_content !!}</p>
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <div class="d-block">
-                            <i class="fa fa-"></i>
+
+  <div class="d-block">
+                            <i class="fa fa-tags"></i>
                             <small class="text-muted">
                                 @if($post->tags && $post->tags->count()>0)
                                     @foreach($post->tags as $tag)
@@ -36,8 +20,9 @@
                                     @endforeach
                                 @endif
                             </small>
-                        </div>
-                    </div>
+                        </div>              <p>{!! $post->post_content !!}</p>
+                <div class="d-flex justify-content-between">
+                    <div></div>
                     <div>
                         <div class="d-block d-flex justify-content-between">
                             <img height="40" width="40" class="img rounded-circle" src="{{$post->user->avatar}}"/>
