@@ -3,7 +3,6 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">{{trans('general.label_home')}}</a></li>
             <li class="breadcrumb-item"><a href="{{route('post.index')}}">{{trans('post.label_post')}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{$post->post_title}}</li>
         </ol>
     </nav>
     <div class="card-body">
