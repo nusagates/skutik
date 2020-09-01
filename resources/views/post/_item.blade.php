@@ -10,7 +10,7 @@
                     <h3><a href="{{$item->url}}"> {{$item->post_title}}</a></h3>
                     <p class="lead">
 <div class='d-flex justify-content-between'>
-                        <small class="text-muted d-block"><i class="fa fa-user"></i> <a href="{{$item->user->url}}">{{ $item->user->name }}</a></small>
+                        <small class="text-muted d-block"><i class="fa fa-user-circle-o"></i> <a href="{{$item->user->url}}">{{ $item->user->name }}</a></small>
                         <small class="text-muted d-block"><i class="fa fa-clock-o"></i> {{ $item->created_date }}</small>
 </div>
                     </p>
