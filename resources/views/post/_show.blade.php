@@ -35,7 +35,7 @@
                     </div>
                     <div>
                         <div class="d-block d-flex justify-content-between">
-                            <img width="40" class="img rounded-circle" src="{{$post->user->avatar}}"/>
+                            <img height="80" width="40" class="img rounded-circle" src="{{$post->user->avatar}}"/>
                             <div class="ml-2">
                                 <a href="{{$post->user->url}}">{{ $post->user->name }}</a>
                                 <small class="text-muted d-block">{{ $post->created_date }}</small>
