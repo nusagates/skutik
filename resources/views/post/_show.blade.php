@@ -1,3 +1,4 @@
+@section('title', $post->post_title." - ".config('app.name'))
 <div class="card">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
