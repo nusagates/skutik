@@ -9,11 +9,9 @@
         <div class="media">
             <div class="media-body">
                 <h3>{{$post->post_title}}</h3>
-                <p>{!! $post->post_content !!}</p>
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <div class="d-block">
-                            <i class="fa fa-"></i>
+
+  <div class="d-block">
+                            <i class="fa fa-tags"></i>
                             <small class="text-muted">
                                 @if($post->tags && $post->tags->count()>0)
                                     @foreach($post->tags as $tag)
@@ -22,8 +20,9 @@
                                     @endforeach
                                 @endif
                             </small>
-                        </div>
-                    </div>
+                        </div>              <p>{!! $post->post_content !!}</p>
+                <div class="d-flex justify-content-between">
+                    <div></div>
                     <div>
                         <div class="d-block d-flex justify-content-between">
                             <img height="40" width="40" class="img rounded-circle" src="{{$post->user->avatar}}"/>
