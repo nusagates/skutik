@@ -2,6 +2,8 @@
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="{{Request::url()}}"/>
     <meta property="og:site_name" content="Skutik"/>
+    <meta property="og:title" content="{{$meta_title??''}}"/>
+    <meta property="og:description" content="{{$meta_description??''}}"/>
     <meta property="og:image" itemprop="image primaryImageOfPage"
           content="{{$meta_image??''}}"/>
     <meta name="twitter:card" content="summary"/>
