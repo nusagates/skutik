@@ -24,7 +24,7 @@ class PostController extends Controller
         $post = Post::with(['user', 'tags'])
             ->where('post_type', 'post')
             ->latest()->paginate(15);
-        return view('post.index', ['post'=>$post,'latest'=>$post]);
+        return view('post.index', ['post' => $post, 'latest' => $post]);
     }
 
     /**
@@ -69,7 +69,7 @@ class PostController extends Controller
         $latest = Post::where('post_type', 'post')
             ->latest()->paginate(10);
         $post->increment('post_view');
-        return view('post.index', ['post'=>$post, 'latest'=>$latest]);
+        return view('post.index', ['post' => $post, 'latest' => $latest]);
     }
 
     /**
@@ -118,5 +118,13 @@ class PostController extends Controller
         $this->authorize('delete', $post);
         $post->delete();
         return redirect()->route('post.index')->with('success', trans('post.label_delete_success'));
+    }
+
+    public function tag(Tags $tag)
+    {
+        $post = Tags::find($tag->id)->tag()->paginate(15);
+        $latest = Post::where('post_type', 'post')
+            ->latest()->limit(10);
+        return view('post.index', ['post' => $post, 'latest' => $latest, "tag"=>$tag->name]);
     }
 }

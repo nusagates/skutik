@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Post;
+use App\Tags;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -31,8 +32,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Route::bind('slug', function ($slug) {
+        Route::bind('post_slug', function ($slug) {
             return Post::where('slug', $slug)->first() ?? abort(404);
+        });
+        Route::bind('tag_slug', function ($slug) {
+            return Tags::where('slug', $slug)->first() ?? abort(404);
         });
 
         parent::boot();

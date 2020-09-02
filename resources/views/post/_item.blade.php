@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
-        <h3>{{trans('post.label_newest')}}</h3>
+        <h3>{{$title??trans('post.label_newest')}}</h3>
         <a class="btn btn-outline-info" href="{{route('post.create')}}">{{trans('post.label_create')}}</a>
     </div>
     <div class="card-body">

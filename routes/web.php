@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'PostController@index')->name('home');
 Route::resource('post', 'PostController')->except('show');
-Route::get('/post/{slug}', 'PostController@show')->name('post.show');
+Route::get('/post/{post_slug}', 'PostController@show')->name('post.show');
+Route::get('/post/tagged/{tag_slug}', 'PostController@tag')->name('post.tag');
