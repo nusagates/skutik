@@ -1,4 +1,5 @@
 @section('meta')
+    <meta property="fb:app_id" content="3223075517741573"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="{{Request::url()}}"/>
     <meta property="og:site_name" content="Skutik"/>
