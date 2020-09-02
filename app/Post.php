@@ -28,7 +28,7 @@ class Post extends Model
     public function setPostTitleAttribute($value)
     {
         $this->attributes['post_title'] = $value;
-        $this->attributes['slug'] = Str::slug($value) . "_" . strrev(Carbon::now()->timestamp);
+        $this->attributes['slug'] = Str::slug($value) . "-" . strrev(Carbon::now()->timestamp);
     }
 
     public function getCreatedDateAttribute()
