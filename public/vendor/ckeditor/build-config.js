@@ -13,10 +13,10 @@
  * (1) https://ckeditor.com/cke4/builder
  *     Visit online builder to build CKEditor from scratch.
  *
- * (2) https://ckeditor.com/cke4/builder/c2bf1cd48a550be5027329af191e1e2b
+ * (2) https://ckeditor.com/cke4/builder/75d109c77c04edb527a5fd50727b04c4
  *     Visit online builder to build CKEditor, starting with the same setup as before.
  *
- * (3) https://ckeditor.com/cke4/builder/download/c2bf1cd48a550be5027329af191e1e2b
+ * (3) https://ckeditor.com/cke4/builder/download/75d109c77c04edb527a5fd50727b04c4
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
  * NOTE:
@@ -25,7 +25,7 @@
  */
 
 var CKBUILDER_CONFIG = {
-	skin: 'moono-lisa',
+	skin: 'kama',
 	preset: 'basic',
 	ignore: [
 		'.DS_Store',
@@ -53,25 +53,25 @@ var CKBUILDER_CONFIG = {
 	],
 	plugins : {
 		'about' : 1,
-		'autogrow' : 1,
-		'autolink' : 1,
 		'basicstyles' : 1,
-		'chart' : 1,
+		'ckeditorfa' : 1,
 		'clipboard' : 1,
+		'emojione' : 1,
 		'enterkey' : 1,
 		'entities' : 1,
+		'eqneditor' : 1,
 		'floatingspace' : 1,
-		'font' : 1,
-		'image2' : 1,
-		'imageresize' : 1,
+		'format_buttons' : 1,
+		'image' : 1,
 		'indentlist' : 1,
-		'justify' : 1,
 		'link' : 1,
 		'list' : 1,
-		'mathjax' : 1,
+		'maximize' : 1,
 		'mentions' : 1,
 		'prism' : 1,
 		'simage' : 1,
+		'sourcedialog' : 1,
+		'toc' : 1,
 		'toolbar' : 1,
 		'undo' : 1,
 		'wordcount' : 1,
@@ -79,6 +79,7 @@ var CKBUILDER_CONFIG = {
 		'youtube' : 1
 	},
 	languages : {
+		'ar' : 1,
 		'en' : 1,
 		'id' : 1
 	}
