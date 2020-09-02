@@ -103,3 +103,9 @@ p.arabic-text, .arabic{
     font-family: utsmani;
     font-size: 14pt;
 }
+
+pre {
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
