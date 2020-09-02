@@ -11,9 +11,9 @@
                 <h3>{{$post->post_title}}</h3>
 
                 <div class="d-block">
-                    <i class="fa fa-tags"></i>
                     <small class="text-muted">
                         @if($post->tags && $post->tags->count()>0)
+                            <i class="fa fa-tags"></i>
                             @foreach($post->tags as $tag)
                                 <a class="badge badge-success"
                                    href="{{$tag->url}}">{{$tag->name}}</a>
