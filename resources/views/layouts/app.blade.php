@@ -15,12 +15,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url('vendor/fontawesome/css/all.css')}}">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism-dark.min.css" integrity="sha512-Njdz7T/p6Ud1FiTMqH87bzDxaZBsVNebOWmacBjMdgWyeIhUSFU4V52oGwo3sT+ud+lyIE98sS291/zxBfozKw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{url('vendor/ckeditor/plugins/prism/lib/prism/prism_patched.min.css')}}"/>
+    <link href="{{url('vendor/ckeditor/plugins/chart/chart.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{url('images/icon.png')}}">
     @yield('meta')
 </head>
@@ -84,7 +83,9 @@
         @yield('content')
     </main>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
+<script src="{{url('vendor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js')}}"></script>
+<script src="{{url('vendor/ckeditor/plugins/chart/lib/chart.min.js')}}"></script>
+<script src="{{url('vendor/ckeditor/plugins/chart/widget2chart.js')}}"></script>
 @yield('script')
 </body>
 </html>

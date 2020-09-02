@@ -1,4 +1,3 @@
-@section('title', $post->post_title." - ".config('app.name'))
 <div class="card">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -11,17 +10,18 @@
             <div class="media-body">
                 <h3>{{$post->post_title}}</h3>
 
-  <div class="d-block">
-                            <i class="fa fa-tags"></i>
-                            <small class="text-muted">
-                                @if($post->tags && $post->tags->count()>0)
-                                    @foreach($post->tags as $tag)
-                                        <a class="badge badge-success"
-                                           href="{{$tag->url}}">{{$tag->name}}</a>
-                                    @endforeach
-                                @endif
-                            </small>
-                        </div>              <p>{!! $post->post_content !!}</p>
+                <div class="d-block">
+                    <i class="fa fa-tags"></i>
+                    <small class="text-muted">
+                        @if($post->tags && $post->tags->count()>0)
+                            @foreach($post->tags as $tag)
+                                <a class="badge badge-success"
+                                   href="{{$tag->url}}">{{$tag->name}}</a>
+                            @endforeach
+                        @endif
+                    </small>
+                </div>
+                <p>{!! $post->post_content !!}</p>
                 <div class="d-flex justify-content-between">
                     <div></div>
                     <div>
@@ -33,14 +33,19 @@
                             </div>
                         </div>
                         <div class="d-block">
-                            <a class="btn btn-sm btn-outline-primary mt-2"
-                               href="{{route('post.edit', $post->id)}}">Edit</a>
-                            <form class="d-inline" action="{{route('post.destroy', $post->id)}}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <input type="submit" class="btn btn-sm btn-outline-danger mt-2"
-                                       value="{{trans('general.label_delete')}}">
-                            </form>
+                            @can('update', $post)
+                                <a class="btn btn-sm btn-outline-primary mt-2"
+                                   href="{{route('post.edit', $post->id)}}">Edit</a>
+                            @endcan
+                            @can('delete', $post)
+                                <form class="d-inline" action="{{route('post.destroy', $post->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input onclick="return confirm('{{trans('post.msg_delete_confirmation')}}')"
+                                           type="submit" class="btn btn-sm btn-outline-danger mt-2"
+                                           value="{{trans('general.label_delete')}}">
+                                </form>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -94,6 +99,9 @@
       }
     }
     ]
+
+
+
 
 
 </script>

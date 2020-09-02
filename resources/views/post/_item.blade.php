@@ -9,20 +9,37 @@
                 <div class="media-body">
                     <h2><small><a href="{{$item->url}}"> {{$item->post_title}}</a></small></h2>
                     <p class="lead">
-<div class='d-flex justify-content-between'>
-                        <small class="text-muted d-block"><i class="fa fa-user-circle-o"></i> <a href="{{$item->user->url}}">{{ $item->user->name }}</a></small>
-                        <small class="text-muted d-block"><i class="fa fa-clock-o"></i> {{ $item->created_date }}</small>
-</div>
+                    <div class='d-flex justify-content-between'>
+                        <small class="text-muted d-block"><i class="fa fa-user-circle-o"></i> <a
+                                href="{{$item->user->url}}">{{ $item->user->name }}</a></small>
+                        <small class="text-muted d-block"><i class="fa fa-clock-o"></i> {{ $item->created_date }}
+                        </small>
+                    </div>
                     </p>
                     <p>{!!Str::limit(strip_tags($item->post_content), 200, '...')!!}</p>
-<small class="text-muted d-block">
-                            @if($item->tags->count()>0)
-                                <i class="fa fa-tags"></i>
-                                @foreach($item->tags as $tag)
-                                    <a class="badge badge-success" href="{{$tag->url}}">{{$tag->name}}</a>
-                                @endforeach
-                            @endif
-                        </small>
+                    <small class="text-muted d-block">
+                        @if($item->tags->count()>0)
+                            <i class="fa fa-tags"></i>
+                            @foreach($item->tags as $tag)
+                                <a class="badge badge-success" href="{{$tag->url}}">{{$tag->name}}</a>
+                            @endforeach
+                        @endif
+                    </small>
+                    <div class="d-block">
+                        @can('update', $item)
+                            <a class="btn btn-sm btn-outline-primary mt-2"
+                               href="{{route('post.edit', $item->id)}}">Edit</a>
+                        @endcan
+                        @can('delete', $item)
+                            <form class="d-inline" action="{{route('post.destroy', $item->id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input onclick="return confirm('{{trans('post.msg_delete_confirmation')}}')"
+                                       type="submit" class="btn btn-sm btn-outline-danger mt-2"
+                                       value="{{trans('general.label_delete')}}">
+                            </form>
+                        @endcan
+                    </div>
                     <hr>
                 </div>
             </div>

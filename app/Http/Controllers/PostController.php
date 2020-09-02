@@ -76,6 +76,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
         return view('post.index', compact('post'));
     }
 
@@ -88,6 +89,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $this->authorize('update', $post);
         $post->update($request->only("post_title", "post_content"));
         $post->tags()->detach();
         if (!empty($request->post_tags)) {
@@ -109,6 +111,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
         $post->delete();
         return redirect()->route('post.index')->with('success', trans('post.label_delete_success'));
     }

@@ -39,10 +39,10 @@
         </form>
     </div>
 </div>
-<script src="{{url('js/ckeditor/ckeditor.js')}}"></script>
+<script src="{{url('vendor/ckeditor/ckeditor.js')}}"></script>
 @section("script")
     <script>
-        CKEDITOR.replace('post_content', {
+       var editor = CKEDITOR.replace('post_content', {
             codeBlock: {
                 languages: [
                     {language: 'css', label: 'CSS'},
@@ -53,7 +53,11 @@
                     {language: 'kotlin', label: 'Kotlin'},
                     {language: 'sql', label: 'SQL'},
                 ]
-            }
+            },
         });
+       editor.on( 'instanceReady', function(event){
+           if(event.editor.getCommand( 'maximize' ).state == CKEDITOR.TRISTATE_OFF);//ckeck if maximize is off
+           event.editor.execCommand( 'maximize');
+       });
     </script>
 @endsection
