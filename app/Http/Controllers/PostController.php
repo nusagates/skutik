@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use App\Tags;
+use App\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'tag', 'author']]);
     }
 
     /**
@@ -125,6 +126,15 @@ class PostController extends Controller
         $post = Tags::find($tag->id)->tag()->paginate(15);
         $latest = Post::where('post_type', 'post')
             ->latest()->paginate(10);
-        return view('post.index', ['post' => $post, 'latest' => $latest, "tag"=>$tag->name]);
+        return view('post.index', ['post' => $post, 'latest' => $latest, "title" => $tag->name]);
+    }
+
+    public function author(User $user)
+    {
+
+        $post = Post::where('user_id', $user->id)->paginate(15);
+        $latest = Post::where('post_type', 'post')
+            ->latest()->paginate(10);
+        return view('post.author', ['post' => $post, 'latest' => $latest, "title" => trans('post.label_tag_author', ['author'=>$user->name])]);
     }
 }

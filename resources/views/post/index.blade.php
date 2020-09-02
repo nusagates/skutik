@@ -6,13 +6,14 @@
                 @include('layouts._message')
                 @if(Route::is('post.index')||Route::is('root')||Route::is('home')||Route::is('post.tag'))
                     @if(Route::is('post.tag'))
-                        @include('post._item', ['title'=>trans('post.label_tag_title', ['tag'=>$tag])])
-                        @include('layouts._meta', ['meta_image'=>url('images/baner.png'), 'meta_title'=>trans('post.label_tag_title', ['tag'=>$tag]), 'meta_description'=>"Tempat berbagi kisah menarik dan beragam tulisan lainnya"])
+                        <?php $page_title =trans('post.label_tag_title', ['tag'=>$title]) ?>
+                        @include('post._item', ['title'=>$page_title])
+                        @include('layouts._meta', ['meta_image'=>url('images/baner.png'), 'meta_title'=>$page_title, 'meta_description'=>$page_title])
                     @else
                         @include('post._item')
                         @include('layouts._meta', ['meta_image'=>url('images/baner.png'), 'meta_title'=>"Skutik | Cerdik & Unik", 'meta_description'=>"Tempat berbagi kisah menarik dan beragam tulisan lainnya"])
                     @endif
-                        @section('title', isset($tag)?trans('post.label_tag_title', ['tag'=>$tag])." - Skutik":config('app.name')." - Cerdik & Unik")
+                        @section('title', isset($title)?$page_title." - Skutik":config('app.name')." - Cerdik & Unik")
                 @endif
                 @if(Route::is('post.create'))
                     @section('title', trans('general.label_create')." ".trans('post.label_post')." - ".config('app.name'))

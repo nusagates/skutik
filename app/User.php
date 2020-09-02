@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function getUrlAttribute()
     {
-        return url($this->username);
+        return url("author/".$this->username);
     }
 
     public function setNameAttribute($value)

@@ -24,7 +24,8 @@ return [
     'label_create_success' => "Artikel Anda berhasil diterbitkan",
     'label_update_success' => "Artikel Anda berhasil diperbarui",
     'label_tag_title' => "Semua Artikel tentang :tag",
-    'label_delete_success' => "Artikel AndaAnda berhasil dihapus",
+    'label_tag_author' => "Semua Artikel oleh :author",
+    'label_delete_success' => "Artikel Anda berhasil dihapus",
     'msg_delete_confirmation' => "Apakah Anda yakin ingin menghapus artikel ini?",
 
 ];
