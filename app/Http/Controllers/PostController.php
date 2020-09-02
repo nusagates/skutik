@@ -124,7 +124,7 @@ class PostController extends Controller
     {
         $post = Tags::find($tag->id)->tag()->paginate(15);
         $latest = Post::where('post_type', 'post')
-            ->latest()->limit(10);
+            ->latest()->paginate(10);
         return view('post.index', ['post' => $post, 'latest' => $latest, "tag"=>$tag->name]);
     }
 }
