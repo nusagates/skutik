@@ -21,6 +21,19 @@
     <link rel="stylesheet" href="{{url('vendor/ckeditor/plugins/prism/lib/prism/prism_patched.min.css')}}"/>
     <link href="{{url('vendor/ckeditor/plugins/chart/chart.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{url('images/icon.png')}}">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73062055-14"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'UA-73062055-14');
+    </script>
+
     @yield('meta')
 </head>
 <body>
