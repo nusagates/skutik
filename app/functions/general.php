@@ -9,8 +9,7 @@ if (!function_exists('set_title')) {
 if (!function_exists('ping_SE')) {
     function ping_SE($service)
     {
-        //$sitemap = url('sitemap_index.xml');
-        $sitemap = "https://skutik.com/sitemap_index.xml";
+        $sitemap = url('sitemap_index.xml');
         switch ($service) {
             case 'bing':
                 $ping = "http://www.bing.com/webmaster/ping.aspx?siteMap=$sitemap";
