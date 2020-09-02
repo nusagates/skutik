@@ -42,7 +42,7 @@ return [
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
-            'auth_mode' => null,
+            'auth_mode' => null
         ],
 
         'ses' => [
@@ -51,6 +51,8 @@ return [
 
         'mailgun' => [
             'transport' => 'mailgun',
+            'domain' => env('MAILGUN_DOMAIN'),
+            'screet' => env('MAILGUN_SCREET')
         ],
 
         'postmark' => [
@@ -83,10 +85,7 @@ return [
     |
     */
 
-    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
-    ],
+    'from' => ['address' => 'noreply@skutik.com', 'name' => 'Noreply Skutik.com'],
 
     /*
     |--------------------------------------------------------------------------

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PostController@index')->name('root');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'PostController@index')->name('home');
 Route::resource('post', 'PostController')->except('show');
