@@ -28,7 +28,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                <img width="30" src="{{url('images/icon2.png')}}"/> {{ config('app.name', 'Laravel') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -82,6 +82,90 @@
     <main class="py-4">
         @yield('content')
     </main>
+    <div class="container">
+        <!-- Footer -->
+        <footer class="page-footer bg-white font-small stylish-color-dark pt-4">
+
+            <!-- Footer Links -->
+            <div class="container text-center text-md-left">
+
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 mx-auto">
+
+                        <!-- Content -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">SKUTIK</h5>
+                        <p>Dibuat oleh Blogger Sejoli yang ditujukan untuk berbagi kisah dan ragam tulisan menarik
+                            lainnya.</p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">@lang('general.label_about')</h5>
+
+                        <ul class="list-unstyled">
+                            <li><a href="{{route('root')}}">@lang('general.label_home')</a></li>
+                            <li><a href="{{url('about')}}">@lang('general.label_profile')</a></li>
+                            <li><a href="{{url('privacy')}}">@lang('general.label_privacy')</a></li>
+                            <li><a href="{{url('contact')}}">@lang('general.label_contact')</a></li>
+                        </ul>
+
+                    </div>
+                    <!-- Grid column -->
+                    @if(@isset($latest))
+                        <hr class="clearfix w-100 d-md-none">
+                        <!-- Grid column -->
+                        <div class="col-md-2 mx-auto">
+                            <!-- Links -->
+                            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">@lang('post.label_newest')</h5>
+                            <ul class="list-unstyled">
+                                @foreach($latest as $item)
+                                    <li><a href="{{$item->slug}}">{{$item->post_title}}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                @endif
+                <!-- Grid column -->
+
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Footer Links -->
+
+            <hr>
+
+            <!-- Call to action -->
+            <ul class="list-unstyled list-inline text-center py-2">
+                <li class="list-inline-item">
+                    <h5 class="mb-1">@lang('general.label_want_to_write')</h5>
+                </li>
+                <li class="list-inline-item">
+                    <a href="{{route('register')}}"
+                       class="btn btn-danger btn-rounded">@lang('general.label_register')</a>
+                </li>
+            </ul>
+            <!-- Call to action -->
+
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a href="{{route('root')}}"> Skutik.com</a>
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+    </div>
 </div>
 <script src="{{url('vendor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js')}}"></script>
 <script src="{{url('vendor/ckeditor/plugins/chart/lib/chart.min.js')}}"></script>

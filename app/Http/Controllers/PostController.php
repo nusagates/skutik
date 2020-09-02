@@ -24,7 +24,7 @@ class PostController extends Controller
         $post = Post::with(['user', 'tags'])
             ->where('post_type', 'post')
             ->latest()->paginate(15);
-        return view('post.index', compact('post'));
+        return view('post.index', ['post'=>$post,'latest'=>$post]);
     }
 
     /**
@@ -66,8 +66,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $latest = Post::where('post_type', 'post')
+            ->latest()->paginate(10);
         $post->increment('post_view');
-        return view('post.index', compact('post'));
+        return view('post.index', ['post'=>$post, 'latest'=>$latest]);
     }
 
     /**

@@ -10983,3 +10983,14 @@ a.text-dark:focus {
   color: #38c172;
 }
 
+footer.page-footer .footer-copyright {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.stylish-color-dark {
+  background-color: #3e4551 !important;
+  color: #fff;
+}
+

@@ -15,6 +15,8 @@ return [
 
     'label_all' => "Semua",
     'label_home' => "Beranda",
+    'label_register' => "Daftar",
+    'label_want_to_write' => "Mau menulis di Skutik.com?",
     'label_back' => "Kembali",
     'label_send' => "Kirim",
     'label_update' => "Perbarui",
@@ -26,5 +28,9 @@ return [
     'label_error' => "Kesalahan",
     'label_new' => "Baru",
     'label_old' => "Lama",
+    'label_about' => "Tentang",
+    'label_privacy' => "Kebijakan",
+    'label_contact' => "Kontak",
+    'label_profile' => "Profil",
 
 ];
