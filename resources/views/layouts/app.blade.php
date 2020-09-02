@@ -157,7 +157,7 @@
                             <h5 class="font-weight-bold text-uppercase mt-3 mb-4">@lang('post.label_newest')</h5>
                             <ul class="list-unstyled">
                                 @foreach($latest as $item)
-                                    <li><a href="{{$item->slug}}">{{$item->post_title}}</a></li>
+                                    <li><a href="{{$item->url}}">{{$item->post_title}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
