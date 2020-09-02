@@ -9,44 +9,47 @@
         <div class="media">
             <div class="media-body">
                 <h3>{{$post->post_title}}</h3>
-
-                <div class="d-block">
-                    <small class="text-muted">
-                        @if($post->tags && $post->tags->count()>0)
-                            <i class="fa fa-tags"></i>
-                            @foreach($post->tags as $tag)
-                                <a class="badge badge-success"
-                                   href="{{$tag->url}}">{{$tag->name}}</a>
-                            @endforeach
-                        @endif
-                    </small>
+                <div class='lead d-flex justify-content-between'>
+                    <div class="d-block d-flex justify-content-between">
+                        <img height="40" width="40" class="img rounded-circle" src="{{$post->user->avatar}}"/>
+                        <div class="ml-2">
+                            <a href="{{$post->user->url}}">{{ $post->user->name }}</a>
+                            <small class="text-muted d-block">{{ $post->created_date }}</small>
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"></span> <small class="text-muted d-block"><i
+                                        class="fa fa-eye"></i> {{$post->post_view}}</small></li>
+                            <li><span class="fa-li"></span>
+                                <small>
+                                    <i class="fa fa-tags"></i>
+                                    @foreach($post->tags as $tag)
+                                        <a class="badge badge-success"
+                                           href="{{$tag->url}}">{{$tag->name}}</a>
+                                    @endforeach
+                                </small>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <p>{!! $post->post_content !!}</p>
                 <div class="d-flex justify-content-between">
                     <div></div>
-                    <div>
-                        <div class="d-block d-flex justify-content-between">
-                            <img height="40" width="40" class="img rounded-circle" src="{{$post->user->avatar}}"/>
-                            <div class="ml-2">
-                                <a href="{{$post->user->url}}">{{ $post->user->name }}</a>
-                                <small class="text-muted d-block">{{ $post->created_date }}</small>
-                            </div>
-                        </div>
-                        <div class="d-block">
-                            @can('update', $post)
-                                <a class="btn btn-sm btn-outline-primary mt-2"
-                                   href="{{route('post.edit', $post->id)}}">Edit</a>
-                            @endcan
-                            @can('delete', $post)
-                                <form class="d-inline" action="{{route('post.destroy', $post->id)}}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input onclick="return confirm('{{trans('post.msg_delete_confirmation')}}')"
-                                           type="submit" class="btn btn-sm btn-outline-danger mt-2"
-                                           value="{{trans('general.label_delete')}}">
-                                </form>
-                            @endcan
-                        </div>
+                    <div class="d-block">
+                        @can('update', $post)
+                            <a class="btn btn-sm btn-outline-primary mt-2"
+                               href="{{route('post.edit', $post->id)}}">Edit</a>
+                        @endcan
+                        @can('delete', $post)
+                            <form class="d-inline" action="{{route('post.destroy', $post->id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input onclick="return confirm('{{trans('post.msg_delete_confirmation')}}')"
+                                       type="submit" class="btn btn-sm btn-outline-danger mt-2"
+                                       value="{{trans('general.label_delete')}}">
+                            </form>
+                        @endcan
                     </div>
                 </div>
                 <hr>
@@ -99,6 +102,10 @@
       }
     }
     ]
+
+
+
+
 
 
 

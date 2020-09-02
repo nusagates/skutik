@@ -6,6 +6,10 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@font-face {
+    font-family: utsmani;
+    src: url(/fonts/utsmani.otf);
+}
 .lead{
     font: 15px / 1.4 sans-serif;
     font-family: 'Segoe UI','Helvetica Neue',Helvetica,Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans',sans-serif;
@@ -92,4 +96,10 @@ footer.page-footer .footer-copyright {
 .stylish-color-dark {
     background-color: #3e4551 !important;
     color: $white
+}
+p.arabic-text, .arabic{
+    direction: rtl;
+    text-align: justify;
+    font-family: utsmani;
+    font-size: 14pt;
 }

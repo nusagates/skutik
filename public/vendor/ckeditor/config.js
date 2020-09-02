@@ -20,16 +20,18 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'insert' },
 		{ name: 'styles' },
 		{ name: 'colors' },
-		{ name: 'tools' }
+		{ name: 'tools' },
+        { name: 'others' },
 	];
 
 	// The default plugins included in the basic setup define some buttons that
 	// are not needed in a basic editor. They are removed here.
-	config.removeButtons = 'Cut,Copy,Paste,Undo,Redo,Anchor';
+	config.removeButtons = 'Cut,Copy,Undo,Redo,Anchor';
 
 	// Dialog windows are also simplified.
 	config.removeDialogTabs = 'link:advanced';
     config.mathJaxLib = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML';
     config.extraPlugins = 'maximize, eqneditor, sourcearea, colorbutton';
     config.removePlugins = 'mathjax';
+    config.extraAllowedContent = 'p(*); p[dir]';
 };
