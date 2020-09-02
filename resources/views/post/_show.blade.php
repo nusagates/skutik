@@ -33,7 +33,7 @@
                         </ul>
                     </div>
                 </div>
-                <p>{!! $post->post_content !!}</p>
+                <div class="post-content">{!! $post->post_content !!}</div>
                 <div class="d-flex justify-content-between">
                     <div></div>
                     <div class="d-block">
@@ -102,6 +102,7 @@
       }
     }
     ]
+
 
 
 

@@ -109,3 +109,9 @@ pre {
   word-wrap: normal;
   white-space: pre;
 }
+.post-content{
+    overflow: auto;
+}
+*, *::before, *::after{
+    box-sizing: content-box;
+}
