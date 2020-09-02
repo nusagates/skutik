@@ -17,6 +17,6 @@ Route::get('/', 'PostController@index')->name('root');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::resource('post', 'PostController')->except('show');
 Route::get('/post/{slug}', 'PostController@show')->name('post.show');
