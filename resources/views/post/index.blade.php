@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 @include('layouts._message')
-                @if(Route::is('post.index')||Route::is('root'))
+                @if(Route::is('post.index')||Route::is('root')||Route::is('home'))
                     @section('title', config('app.name')." - Cerdik & Unik")
                     @include('layouts._meta', ['meta_image'=>url('images/baner.png'), 'meta_title'=>"Skutik | Cerdik & Unik", 'meta_description'=>"Tempat berbagi kisah menarik dan beragam tulisan lainnya"])
                     @include('post._item')
