@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'PostController@index')->name('root');
+Route::get('/sitemap/generate', 'SitemapController@index')->name('sitemap');
 
 Auth::routes(['verify' => true]);
 
