@@ -113,9 +113,9 @@
 
                         <ul class="list-unstyled">
                             <li><a href="{{route('root')}}">@lang('general.label_home')</a></li>
-                            <li><a href="{{url('about')}}">@lang('general.label_profile')</a></li>
-                            <li><a href="{{url('privacy')}}">@lang('general.label_privacy')</a></li>
-                            <li><a href="{{url('contact')}}">@lang('general.label_contact')</a></li>
+                            <li><a href="{{url('post/about')}}">@lang('general.label_profile')</a></li>
+                            <li><a href="{{url('post/privacy')}}">@lang('general.label_privacy')</a></li>
+                            <li><a href="{{url('post/contact')}}">@lang('general.label_contact')</a></li>
                         </ul>
 
                     </div>
