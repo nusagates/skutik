@@ -11,7 +11,8 @@
                 <h3>{{$post->post_title}}</h3>
                 <div class='lead d-flex justify-content-between'>
                     <div class="d-block d-flex justify-content-between">
-                        <img height="40" width="40" class="img rounded-circle" src="{{$post->user->avatar}}"/>
+                        <img alt="User Avatar" height="40" width="40" class="img rounded-circle"
+                             src="{{$post->user->avatar}}"/>
                         <div class="ml-2">
                             <a href="{{$post->user->url}}">{{ $post->user->name }}</a>
                             <small class="text-muted d-block">{{ $post->created_date }}</small>
@@ -19,16 +20,21 @@
                     </div>
                     <div>
                         <ul class="fa-ul">
-                            <li><span class="fa-li"></span> <small class="text-muted d-block"><i
-                                        class="fa fa-eye"></i> {{$post->post_view}}</small></li>
                             <li><span class="fa-li"></span>
-                                <small>
-                                    <i class="fa fa-tags"></i>
-                                    @foreach($post->tags as $tag)
-                                        <a class="badge badge-success"
-                                           href="{{$tag->url}}">{{$tag->name}}</a>
-                                    @endforeach
-                                </small>
+                                <span class="text-muted d-block"><i
+                                        class="fa fa-eye"></i> {{$post->post_view}}
+                                </span>
+                            </li>
+                            <li><span class="fa-li"></span>
+                                <span>
+                                    @if($post->tags->count()>0)
+                                        <i class="fa fa-tags"></i>
+                                        @foreach($post->tags as $tag)
+                                            <a class="badge badge-success"
+                                               href="{{$tag->url}}">{{$tag->name}}</a>
+                                        @endforeach
+                                    @endif
+                                </span>
                             </li>
                         </ul>
                     </div>
@@ -102,6 +108,7 @@
       }
     }
     ]
+
 
 
 

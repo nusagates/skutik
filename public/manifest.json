@@ -1,0 +1,30 @@
+{
+    "name": "Skutik",
+    "short_name": "Skutik",
+    "logos": [
+        {
+            "src": "/images/logo_128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/logo_144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/logo_152.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "?pwa",
+    "display": "standalone",
+    "background_color": "#298e67",
+    "theme_color": "#08472d"
+}
