@@ -11007,19 +11007,12 @@ p.arabic-text,
   font-size: 14pt;
 }
 
-pre {
-  overflow: auto;
-  word-wrap: normal;
-  white-space: pre;
-}
-
-.post-content {
-  overflow: auto;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: content-box;
+@media only screen and (max-width: 600px) {
+  pre {
+    overflow: auto;
+    word-wrap: normal;
+    white-space: pre;
+    width: 310px;
+  }
 }
 

@@ -6,7 +6,7 @@
         </ol>
     </nav>
     <div class="card-body">
-        <div class="media">
+        <div class="media post-content-inner w-100">
             <div class="media-body">
                 <h3>{{$post->post_title}}</h3>
                 <div class='lead d-flex justify-content-between'>

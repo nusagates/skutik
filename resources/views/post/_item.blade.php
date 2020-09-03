@@ -3,9 +3,9 @@
         <h3>{{$title??trans('post.label_newest')}}</h3>
         <a class="btn btn-outline-info" href="{{route('post.create')}}">{{trans('post.label_create')}}</a>
     </div>
-    <div class="card-body">
+    <div class="card-body post-content-outer">
         @foreach($post as $item)
-            <div class="media">
+            <div class="media post-content-inner">
                 <div class="media-body">
                     <h2><small><a href="{{$item->url}}"> {{$item->post_title}}</a></small></h2>
                     <div class='lead d-flex justify-content-between'>
