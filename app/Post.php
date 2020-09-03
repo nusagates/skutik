@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class Post extends Model
@@ -28,7 +27,7 @@ class Post extends Model
     public function setPostTitleAttribute($value)
     {
         $this->attributes['post_title'] = $value;
-        $this->attributes['slug'] = Str::slug($value) . "-" . strrev(Carbon::now()->timestamp);
+        $this->attributes['slug'] = set_post_slug($value, $this->id);
     }
 
     public function getCreatedDateAttribute()
@@ -73,6 +72,10 @@ class Post extends Model
             array_push($t, $tag->name);
         }
         return implode(",", $t);
+    }
+
+    public function comments(){
+        return $this->hasMany(PostComment::class);
     }
 
 }

@@ -47,7 +47,6 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-
         $post = $request->user()->posts()->create($request->only("post_title", "post_content"));
         if (!empty($request->post_tags)) {
             $tags = array_unique(explode(",", $request->post_tags));
@@ -64,14 +63,12 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param \App\Post $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Post $post)
     {
-        $latest = Post::where('post_type', 'post')
-            ->latest()->paginate(10);
         $post->increment('post_view');
-        return view('post.index', ['post' => $post, 'latest' => $latest]);
+        return view('post.index', ['post' => $post]);
     }
 
     /**
@@ -136,6 +133,6 @@ class PostController extends Controller
         $post = Post::where('user_id', $user->id)->paginate(15);
         $latest = Post::where('post_type', 'post')
             ->latest()->paginate(10);
-        return view('post.author', ['post' => $post, 'latest' => $latest, "title" => trans('post.label_tag_author', ['author'=>$user->name])]);
+        return view('post.author', ['post' => $post, 'latest' => $latest, "title" => trans('post.label_tag_author', ['author' => $user->name])]);
     }
 }

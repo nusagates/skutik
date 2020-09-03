@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Weather PWA">
     <link rel="apple-touch-icon" href="images/icon_152.png">
-    <meta name="theme-color" content="#08472d" />
+    <meta name="theme-color" content="#08472d"/>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -28,27 +28,28 @@
     <link rel="stylesheet" href="{{url('vendor/ckeditor/plugins/prism/lib/prism/prism_patched.min.css')}}"/>
     <link href="{{url('vendor/ckeditor/plugins/chart/chart.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{url('images/icon.png')}}">
+@if(env('APP_ENV')=="production")
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73062055-14"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73062055-14"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
+            function gtag() {
+                dataLayer.push(arguments);
+            }
 
-        gtag('js', new Date());
-        gtag('config', 'UA-73062055-14');
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then((reg) => {
-                        console.log('Service worker registered.', reg);
-                    });
-            });
-        }
-    </script>
-
+            gtag('js', new Date());
+            gtag('config', 'UA-73062055-14');
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js')
+                        .then((reg) => {
+                            console.log('Service worker registered.', reg);
+                        });
+                });
+            }
+        </script>
+    @endif
     @yield('meta')
 </head>
 <body>
@@ -149,20 +150,31 @@
 
                     </div>
                     <!-- Grid column -->
-                    @if(@isset($latest))
-                        <hr class="clearfix w-100 d-md-none">
-                        <!-- Grid column -->
-                        <div class="col-md-2 mx-auto">
-                            <!-- Links -->
-                            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">@lang('post.label_newest')</h5>
-                            <ul class="list-unstyled">
-                                @foreach($latest as $item)
-                                    <li><a href="{{$item->url}}">{{$item->post_title}}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                @endif
-                <!-- Grid column -->
+                    <hr class="clearfix w-100 d-md-none">
+                    <!-- Grid column -->
+                    <div class="col-md-2 mx-auto">
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">@lang('general.label_statistic')</h5>
+                        <!-- Histats.com  (div with counter) -->
+                        <div id="histats_counter"></div>
+
+                    @if(env('APP_ENV')=="production")
+                        <!-- Histats.com  START  (aync)-->
+                            <script type="text/javascript">var _Hasync = _Hasync || [];
+                                _Hasync.push(['Histats.start', '1,4446124,4,406,165,100,00010111']);
+                                _Hasync.push(['Histats.fasi', '1']);
+                                _Hasync.push(['Histats.track_hits', '']);
+                                (function () {
+                                    var hs = document.createElement('script');
+                                    hs.type = 'text/javascript';
+                                    hs.async = true;
+                                    hs.src = ('//s10.histats.com/js15_as.js');
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+                                })();</script>
+                            <!-- Histats.com  END  -->
+                        @endif
+                    </div>
+                    <!-- Grid column -->
 
 
                 </div>

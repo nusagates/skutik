@@ -135,3 +135,72 @@ pre {
     }
 }
 
+.post-content-inner h2 a{
+    color: #1b1b1b;
+    font-size: 16pt;
+}
+/*------------------------------------
+	Comment
+------------------------------------*/
+.comment-list li {
+    list-style: none;
+    margin-top: 2rem;
+}
+
+.comment-list li .user-comment {
+    border-bottom: #dee2e6 1px dashed;
+    padding-bottom: 1rem;
+}
+
+.comment-list li .user-comment .comment-author .avatar {
+    float: left;
+    margin-right: 1rem;
+}
+
+.comment-list li .user-comment .title-comments .authors {
+    font-weight: 700;
+}
+
+.comment-list li .user-comment .comment-content p {
+    margin-bottom: 0;
+}
+
+.comment-list li .sub-comment {
+    margin-left: 6rem;
+}
+
+.comment-list li .sub-comment .sub-comment {
+    margin-left: 0;
+}
+
+.comment-awaiting-moderation {
+    background: #ffc107;
+}
+
+@media (min-width: 576px) {
+    .comment-list li .sub-comment .sub-comment {
+        margin-left: 6rem;
+    }
+    .comment-list .title-comments .dates {
+        float: right;
+    }
+}
+
+.recentcomments a {
+    font-style: italic;
+    font-family: "Roboto", Helvetica, sans-serif !important;
+    font-size: 0.875rem;
+}
+
+.recentcomments .comment-author-link {
+    font-style: italic;
+    font-family: "Roboto", Helvetica, sans-serif !important;
+    font-size: 0.875rem;
+}
+
+.recentcomments .comment-author-link a.url {
+    color: #6c63ff !important;
+}
+.comment-title{
+    border-bottom: 5px solid #38c172;
+}

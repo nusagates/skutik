@@ -1,4 +1,8 @@
 <?php
+
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+
 if (!function_exists('set_title')) {
     function set_title($title = '')
     {
@@ -32,5 +36,40 @@ if (!function_exists('ping_SE')) {
         curl_close($curl_handle);
 
 
+    }
+}
+
+if (!function_exists('set_post_slug')) {
+    function set_post_slug($title, $id = 0)
+    {
+        $slug = Str::slug($title);
+
+        // Get any that could possibly be related.
+        // This cuts the queries down by doing it once.
+        $allSlugs = get_related_slug($slug, $id);
+
+        // If we haven't used it before then we are all good.
+        if (!$allSlugs->contains('slug', $slug)) {
+            return $slug;
+        }
+
+        // Just append numbers like a savage until we find not used.
+        for ($i = 1; $i <= 10; $i++) {
+            $newSlug = $slug . '-' . $i;
+            if (!$allSlugs->contains('slug', $newSlug)) {
+                return $newSlug;
+            }
+        }
+
+        throw new \Exception('Can not create a unique slug');
+    }
+}
+if (!function_exists("get_related_slug")) {
+    function get_related_slug($slug, $id = 0)
+    {
+
+        return \App\Post::select('slug')->where('slug', 'like', $slug . '%')
+            ->where('id', '<>', $id)
+            ->get();
     }
 }
