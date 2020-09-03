@@ -11007,12 +11007,27 @@ p.arabic-text,
   font-size: 14pt;
 }
 
-@media only screen and (max-width: 600px) {
+pre {
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+@media only screen and (min-width: 320px) {
   pre {
-    overflow: auto;
-    word-wrap: normal;
-    white-space: pre;
-    width: 310px;
+    width: 300px;
+  }
+}
+
+@media only screen and (min-width: 450px) {
+  pre {
+    width: 400px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  pre {
+    width: 550px;
   }
 }
 
