@@ -26,7 +26,7 @@
                 <div class="post-content mt-2 mb-2">{!! $post->post_content !!}</div>
                 <div class="text-center mt-4">
                     @foreach($post->tags as $tag)
-                        <a class="btn btn-sm btn-outline-success"
+                        <a class="btn btn-sm btn-outline-success mt-1"
                            href="{{$tag->url}}">{{$tag->name}}</a>
                     @endforeach
                 </div>
