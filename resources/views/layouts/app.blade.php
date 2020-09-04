@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="{{url('vendor/ckeditor/plugins/prism/lib/prism/prism_patched.min.css')}}"/>
     <link href="{{url('vendor/ckeditor/plugins/chart/chart.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{url('images/icon.png')}}">
-@if(env('APP_ENV')=="production")
     <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73062055-14"></script>
         <script>
@@ -49,7 +48,6 @@
                 });
             }
         </script>
-    @endif
     @yield('meta')
 </head>
 <body>
@@ -158,7 +156,6 @@
                         <!-- Histats.com  (div with counter) -->
                         <div id="histats_counter"></div>
 
-                    @if(env('APP_ENV')=="production")
                         <!-- Histats.com  START  (aync)-->
                             <script type="text/javascript">var _Hasync = _Hasync || [];
                                 _Hasync.push(['Histats.start', '1,4446124,4,406,165,100,00010111']);
@@ -172,7 +169,6 @@
                                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
                                 })();</script>
                             <!-- Histats.com  END  -->
-                        @endif
                     </div>
                     <!-- Grid column -->
 
