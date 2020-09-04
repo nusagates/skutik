@@ -147,28 +147,7 @@
                     </div>
                     <!-- Grid column -->
                     <hr class="clearfix w-100 d-md-none">
-                    <!-- Grid column -->
-                    <div class="col-md-2 mx-auto">
-                        <!-- Links -->
-                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">@lang('general.label_statistic')</h5>
-                        <!-- Histats.com  (div with counter) -->
-                        <div id="histats_counter"></div>
 
-                        <!-- Histats.com  START  (aync)-->
-                            <script type="text/javascript">var _Hasync = _Hasync || [];
-                                _Hasync.push(['Histats.start', '1,4446124,4,406,165,100,00010111']);
-                                _Hasync.push(['Histats.fasi', '1']);
-                                _Hasync.push(['Histats.track_hits', '']);
-                                (function () {
-                                    var hs = document.createElement('script');
-                                    hs.type = 'text/javascript';
-                                    hs.async = true;
-                                    hs.src = ('//s10.histats.com/js15_as.js');
-                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-                                })();</script>
-                            <!-- Histats.com  END  -->
-                    </div>
-                    <!-- Grid column -->
 
 
                 </div>

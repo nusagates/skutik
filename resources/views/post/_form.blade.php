@@ -20,14 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="post_content">{{trans('post.label_content')}}</label>
-                <textarea rows="7" class="form-control{{$errors->has('post_content')?' is-invalid':''}}
-                    " name="post_content"
-                          id="post_content">{{old('post_content',isset($post)?$post->post_content:'')}}</textarea>
-                @if ($errors->has('post_content'))
-                    <div class="invalid-feedback">
-                        <strong>{{ $errors->first('post_content') }}</strong>
-                    </div>
-                @endif
+                <post-comment content="{{old('post_content', isset($post)?$post->post_content:'')}}"></post-comment>
             </div>
             <div class="form-group">
                 <label for="post_tags">Tag</label>
@@ -41,47 +34,3 @@
         </form>
     </div>
 </div>
-<script src="{{url('vendor/ckeditor/ckeditor.js')}}"></script>
-@section("script")
-    <script>
-        var editor = CKEDITOR.replace('post_content');
-        editor.on('instanceReady', function (event) {
-            if (event.editor.getCommand('maximize').state == CKEDITOR.TRISTATE_OFF) ;//ckeck if maximize is off
-            event.editor.execCommand('maximize');
-        });
-        editor.addCommand("cmd_utsmani", {
-            exec: function (edt) {
-                var mySelection = editor.getSelection();
-                var selectedText;
-
-                //Handle for the old Internet Explorer browser
-                if (mySelection.getType() == CKEDITOR.SELECTION_TEXT) {
-                    if (CKEDITOR.env.ie) {
-                        mySelection.unlock(true);
-                        selectedText = mySelection.getNative().createRange().text;
-                    } else {
-                        selectedText = mySelection.getNative();
-                    }
-                }
-
-                var plainSelectedText = selectedText.toString();
-                if (plainSelectedText != "") {
-                    var insertedElement = editor.document.createElement('p');
-                    insertedElement.setAttribute('class', 'arabic-text');
-                    insertedElement.setAttribute('dir', 'rtl');
-                    insertedElement.appendText(plainSelectedText);
-                    editor.insertElement(insertedElement);
-                }
-            }
-        });
-
-        editor.ui.addButton('utsmani', //button name
-            {
-                label: 'Use Utsmani Font', //button tooltips (will show up when mouse hovers over the button)
-                command: 'cmd_utsmani', // command which is fired to handle event when the button is clicked
-                toolbar: 'editing', //name of the toolbar group in which the new button is added
-                icon: '{{url("/images/arabic-icon.png")}}' //path to the button's icon
-            }
-        );
-    </script>
-@endsection
