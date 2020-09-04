@@ -59,8 +59,8 @@
                                                <textarea rows="5" v-model="comment_content" class="form-control"></textarea>
                                            </div>
                                            <div class="form-group">
-                                               <button @click="update" class="btn btn-sm btn-outline-success">{{trans('general.label_update')}}</button>
-                                               <button @click="editing=false" class="btn btn-sm btn-outline-warning">{{trans('general.label_cancel')}}</button>
+                                               <button @click="update" class="btn btn-sm btn-outline-success" :disabled="isInvalid">{{trans('general.label_update')}}</button>
+                                               <button @click="cancel" class="btn btn-sm btn-outline-warning">{{trans('general.label_cancel')}}</button>
                                            </div>
                                        </div>
                                        <div v-else>
@@ -68,7 +68,7 @@
                                        </div>
                                        <div class="text-right">
                                            @can('update', $item)
-                                               <a @click.prevent="editing=true"
+                                               <a @click.prevent="edit"
                                                   class="btn btn-sm btn-outline-primary mt-2">{{trans('general.label_edit')}}</a>
                                            @endcan
                                            @can('delete', $item)

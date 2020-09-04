@@ -1915,10 +1915,19 @@ __webpack_require__.r(__webpack_exports__);
       editing: false,
       comment_content: this.comment.comment_content,
       id: this.comment.id,
-      post_id: this.comment.post_id
+      post_id: this.comment.post_id,
+      content_cache: null
     };
   },
   methods: {
+    edit: function edit() {
+      this.content_cache = this.comment_content;
+      this.editing = true;
+    },
+    cancel: function cancel() {
+      this.comment_content = this.content_cache;
+      this.editing = false;
+    },
     update: function update() {
       var _this = this;
 
@@ -1944,6 +1953,11 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log("Kesalahan");
       });
+    }
+  },
+  computed: {
+    isInvalid: function isInvalid() {
+      return this.comment_content.length < 10;
     }
   }
 });
