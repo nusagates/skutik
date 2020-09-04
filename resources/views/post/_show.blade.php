@@ -8,29 +8,8 @@
         <div class="media post-content-inner w-100">
             <div class="media-body">
                 <h3>{{$post->post_title}}</h3>
-                <div class='lead d-flex justify-content-between'>
-                    <div class="d-block d-flex justify-content-between">
-                        <img alt="User Avatar" height="40" width="40" class="img rounded-circle"
-                             src="{{$post->user->avatar}}"/>
-                        <div class="ml-2">
-                            <a href="{{$post->user->url}}">{{ $post->user->name }}</a>
-                            <small class="text-muted d-block">{{ $post->created_date }}</small>
-                        </div>
-                    </div>
-                    <div>
-                      <span class="text-muted d-block"><i
-                              class="fa fa-eye"></i> {{$post->post_view}}
-                      </span>
-                    </div>
-                </div>
-                <div class="post-content mt-2 mb-2">{!! $post->post_content !!}</div>
-                <div class="text-center mt-4">
-                    @foreach($post->tags as $tag)
-                        <a class="btn btn-sm btn-outline-success"
-                           href="{{$tag->url}}">{{$tag->name}}</a>
-                    @endforeach
-                </div>
-                <hr>
+                <user-info :model="{{$post}}"></user-info>
+                <post-content :model="{{$post}}"></post-content>
                 <div class="text-right mt-4">
 
                     <div class="d-block">
@@ -60,42 +39,57 @@
                     </div>
                     <!--comment list-->
 
-                    @foreach($post->comments as $item)
-                        <div class="media">
-                            <div class="media-left mr-2">
-                                <img src="{{$item->user->avatar}}" alt="Avatar">
-                            </div>
-                            <div class="media-body">
-                                <div class="d-flex justify-content-between">
-                                    <a class="authors" href="{{$item->user->url}}"
-                                       target="_blank">{{$item->user->name}}</a>
-                                    <div class="text-muted dates small">
-                                        <time datetime="{{$item->created_at}}">{{$item->created_date}}</time>
-                                    </div>
-                                </div>
-                                <p>{!! $item->comment_content !!}</p>
-                                <div class="text-right">
-                                    @can('update', $item)
-                                        <a class="btn btn-sm btn-outline-primary mt-2"
-                                           href="{{route('post.comment.edit', [$post->id, $item->id])}}">Edit</a>
-                                    @endcan
-                                    @can('delete', $item)
-                                        <form class="d-inline"
-                                              action="{{route('post.comment.destroy', [$post->id, $item->id])}}"
-                                              method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input
-                                                onclick="return confirm('{{trans('post.comment_delete_confirmation')}}')"
-                                                type="submit" class="btn btn-sm btn-outline-danger mt-2"
-                                                value="{{trans('general.label_delete')}}">
-                                        </form>
-                                    @endcan
-                                </div>
-                                <hr/>
-                            </div>
-                        </div>
-                    @endforeach
+                   <div class="comment-list" v-cloak>
+                       @foreach($post->comments as $item)
+                           <comment :comment="{{$item}}" inline-template>
+                               <div class="media">
+                                   <div class="media-left mr-2">
+                                       <img src="{{$item->user->avatar}}" alt="Avatar">
+                                   </div>
+                                   <div class="media-body">
+                                       <div class="d-flex justify-content-between">
+                                           <a class="authors" href="{{$item->user->url}}"
+                                              target="_blank">{{$item->user->name}}</a>
+                                           <div class="text-muted dates small">
+                                               <time datetime="{{$item->created_at}}">{{$item->created_date}}</time>
+                                           </div>
+                                       </div>
+                                       <div v-if="editing">
+                                           <div class="form-group">
+                                               <textarea rows="5" v-model="comment_content" class="form-control"></textarea>
+                                           </div>
+                                           <div class="form-group">
+                                               <button @click="update" class="btn btn-sm btn-outline-success">{{trans('general.label_update')}}</button>
+                                               <button @click="editing=false" class="btn btn-sm btn-outline-warning">{{trans('general.label_cancel')}}</button>
+                                           </div>
+                                       </div>
+                                       <div v-else>
+                                           <p v-html="comment_content"/>
+                                       </div>
+                                       <div class="text-right">
+                                           @can('update', $item)
+                                               <a @click.prevent="editing=true"
+                                                  class="btn btn-sm btn-outline-primary mt-2">{{trans('general.label_edit')}}</a>
+                                           @endcan
+                                           @can('delete', $item)
+                                               <form class="d-inline"
+                                                     action="{{route('post.comment.destroy', [$post->id, $item->id])}}"
+                                                     method="post">
+                                                   @csrf
+                                                   @method('DELETE')
+                                                   <input
+                                                       onclick="return confirm('{{trans('post.comment_delete_confirmation')}}')"
+                                                       type="submit" class="btn btn-sm btn-outline-danger mt-2"
+                                                       value="{{trans('general.label_delete')}}">
+                                               </form>
+                                           @endcan
+                                       </div>
+                                       <hr/>
+                                   </div>
+                               </div>
+                           </comment>
+                       @endforeach
+                   </div>
                     @if(Auth::check())
                     <!--comment form-->
                         <div id="comment-form" class="my-5">
@@ -158,16 +152,6 @@
       }
     }
     ]
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

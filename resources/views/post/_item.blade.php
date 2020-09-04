@@ -8,17 +8,7 @@
             <div class="media post-content-inner">
                 <div class="media-body">
                     <h2 class="title h1-sm h3-lg"><a href="{{$item->url}}"> {{$item->post_title}}</a></h2>
-                    <div class='lead d-flex justify-content-between'>
-                        <div class="d-flex justify-content-between">
-                            <img alt="User Avatar" height="40" width="40" class="img rounded-circle"
-                                 src="{{$item->user->avatar}}"/>
-                           <div class="ml-2">
-                               <small class="text-muted d-block"><a href="{{$item->user->url}}">{{ $item->user->name }}</a></small>
-                               <small class="text-muted">{{ $item->created_date }}</small>
-                           </div>
-                        </div>
-                        <div></div>
-                    </div>
+                    <user-info :model="{{$item}}"></user-info>
                     <p>{!!Str::limit(strip_tags($item->post_content), 200, '...')!!}</p>
                     <div class="d-block">
                         @can('update', $item)

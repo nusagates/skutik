@@ -9,6 +9,7 @@ class Tags extends Model
 {
     public $timestamps = false;
     protected $guarded = [];
+    protected $appends = ['url'];
 
     public function setNameAttribute($value)
     {

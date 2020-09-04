@@ -6,7 +6,6 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
 @font-face {
     font-family: utsmani;
     src: url(/fonts/utsmani.otf);
@@ -203,4 +202,7 @@ pre {
 }
 .comment-title{
     border-bottom: 5px solid #38c172;
+}
+[v-cloak]{
+    display: none;
 }

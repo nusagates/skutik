@@ -47,14 +47,17 @@ class CommentController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\PostComment $postComment
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $post, $comment)
     {
 
-        $postComment =PostComment::find($comment);
+        $postComment = PostComment::find($comment);
         $postComment->update($request->only('comment_content'));
-        return redirect()->route('post.show', $postComment->post->slug)->with('success', trans('post.comment_update_success'));
+        return response()->json([
+            'message' => trans('post.comment_update_success'),
+            'comment_content' => $postComment->comment_content
+        ]);
     }
 
     /**

@@ -34,7 +34,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         Route::bind('post_slug', function ($slug) {
-            return Post::where('slug', $slug)->first() ?? abort(404);
+            return Post::with(['user', 'tags'])->where('slug', $slug)->first() ?? abort(404);
         });
         Route::bind('tag_slug', function ($slug) {
             return Tags::where('slug', $slug)->first() ?? abort(404);
