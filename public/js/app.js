@@ -49867,12 +49867,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component('user-info', __webpack_require__(/*! ./components/UserInfo.vue */ "./resources/js/components/UserInfo.vue")["default"]);
 Vue.component('post-content', __webpack_require__(/*! ./components/PostContent.vue */ "./resources/js/components/PostContent.vue")["default"]);
 Vue.component('comment', __webpack_require__(/*! ./components/Comments */ "./resources/js/components/Comments.vue")["default"]);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 var app = new Vue({
   el: '#app'
 });
