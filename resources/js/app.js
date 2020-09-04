@@ -16,11 +16,6 @@ Vue.component('user-info', require('./components/UserInfo.vue').default);
 Vue.component('post-content', require('./components/PostContent.vue').default);
 Vue.component('comment', require('./components/Comments').default);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 const app = new Vue({
     el: '#app',
