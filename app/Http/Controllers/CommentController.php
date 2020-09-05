@@ -29,7 +29,8 @@ class CommentController extends Controller
         ]);
         $comment = $post->comments()->create(["comment_content" => $request->comment_content, "user_id" => $request->user()->id]);
         if ($post->user_id != Auth::id()) {
-            $comment->post->user->notify(new NewComment($comment));
+            $when = now()->addMinutes(10);
+            $comment->post->user->notify((new NewComment($comment))->delay($when));
         }
         return redirect()->route('post.show', $post->slug)->with('success', trans('post.comment_create_success'));
     }
