@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\NewComment;
 use App\Post;
 use App\PostComment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -25,7 +27,10 @@ class CommentController extends Controller
         $request->validate([
             "comment_content" => 'required'
         ]);
-        $post->comments()->create(["comment_content" => $request->comment_content, "user_id" => $request->user()->id]);
+        $comment = $post->comments()->create(["comment_content" => $request->comment_content, "user_id" => $request->user()->id]);
+        if ($post->user_id != Auth::id()) {
+            $comment->post->user->notify(new NewComment($comment));
+        }
         return redirect()->route('post.show', $post->slug)->with('success', trans('post.comment_create_success'));
     }
 

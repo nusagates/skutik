@@ -17,6 +17,7 @@ Route::get('/', 'PostController@index')->name('root');
 
 Auth::routes(['verify' => true]);
 Route::get('/home', 'PostController@index')->name('home');
+Route::get('/notify/comment', 'NotificationController@comment')->name('notif.comment');
 Route::resource('post', 'PostController')->except('show');
 Route::get('/post/{post_slug}', 'PostController@show')->name('post.show');
 Route::get('/post/tagged/{tag_slug}', 'PostController@tag')->name('post.tag');
