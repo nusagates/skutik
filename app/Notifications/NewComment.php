@@ -42,7 +42,7 @@ class NewComment extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         $comment = $this->comment;
-        $name = $notifiable->name;
+        $name = $this->comment->user->name;
         $utm_tracking = "?utm_source=notification&utm_medium=email&utm_campaign=new_comment";
         return (new MailMessage)
             ->subject('Komentar Baru dari ' . $name)
