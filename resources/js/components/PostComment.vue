@@ -7,7 +7,8 @@
 </template>
 
 <script>
-    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+    import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
     export default {
         props: ['content'],
@@ -17,7 +18,10 @@
                 editor: ClassicEditor,
                 editorData: this.content,
                 editorConfig: {
-                    // The configuration of the editor.
+                    ckfinder: {
+                        // Upload the images to the server using the CKFinder QuickUpload command.
+                        uploadUrl: 'https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                    }
                 },
 
 
