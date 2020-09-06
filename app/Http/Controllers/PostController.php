@@ -140,7 +140,7 @@ class PostController extends Controller
     public function author(User $user)
     {
 
-        if(Auth::check() || Auth::id()!= $user->id){
+        if(!(Auth::check() || Auth::id()== $user->id)){
             $post = Post::where('user_id', $user->id)
                 ->where('post_status', 'published')
                 ->paginate(15);
