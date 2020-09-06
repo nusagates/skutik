@@ -8,7 +8,7 @@
         <div class="media post-content-inner w-100">
             <div class="media-body">
                 <h3>{{$post->post_title}}</h3>
-                <user-info :model="{{$post}}"></user-info>
+                <user-info :model="{{$post}}" :userdata="{{$post->user}}"></user-info>
                 <post-content :model="{{$post}}"></post-content>
                 <div class="text-right mt-4">
 

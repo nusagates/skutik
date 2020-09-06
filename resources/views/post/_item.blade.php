@@ -8,7 +8,7 @@
             <div class="media post-content-inner">
                 <div class="media-body">
                     <h2 class="title h1-sm h3-lg"><a href="{{$item->url}}"> {{$item->post_title}}</a></h2>
-                    <user-info :model="{{$item}}"></user-info>
+                    <user-info :model="{{$item}}" :userdata="{{$item->user}}"></user-info>
                     <p>{!!Str::limit(strip_tags($item->post_content), 200, '...')!!}</p>
                     <div class="d-block">
                         @can('update', $item)

@@ -2,9 +2,9 @@
     <div class='lead d-flex justify-content-between'>
         <div class="d-block d-flex justify-content-between">
             <img alt="User Avatar" height="40" width="40" class="img rounded-circle"
-                 :src="user.avatar"/>
+                 :src="userdata.avatar"/>
             <div class="ml-2">
-                <a :href="user.url">{{ user.name }}</a>
+                <a :href="userdata.url">{{ userdata.name }}</a>
                 <small class="text-muted d-block">{{ postDate }}</small>
             </div>
         </div>
@@ -18,14 +18,11 @@
 
 <script>
     export default {
-        props: ['model'],
+        props: ['model', 'userdata'],
         computed: {
             postDate() {
                 return this.model.created_date
             }
-        },
-        data() {
-            return {user: this.model.user}
         }
     }
 </script>
