@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 if (!function_exists('set_title')) {
     function set_title($title = '')
     {
-        if (empty($title)) return config('app.name');
+        if (empty($title)) return config('app.name')." - Sederhana & Unik";
         return $title . " - " . config('app.name');
     }
 }
