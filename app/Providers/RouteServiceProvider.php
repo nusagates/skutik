@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('post_slug', function ($slug) {
             return Post::with('tags')
                     ->where('slug', $slug)
-                    ->where('post_status', 'published')
+                    ->where('post_status', 'publish')
                     ->first() ?? abort(404);
         });
         Route::bind('tag_slug', function ($slug) {

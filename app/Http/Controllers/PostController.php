@@ -26,7 +26,7 @@ class PostController extends Controller
     {
         $post = Post::with(['user', 'tags'])
             ->where('post_type', 'post')
-            ->where('post_status', 'published')
+            ->where('post_status', 'publish')
             ->latest()->paginate(15);
         return view('post.index', ['post' => $post, 'latest' => $post]);
     }
@@ -132,7 +132,7 @@ class PostController extends Controller
     public function tag(Tags $tag)
     {
         $post = Tags::find($tag->id)->tag()
-            ->where('post_status', 'published')
+            ->where('post_status', 'publish')
             ->paginate(15);
         return view('post.index', ['post' => $post, "title" => $tag->name]);
     }
@@ -142,7 +142,7 @@ class PostController extends Controller
 
         if(!(Auth::check() || Auth::id()== $user->id)){
             $post = Post::where('user_id', $user->id)
-                ->where('post_status', 'published')
+                ->where('post_status', 'publish')
                 ->paginate(15);
         }else{
             $post = Post::where('user_id', $user->id)

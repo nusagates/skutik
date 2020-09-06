@@ -89,9 +89,9 @@
                     this.status = "Isi artikel tidak boleh kosong"
                     this.is_processing = false
                 } else if (this.id == undefined) {
-                    this.save('published')
+                    this.save('publish')
                 } else {
-                    this.update('published')
+                    this.update('publish')
                 }
             },
             draft() {
