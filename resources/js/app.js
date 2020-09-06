@@ -18,6 +18,7 @@ Vue.component('user-info', require('./components/UserInfo.vue').default);
 Vue.component('post-content', require('./components/PostContent.vue').default);
 Vue.component('comment', require('./components/Comments').default);
 Vue.component('post-comment', require('./components/PostComment.vue').default);
+Vue.component('post-form', require('./components/PostForm.vue').default);
 
 const app = new Vue({
     el: '#app',

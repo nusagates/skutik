@@ -9,7 +9,7 @@ class Post extends Model
 {
     protected $guarded = [];
 
-    protected $appends = ['created_date', ''];
+    protected $appends = ['created_date', 'all_tags'];
     public function user()
     {
         return $this->belongsTo(User::class);
