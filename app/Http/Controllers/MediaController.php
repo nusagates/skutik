@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Media;
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 class MediaController extends Controller
 {
     public function image_upload(Request $request)
@@ -41,6 +42,7 @@ class MediaController extends Controller
             }
             $file->move($path, $name_formated);
             $filesource = $path . $name_formated;
+            ImageOptimizer::optimize($filesource, $filesource);
             $this->convert($filesource, $filesource);
             return ['fileName' => $filename, 'uploaded' => true, 'url' => route('media.image', $media->url)];
         }

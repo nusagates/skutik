@@ -10,6 +10,7 @@ class Post extends Model
     protected $guarded = [];
 
     protected $appends = ['created_date', 'all_tags'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -53,6 +54,15 @@ class Post extends Model
 
     public function getFeaturedImageAttribute()
     {
+        $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML($this->post_content);
+        libxml_clear_errors();
+        $imgTags = $dom->getElementsByTagName('img');
+        if ($imgTags->length > 0) {
+            $imgElement = $imgTags->item(0);
+            return $imgElement->getAttribute('src');
+        }
         return url("images/baner.png");
     }
 
@@ -75,7 +85,8 @@ class Post extends Model
         return implode(",", $t);
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(PostComment::class);
     }
 
