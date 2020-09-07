@@ -12,3 +12,4 @@ npm-debug.log
 yarn-error.log
 /public/sitemap/
 /public/sitemap_index.xml
+/public/uploads/

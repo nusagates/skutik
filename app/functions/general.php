@@ -73,3 +73,12 @@ if (!function_exists("get_related_slug")) {
             ->get();
     }
 }
+if (!function_exists('upload_image_error')){
+    function upload_image_error($msg){
+        return [
+            'error'=> [
+                'message'=> $msg
+            ]
+        ];
+    }
+}

@@ -54,7 +54,7 @@
                 editorConfig: {
                     ckfinder: {
                         // Upload the images to the server using the CKFinder QuickUpload command.
-                        uploadUrl: 'https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                        uploadUrl: '/media/image/upload'
                     }
                 }
             }
