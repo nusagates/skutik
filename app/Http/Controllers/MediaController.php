@@ -7,7 +7,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
+use ImageOptimizer;
 class MediaController extends Controller
 {
     public function image_upload(Request $request)
