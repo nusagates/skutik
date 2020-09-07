@@ -25,7 +25,5 @@ Route::get('/author/{username}', 'PostController@author')->name('author');
 Route::resource('post.comment', 'CommentController')->except(['index', 'show', 'create']);
 Route::group(['prefix' => 'media'], function () {
     Route::post('image/upload', 'MediaController@image_upload')->name('media.image.upload');
-    Route::get('image/', 'MediaController@image')->name('media.image');
-    Route::get('image/', 'MediaController@image')->name('media.image');
     Route::get('image/{filename}', 'MediaController@image')->name('media.image');
 });
