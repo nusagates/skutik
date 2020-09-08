@@ -29,7 +29,7 @@
                 @include('post._show')
                 @endif
 
-                <div class="card shadow">
+                <div class="card shadow mt-2">
                     <div class="card-header">
                         <h3 class="card-title">20 Tag Populer</h3>
                     </div>
