@@ -9,14 +9,12 @@
                 <div class="media-body post-content">
                     <user-info :model="{{$item}}" :userdata="{{$item->user}}"></user-info>
                     <h2 class="title h1-sm h3-lg"><a href="{{$item->url}}"> {{$item->post_title}}</a></h2>
-                   <div class="media">
-                       <div class="media-left mr-2">
-                           <img width="150px" src="{{$item->featured_image}}" alt="{{$item->post_title}}" title="{{$item->post_title}}"/>
-                       </div>
-                       <div class="media-body">
-                           <p>{!!Str::limit(strip_tags($item->post_content), 150, '...')!!}</p>
-                       </div>
-                   </div>
+                    <div class="float-left mr-2">
+                        <a href="{{$item->url}}">
+                            <img width="150px" src="{{$item->featured_image}}" alt="{{$item->post_title}}" title="{{$item->post_title}}"/>
+                        </a>
+                    </div>
+                    <div>{!!Str::limit(strip_tags($item->post_content), 200, '...')!!}</div>
                     <div class="d-flex justify-content-between">
                         <div>
                             @can('update', $item)
@@ -39,7 +37,6 @@
                             @endcan
                         </div>
                     </div>
-                    <hr>
                 </div>
             </div>
         </div>

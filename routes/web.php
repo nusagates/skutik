@@ -23,6 +23,7 @@ Route::get('/post/{post_slug}', 'PostController@show')->name('post.show');
 Route::get('/post/tagged/{tag_slug}', 'PostController@tag')->name('post.tag');
 Route::get('/author/{username}', 'PostController@author')->name('author');
 Route::resource('post.comment', 'CommentController')->except(['index', 'show', 'create']);
+Route::resource('challenge', 'ChallengeController');
 Route::group(['prefix' => 'media'], function () {
     Route::post('image/upload', 'MediaController@image_upload')->name('media.image.upload');
     Route::get('image/{filename}', 'MediaController@image')->name('media.image');
