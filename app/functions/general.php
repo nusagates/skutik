@@ -93,7 +93,7 @@ if (!function_exists('get_all_tags')) {
                 ->paginate(20);
             foreach ($tags as $item) {
                 if($item->tag_count!=0){
-                    echo '<a class="btn btn-sm btn-outline-success my-1 mx-1" href="' . $item->url . '">' . $item->name . '['.$item->tag_count.']</a>';
+                    echo '<a class="btn btn-sm btn-outline-success my-1 mx-1" href="' . $item->url . '">' . strtolower($item->name) . '['.$item->tag_count.']</a>';
                 }
             }
         }
