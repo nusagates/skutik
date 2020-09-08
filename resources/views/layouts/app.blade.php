@@ -149,7 +149,6 @@
                     <hr class="clearfix w-100 d-md-none">
 
 
-
                 </div>
                 <!-- Grid row -->
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Post;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
@@ -92,10 +93,43 @@ if (!function_exists('get_all_tags')) {
                 ->orderBy('tag_count', 'desc')
                 ->paginate(20);
             foreach ($tags as $item) {
-                if($item->tag_count!=0){
-                    echo '<a class="btn btn-sm btn-outline-success my-1 mx-1" href="' . $item->url . '">' . strtolower($item->name) . '['.$item->tag_count.']</a>';
+                if ($item->tag_count != 0) {
+                    echo '<a class="btn btn-sm btn-outline-success my-1 mx-1" href="' . $item->url . '">' . strtolower($item->name) . '[' . $item->tag_count . ']</a>';
                 }
             }
+        }
+    }
+}
+if (!function_exists('get_latest_posts')) {
+    function get_latest_post()
+    {
+        if (Schema::hasTable('posts')) {
+            $post = Post::where('post_type', 'post')
+                ->where('post_status', 'publish')
+                ->latest()->paginate(5);
+            $html = '<ul class="fa-ul">';
+            foreach ($post as $item) {
+                $html .= '<li><a href="'.$item->url.'"> <i class="fa fa-book"></i> '.$item->post_title.'</a></li>';
+            }
+            $html .= '</ul>';
+            return $html;
+        }
+    }
+}
+if (!function_exists('get_popular_posts')) {
+    function get_popular_post()
+    {
+        if (Schema::hasTable('posts')) {
+            $post = Post::where('post_type', 'post')
+                ->where('post_status', 'publish')
+                ->orderBy('post_view', 'desc')
+                ->paginate(5);
+            $html = '<ul class="fa-ul">';
+            foreach ($post as $item) {
+                $html .= '<li><a href="'.$item->url.'"> <i class="fa fa-book"></i> '.$item->post_title.'</a></li>';
+            }
+            $html .= '</ul>';
+            return $html;
         }
     }
 }
