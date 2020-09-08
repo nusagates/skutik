@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Challenge;
 use App\Post;
 use App\Tags;
 use App\User;
@@ -37,6 +38,16 @@ class RouteServiceProvider extends ServiceProvider
             return Post::with('tags')
                     ->where('slug', $slug)
                     ->where('post_status', 'publish')
+                    ->first() ?? abort(404);
+        });
+        Route::bind('challenge_slug', function ($slug) {
+            return Challenge::with(['quizes', 'quizes.choices'])->where('challenge_slug', $slug)
+                    ->where('challenge_status', 'publish')
+                    ->first() ?? abort(404);
+        });
+        Route::bind('quiz_slug', function ($slug) {
+            return Challenge::with(['quizes', 'quizes.choices'])->where('challenge_slug', $slug)
+                    ->where('challenge_status', 'publish')
                     ->first() ?? abort(404);
         });
         Route::bind('tag_slug', function ($slug) {

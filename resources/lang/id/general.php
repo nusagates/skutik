@@ -33,5 +33,6 @@ return [
     'label_contact' => "Kontak",
     'label_profile' => "Profil",
     'label_statistic' => "Statistik",
+    'label_challenge' => "Tantangan",
 
 ];

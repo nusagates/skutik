@@ -43,6 +43,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Post::class);
     }
+    public function challenges()
+    {
+        return $this->hasMany(Challenge::class);
+    }
 
     public function getUrlAttribute()
     {

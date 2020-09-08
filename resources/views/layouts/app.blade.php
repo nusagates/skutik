@@ -16,7 +16,7 @@
 
     <title>@yield('title', set_title())</title>
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}"/>
     <script defer src="{{ mix('js/app.js') }}"></script>
 
     <!-- Fonts -->
@@ -27,25 +27,25 @@
     <link href="{{url('vendor/ckeditor/plugins/chart/chart.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{url('images/icon.png')}}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73062055-14"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73062055-14"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-            function gtag() {
-                dataLayer.push(arguments);
-            }
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-            gtag('js', new Date());
-            gtag('config', 'UA-73062055-14');
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/service-worker.js')
-                        .then((reg) => {
-                            console.log('Service worker registered.', reg);
-                        });
-                });
-            }
-        </script>
+        gtag('js', new Date());
+        gtag('config', 'UA-73062055-14');
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((reg) => {
+                        console.log('Service worker registered.', reg);
+                    });
+            });
+        }
+    </script>
     @yield('meta')
 </head>
 <body>
@@ -65,7 +65,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('root') }}"><i class="fa fa-home"></i> {{ __('general.label_home') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('post.index') }}"><i class="fa fa-book"></i> {{ __('post.label_post') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('challenge.index') }}"><i class="fa fa-gamepad"></i> {{ __('general.label_challenge') }}</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -84,7 +92,7 @@
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                               <i class="fa fa-user-circle"></i> {{ Auth::user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

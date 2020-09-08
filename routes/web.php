@@ -18,12 +18,24 @@ Route::get('/', 'PostController@index')->name('root');
 Auth::routes(['verify' => true]);
 Route::get('/home', 'PostController@index')->name('home');
 Route::get('/notify/comment', 'NotificationController@comment')->name('notif.comment');
+
+/* post */
 Route::resource('post', 'PostController')->except('show');
 Route::get('/post/{post_slug}', 'PostController@show')->name('post.show');
 Route::get('/post/tagged/{tag_slug}', 'PostController@tag')->name('post.tag');
 Route::get('/author/{username}', 'PostController@author')->name('author');
 Route::resource('post.comment', 'CommentController')->except(['index', 'show', 'create']);
-Route::resource('challenge', 'ChallengeController');
+
+/* Challenge */
+Route::resource('challenge', 'ChallengeController')->except('show');
+Route::resource('challenge.quiz', 'ChallengeQuizController')->except('index');
+Route::get('/challenge/{challenge_slug}', 'ChallengeController@show')->name('challenge.show');
+Route::get('/challenge/{challenge_slug}/quiz', 'ChallengeQuizController@index')->name('challenge.quiz.index');
+Route::post('/challenge/quiz/answer', 'QuizAnswerController@store')->name('quiz.answer');
+Route::post('/challenge/{id}/finish', 'ChallengeController@finish')->name('challenge.finish');
+Route::get('/challenge/result/{slug}', 'ChallengeController@result')->name('challenge.result');
+
+/* media */
 Route::group(['prefix' => 'media'], function () {
     Route::post('image/upload', 'MediaController@image_upload')->name('media.image.upload');
     Route::get('image/{filename}', 'MediaController@image')->name('media.image');

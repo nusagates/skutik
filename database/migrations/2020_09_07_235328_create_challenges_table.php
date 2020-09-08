@@ -23,6 +23,8 @@ class CreateChallengesTable extends Migration
             $table->string('comment_status', 20)->default('open');
             $table->string('challenge_password', 255)->nullable();
             $table->string('challenge_slug', 200)->unique()->index();
+            $table->string('quiz_order', 20)->default('default');
+            $table->integer('time_limit')->default(0);
             $table->unsignedBigInteger('challenge_view')->default(0);
             $table->timestamps();
         });

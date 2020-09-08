@@ -126,7 +126,7 @@ if (!function_exists('get_popular_posts')) {
                 ->paginate(5);
             $html = '<ul>';
             foreach ($post as $item) {
-                $html .= '<li><a href="'.$item->url.'">'.$item->post_title.'</a></li>';
+                $html .= '<li><a class="text-success" href="'.$item->url.'">'.$item->post_title.'</a></li>';
             }
             $html .= '</ul>';
             return $html;
