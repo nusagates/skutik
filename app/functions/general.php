@@ -8,7 +8,7 @@ if (!function_exists('set_title')) {
     function set_title($title = '')
     {
         if (empty($title)) return config('app.name') . " - Sederhana & Unik";
-        return $title . " - " . config('app.name');
+        return ucwords($title) . " - " . config('app.name');
     }
 }
 if (!function_exists('ping_SE')) {
