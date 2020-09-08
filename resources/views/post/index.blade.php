@@ -30,7 +30,7 @@
                 @endif
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 popular-post">
                 {{-- Artikel Terbaru --}}
                 <div class="card shadow mb-2">
                     <div class="card-header mb-2">

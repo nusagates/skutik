@@ -107,9 +107,9 @@ if (!function_exists('get_latest_posts')) {
             $post = Post::where('post_type', 'post')
                 ->where('post_status', 'publish')
                 ->latest()->paginate(5);
-            $html = '<ul class="fa-ul">';
+            $html = '<ul>';
             foreach ($post as $item) {
-                $html .= '<li><a href="'.$item->url.'"> <i class="fa fa-book"></i> '.$item->post_title.'</a></li>';
+                $html .= '<li><a href="'.$item->url.'">'.$item->post_title.'</a></li>';
             }
             $html .= '</ul>';
             return $html;
@@ -124,9 +124,9 @@ if (!function_exists('get_popular_posts')) {
                 ->where('post_status', 'publish')
                 ->orderBy('post_view', 'desc')
                 ->paginate(5);
-            $html = '<ul class="fa-ul">';
+            $html = '<ul>';
             foreach ($post as $item) {
-                $html .= '<li><a href="'.$item->url.'"> <i class="fa fa-book"></i> '.$item->post_title.'</a></li>';
+                $html .= '<li><a href="'.$item->url.'">'.$item->post_title.'</a></li>';
             }
             $html .= '</ul>';
             return $html;

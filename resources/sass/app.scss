@@ -155,3 +155,7 @@ pre {
 [v-cloak]{
     display: none;
 }
+.popular-post li{
+    list-style: url("/images/hand_arrow.png");
+    padding-bottom: 15px;
+}
