@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 
 if (!function_exists('set_title')) {
     function set_title($title = '')
     {
-        if (empty($title)) return config('app.name')." - Sederhana & Unik";
+        if (empty($title)) return config('app.name') . " - Sederhana & Unik";
         return $title . " - " . config('app.name');
     }
 }
@@ -73,12 +74,28 @@ if (!function_exists("get_related_slug")) {
             ->get();
     }
 }
-if (!function_exists('upload_image_error')){
-    function upload_image_error($msg){
+if (!function_exists('upload_image_error')) {
+    function upload_image_error($msg)
+    {
         return [
-            'error'=> [
-                'message'=> $msg
+            'error' => [
+                'message' => $msg
             ]
         ];
+    }
+}
+if (!function_exists('get_all_tags')) {
+    function get_all_tags()
+    {
+        if (Schema::hasTable('tags')) {
+            $tags = \App\Tags::withCount(['tag'])
+                ->orderBy('tag_count', 'desc')
+                ->paginate(20);
+            foreach ($tags as $item) {
+                if($item->tag_count!=0){
+                    echo '<a class="btn btn-sm btn-outline-success my-1 mx-1" href="' . $item->url . '">' . $item->name . '['.$item->tag_count.']</a>';
+                }
+            }
+        }
     }
 }
