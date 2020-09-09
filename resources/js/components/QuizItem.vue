@@ -2,14 +2,11 @@
     <div>
         <div v-for="item of quiz.choices" class="form-group">
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input :disabled="processing" @click="submit(item.key)" :value="item.key" name="options[]" v-model="selected"
-                               type="radio">
-                    </div>
+                <div class="radio">
+                    <label>
+                        <input :disabled="processing" @click="submit(item.key)" :value="item.key" name="options[]"
+                               v-model="selected" type="radio"> {{item.answer }}</label>
                 </div>
-                <input readonly :value="item.answer" type="text"
-                       class="form-control">
             </div>
         </div>
         <div class="form-group">
@@ -30,7 +27,6 @@
             </button>
         </div>
     </div>
-
 </template>
 <script>
     export default {
