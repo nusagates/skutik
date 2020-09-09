@@ -1984,6 +1984,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['challenge'],
   data: function data() {
     return {
+      processing: false,
       message: '',
       question: '',
       answers: {
@@ -2001,7 +2002,8 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      this.message = '';
+      this.processing = true;
+      this.message = 'memroses...';
 
       if (this.question === '') {
         this.message = "Silahkan isi pertanyaan terlebih dahulu";
@@ -2020,13 +2022,12 @@ __webpack_require__.r(__webpack_exports__);
             _this.message = 'Pertanyaan berhasil ditambahkan';
 
             _this.clear();
+
+            _this.processing = false;
           }
         })["catch"](function (err) {
-          console.log(err.data.message);
-
-          if (err.code == 422) {
-            console.log(err.response.data);
-          }
+          _this.message = 'ada kesalahan teknis saat memroses data';
+          _this.processing = false;
         });
       }
     },
@@ -2034,7 +2035,7 @@ __webpack_require__.r(__webpack_exports__);
       this.question = '';
       this.correct = 0;
 
-      for (var i = 1; i < this.answers.length; i++) {
+      for (var i = 1; i < Object.keys(this.answers).length; i++) {
         this.answers[i] = '';
       }
     }
@@ -2348,6 +2349,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['quiz', 'next', 'prev'],
   data: function data() {
@@ -2355,7 +2359,10 @@ __webpack_require__.r(__webpack_exports__);
       selected: 0,
       challenge_id: this.quiz.challenge_id,
       quiz_id: this.quiz.id,
-      message: ''
+      message: '',
+      answer: '',
+      processing: false,
+      error: false
     };
   },
   methods: {
@@ -2363,15 +2370,25 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.message = 'memroses...';
+      this.processing = true;
       axios.post("/challenge/quiz/answer", {
         challenge_id: this.challenge_id,
         key: key,
         quiz_id: this.quiz_id
       }).then(function (res) {
-        console.log(res.data);
-        _this.message = 'Jawaban berhasil disimpan';
+        if (res.data.code === 200) {
+          _this.message = 'Jawaban berhasil disimpan';
+          _this.answer = res.data.answer;
+        } else {
+          _this.message = 'ada kesalahan teknis';
+          _this.error = true;
+        }
+
+        _this.processing = false;
       })["catch"](function (err) {
-        console.log("Kesalahan");
+        _this.message = 'ada kesalahan teknis';
+        _this.error = true;
+        _this.processing = false;
       });
     },
     finish: function finish(key) {
@@ -2381,11 +2398,14 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.selected == 0) {
         this.message = "Silahkan pilih jawaban terlebih dahulu";
+      } else if (this.answer == '') {
+        this.message = 'Belum bisa menyelesaikan tantangan. SIlahkan pilih jawaban sekali lagi';
       } else {
         axios.post("/challenge/".concat(this.challenge_id, "/finish "), {
           challenge_id: this.challenge_id,
           key: key,
-          quiz_id: this.quiz_id
+          quiz_id: this.quiz_id,
+          answer_id: this.answer.id
         }).then(function (res) {
           console.log(res.data);
           _this2.message = 'Jawaban berhasil disimpan';
@@ -2398,6 +2418,9 @@ __webpack_require__.r(__webpack_exports__);
           console.log("Kesalahan");
         });
       }
+    },
+    resubmit: function resubmit() {
+      this.submit(this.selected);
     },
     prevEvt: function prevEvt() {
       location.href = this.prev;
@@ -38159,7 +38182,11 @@ var render = function() {
     _c("div", { staticClass: "form-group" }, [
       _c(
         "button",
-        { staticClass: "btn btn-outline-success", on: { click: _vm.submit } },
+        {
+          staticClass: "btn btn-outline-success",
+          attrs: { disabled: _vm.processing },
+          on: { click: _vm.submit }
+        },
         [_vm._v("Tambahkan Pertanyaan")]
       )
     ])
@@ -38448,7 +38475,11 @@ var render = function() {
                       expression: "selected"
                     }
                   ],
-                  attrs: { name: "options[]", type: "radio" },
+                  attrs: {
+                    disabled: _vm.processing,
+                    name: "options[]",
+                    type: "radio"
+                  },
                   domProps: {
                     value: item.key,
                     checked: _vm._q(_vm.selected, item.key)
@@ -38499,6 +38530,32 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
+              value: _vm.error,
+              expression: "error"
+            }
+          ],
+          staticClass: "text-center my-2"
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success btn-block",
+              attrs: { disabled: _vm.processing },
+              on: { click: _vm.resubmit }
+            },
+            [_vm._v("Kirim Ulang")]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
               value: _vm.next == "",
               expression: "next==''"
             }
@@ -38530,7 +38587,9 @@ var render = function() {
               }
             ],
             staticClass: "btn btn-outline-success",
-            attrs: { disabled: _vm.selected == 0 || _vm.prev == "" },
+            attrs: {
+              disabled: _vm.selected == 0 || _vm.prev == "" || _vm.processing
+            },
             on: { click: _vm.prevEvt }
           },
           [_vm._v("Sebelumnya\n        ")]
@@ -38548,7 +38607,9 @@ var render = function() {
               }
             ],
             staticClass: "btn btn-outline-success",
-            attrs: { disabled: _vm.selected == 0 || _vm.next == "" },
+            attrs: {
+              disabled: _vm.selected == 0 || _vm.next == "" || _vm.processing
+            },
             on: { click: _vm.nextEvt }
           },
           [_vm._v("Selanjutnya\n        ")]

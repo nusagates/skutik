@@ -108,13 +108,12 @@ class ChallengeController extends Controller
         //
     }
 
-    public function finish($id)
+    public function finish(Request $request)
     {
-        $challenge = Challenge::find($id);
-        $challenge->challenge_status = 'finished';
-        $challenge->save();
 
-        $answer = QuizAnswer::where(['user_id'=>Auth::id(), 'challenge_id'=>$challenge->id])->first();
+        $answer = QuizAnswer::find($request->answer_id);
+        $answer->status = 'finished';
+        $answer->save();
         return ['code' => 200, 'url' => url('challenge/result/' . $answer->slug)];
     }
 

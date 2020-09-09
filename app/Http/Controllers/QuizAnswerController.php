@@ -36,20 +36,21 @@ class QuizAnswerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function store(Request $request)
     {
+        sleep(3);
         $qa = QuizAnswer::updateOrCreate(
-            ['user_id'=>Auth::id(), 'challenge_id'=>$request->challenge_id],
-            ['slug'=>md5(Carbon::now()->timestamp)]
+            ['user_id' => Auth::id(), 'challenge_id' => $request->challenge_id],
+            ['slug' => md5(Carbon::now()->timestamp)]
         );
-        $ch = Choice::where(['key'=>$request->key, 'quiz_id'=>$request->quiz_id])->first();
+        $ch = Choice::where(['key' => $request->key, 'quiz_id' => $request->quiz_id])->first();
         $an = QuizAnswerDetail::updateOrCreate(
-            ['answer_id'=>$qa->id, 'quiz_id'=>$request->quiz_id],
-            ['key'=>$request->key, 'answer'=>$ch->answer, 'correct'=>$ch->correct]
+            ['answer_id' => $qa->id, 'quiz_id' => $request->quiz_id],
+            ['key' => $request->key, 'answer' => $ch->answer, 'correct' => $ch->correct]
         );
-        return 1;
+        return ['code' => 200, 'answer' => $qa];
     }
 
     /**

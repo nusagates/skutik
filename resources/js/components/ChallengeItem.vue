@@ -32,7 +32,7 @@
             <p v-if="message!=''" class="alert alert-warning">{{message}}</p>
         </div>
         <div class="form-group">
-            <button @click="submit" class="btn btn-outline-success">Tambahkan Pertanyaan</button>
+            <button :disabled="processing" @click="submit" class="btn btn-outline-success">Tambahkan Pertanyaan</button>
         </div>
 
     </div>
@@ -43,6 +43,7 @@
         props: ['challenge'],
         data() {
             return {
+                processing: false,
                 message: '',
                 question: '',
                 answers: {
@@ -58,7 +59,8 @@
         },
         methods: {
             submit() {
-                this.message = ''
+                this.processing = true
+                this.message = 'memroses...'
                 if (this.question === '') {
                     this.message = "Silahkan isi pertanyaan terlebih dahulu"
                 } else if (this.correct === 0) {
@@ -76,20 +78,19 @@
                                 this.quizes = res.data.quiz
                                 this.message = 'Pertanyaan berhasil ditambahkan'
                                 this.clear()
+                                this.processing = false
                             }
 
                         }).catch(err => {
-                        console.log(err.data.message)
-                        if (err.code == 422) {
-                            console.log(err.response.data)
-                        }
+                        this.message = 'ada kesalahan teknis saat memroses data'
+                        this.processing = false
                     });
                 }
             },
             clear() {
                 this.question = ''
                 this.correct = 0
-                for (let i = 1; i < this.answers.length; i++) {
+                for (let i = 1; i < Object.keys(this.answers).length; i++) {
                     this.answers[i] = ''
                 }
             }

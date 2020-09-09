@@ -27,12 +27,21 @@
                                 </div>
                                 <h2 class="title">{{$challenge->challenge_title}}</h2>
                                 {!! $challenge->challenge_content !!}
+                                <hr/>
                                 <div class="text-center">
-                                    <h3>Pertanyaan</h3>
-                                    @foreach($quiz as $item)
-                                        {{$item->question}}
-                                        <quiz-item :quiz="{{$item}}" prev="{{$quiz->previousPageUrl()}}"  next="{{$quiz->nextPageUrl()}}"></quiz-item>
-                                    @endforeach
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Pertanyaan {{$quiz->currentPage()}}
+                                                dari {{$quiz->lastPage()}}</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            @foreach($quiz as $item)
+                                                {{$item->question}}
+                                                <quiz-item :quiz="{{$item}}" prev="{{$quiz->previousPageUrl()}}"
+                                                           next="{{$quiz->nextPageUrl()}}"></quiz-item>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Challenge;
 use App\ChallengeQuiz;
+use App\QuizAnswer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChallengeQuizController extends Controller
 {
@@ -20,9 +22,9 @@ class ChallengeQuizController extends Controller
      */
     public function index(Challenge $challenge)
     {
-
         $quiz = ChallengeQuiz::with('choices')->where('challenge_id', $challenge->id)->paginate(1);
-        //return $quiz;
+        $answer_count = QuizAnswer::where(['user_id'=> Auth::id(), 'challenge_id'=>$challenge->id])->get()->count();
+
         return view('challenge.quiz', compact(['quiz', 'challenge']));
     }
 
@@ -44,6 +46,7 @@ class ChallengeQuizController extends Controller
      */
     public function store(Challenge $challenge, Request $request)
     {
+
         $quiz = $challenge->quizes()->create($request->only('question'));
         $answers = array_filter($request->answer);
         foreach ($answers as $k => $item) {
