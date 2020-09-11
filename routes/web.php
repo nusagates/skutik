@@ -34,6 +34,7 @@ Route::get('/challenge/{challenge_slug}/quiz', 'ChallengeQuizController@index')-
 Route::post('/challenge/quiz/answer', 'QuizAnswerController@store')->name('quiz.answer');
 Route::post('/challenge/{id}/finish', 'ChallengeController@finish')->name('challenge.finish');
 Route::get('/challenge/result/{slug}', 'ChallengeController@result')->name('challenge.result');
+Route::get('/challenge/result/image/{slug}', 'ChallengeController@result_image')->name('challenge.result.image');
 
 /* media */
 Route::group(['prefix' => 'media'], function () {

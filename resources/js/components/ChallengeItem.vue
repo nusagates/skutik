@@ -59,8 +59,6 @@
         },
         methods: {
             submit() {
-                this.processing = true
-                this.message = 'memroses...'
                 if (this.question === '') {
                     this.message = "Silahkan isi pertanyaan terlebih dahulu"
                 } else if (this.correct === 0) {
@@ -68,6 +66,8 @@
                 } else if (this.answers[this.correct] === '') {
                     this.message = "Jawaban benar tidak boleh kosong"
                 } else {
+                    this.processing = true
+                    this.message = 'memroses...'
                     axios.post(`/challenge/${this.challenge.id}/quiz `, {
                         question: this.question,
                         answer: this.answers,
@@ -90,7 +90,7 @@
             clear() {
                 this.question = ''
                 this.correct = 0
-                for (let i = 1; i < Object.keys(this.answers).length; i++) {
+                for (let i = 1; i < Object.keys(this.answers).length+1; i++) {
                     this.answers[i] = ''
                 }
             }

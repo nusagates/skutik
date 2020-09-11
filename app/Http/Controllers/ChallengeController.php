@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use GDText\Box;
+use GDText\Color;
+
 
 class ChallengeController extends Controller
 {
@@ -119,6 +122,7 @@ class ChallengeController extends Controller
 
     public function result($slug)
     {
+
         $answer = QuizAnswer::where('slug', $slug)->first() ?? abort(404);
         $quiz_count = $answer->challenge->quizes->count();
         $answer_count = $answer->detail->count();
@@ -139,5 +143,115 @@ class ChallengeController extends Controller
             $label = "<span class='badge badge-danger'>Kurang</span>";
         }
         return view('challenge.result', compact(['answer', 'quiz_count', 'answer_count', 'correct', 'complete_percentage', 'label']));
+    }
+    public function result_image($slug){
+        $answer = QuizAnswer::where('slug', $slug)->first() ?? abort(404);
+        $quiz_count = $answer->challenge->quizes->count();
+        $answer_count = $answer->detail->count();
+        $correct = 0;
+        foreach ($answer->detail as $item) {
+            if ($item->correct == 1) {
+                $correct++;
+            }
+        }
+        $complete_percentage = (($correct / $quiz_count) * 100);
+        if ($complete_percentage > 89) {
+            $label = "Baik Sekali";
+        } else if ($complete_percentage > 79) {
+            $label = "Baik";
+        } else if ($complete_percentage > 69) {
+            $label = "Cukup";
+        } else if ($complete_percentage <= 69) {
+            $label = "Kurang";
+        }
+        header('Content-type: image/png');
+        $im = imagecreatefrompng(public_path('images/Skutik.png'));
+        $greeting = 'Hasil Tantangan';
+
+        $red = new Color(255, 0, 0);
+        $orange = new Color(255, 163, 0);
+        $green = new Color(23, 86, 65);
+        $blue = new Color(82, 133, 255);
+        $black = new Color(0, 0, 0);
+        $pink = new Color(255, 75, 140);
+
+        $font = public_path('/fonts/sb.otf');
+        $box = new Box($im);
+        $box->setFontFace($font);
+        $box->setFontColor($pink);
+        $box->setTextAlign('center', 'top');
+        $box->setBox(15, 27, 640, 60);
+        $box->setFontSize(20);
+        $box->draw(strtoupper($greeting));
+
+        $box2 = new Box($im);
+        $box2->setFontFace($font);
+        $box2->setFontColor($pink);
+        $box2->setTextAlign('center', 'top');
+        $box2->setBox(15, 67, 640, 60);
+        $box2->setFontSize(20);
+        $box2->draw(strtoupper($answer->challenge->challenge_title));
+
+        //bagian nama
+        $box3 = new Box($im);
+        $box3->setFontFace($font);
+        $box3->setFontColor($black);
+        $box3->setTextAlign('left', 'top');
+        $box3->setBox(15, 110, 640, 60);
+        $box3->setFontSize(16);
+        $box3->draw("Nama");
+
+        $box3b = new Box($im);
+        $box3b->setFontFace($font);
+        $box3b->setFontColor($black);
+        $box3b->setTextAlign('left', 'top');
+        $box3b->setBox(100, 110, 640, 60);
+        $box3b->setFontSize(16);
+        $box3b->draw(': '.strtoupper($answer->user->name));
+
+        //bagian skor
+        $box4 = new Box($im);
+        $box4->setFontFace($font);
+        $box4->setFontColor($black);
+        $box4->setTextAlign('left', 'top');
+        $box4->setBox(15, 150, 640, 60);
+        $box4->setFontSize(16);
+        $box4->draw("Skor");
+
+        $box3b = new Box($im);
+        $box3b->setFontFace($font);
+        $box3b->setFontColor($black);
+        $box3b->setTextAlign('left', 'top');
+        $box3b->setBox(100, 150, 640, 60);
+        $box3b->setFontSize(16);
+        $box3b->draw(': '.strtoupper($complete_percentage));
+
+        //ucapan selamat
+        $box5 = new Box($im);
+        $box5->setFontFace($font);
+        $box5->setFontColor($black);
+        $box5->setTextAlign('center', 'top');
+        $box5->setBox(15, 190, 640, 60);
+        $box5->setFontSize(16);
+        $box5->draw("Selamat! Kamu Berhasil Menyelesaikan Tantangan dengan Predikat");
+
+        //predikat
+        $box5 = new Box($im);
+        $box5->setFontFace($font);
+        if ($complete_percentage > 89) {
+            $box5->setFontColor($green);
+        } else if ($complete_percentage > 79) {
+            $box5->setFontColor($blue);
+        } else if ($complete_percentage > 69) {
+            $box5->setFontColor($orange);
+        } else if ($complete_percentage <= 69) {
+            $box5->setFontColor($red);
+        }
+        $box5->setTextAlign('center', 'top');
+        $box5->setBox(15, 225, 640, 60);
+        $box5->setFontSize(25);
+        $box5->draw(strtoupper(strip_tags($label)));
+
+        imagepng($im);
     }
 }

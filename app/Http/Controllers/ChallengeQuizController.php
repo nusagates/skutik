@@ -46,7 +46,6 @@ class ChallengeQuizController extends Controller
      */
     public function store(Challenge $challenge, Request $request)
     {
-
         $quiz = $challenge->quizes()->create($request->only('question'));
         $answers = array_filter($request->answer);
         foreach ($answers as $k => $item) {

@@ -3,11 +3,13 @@
         <div v-for="item of quiz.choices" class="form-group">
             <div class="input-group">
                 <div class="radio">
-                    <label>
+                    <label class="w-100">
                         <input :disabled="processing" @click="submit(item.key)" :value="item.key" name="options[]"
-                               v-model="selected" type="radio"> {{item.answer }}</label>
+                               v-model="selected" type="radio"> {{item.answer }}
+                    </label>
                 </div>
             </div>
+            <hr/>
         </div>
         <div class="form-group">
             <p class="alert alert-warning" v-show="message!=''">{{message}}</p>
@@ -55,6 +57,7 @@
                         if (res.data.code === 200) {
                             this.message = 'Jawaban berhasil disimpan'
                             this.answer = res.data.answer
+                            this.error = false
                         } else {
                             this.message = 'ada kesalahan teknis'
                             this.error = true

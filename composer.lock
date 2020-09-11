@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eaa04d4e51cf4ecbf5256313c6e4b994",
+    "content-hash": "2141c936be6120a59404b6d4b40e44ef",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3176,6 +3176,41 @@
                 "temporary-directory"
             ],
             "time": "2020-06-08T08:58:45+00:00"
+        },
+        {
+            "name": "stil/gd-text",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stil/gd-text.git",
+                "reference": "ae2bd5736dbd6d45a4af1e4b9c573dd4d8d06b11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stil/gd-text/zipball/ae2bd5736dbd6d45a4af1e4b9c573dd4d8d06b11",
+                "reference": "ae2bd5736dbd6d45a4af1e4b9c573dd4d8d06b11",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GDText\\": "src/",
+                    "GDText\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A class drawing multiline and aligned text on pictures. Uses GD extension.",
+            "time": "2016-07-22T22:31:04+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -7279,7 +7314,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2.5"
+        "php": "^7.2.5",
+        "ext-gd": "*"
     },
     "platform-dev": []
 }
