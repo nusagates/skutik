@@ -16,7 +16,7 @@ class ChallengeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('verified', ['except' => ['index', 'show']]);
+        $this->middleware('verified', ['except' => ['index', 'show', 'result', 'result_image']]);
     }
 
     /**
