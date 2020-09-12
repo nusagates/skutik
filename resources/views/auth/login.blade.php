@@ -69,6 +69,7 @@
                     <div class="text-center">
                         <div class="d-block">atau login menggunakan</div>
                         <a class="btn btn-primary" href="{{url('auth/facebook')}}">Facebook</a>
+                        <a class="btn btn-danger" href="{{url('auth/google')}}">Google</a>
                     </div>
                 </div>
             </div>
