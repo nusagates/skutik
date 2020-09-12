@@ -38,11 +38,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    protected $appends= ['avatar', 'url'];
+    protected $appends = ['avatar', 'url'];
+
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
+
     public function challenges()
     {
         return $this->hasMany(Challenge::class);
@@ -50,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getUrlAttribute()
     {
-        return url("author/".$this->username);
+        return url("author/" . $this->username);
     }
 
     public function setNameAttribute($value)
@@ -61,9 +63,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getAvatarAttribute()
     {
-        $email = "someone@somewhere.com";
-        $default = url('images/user.jfif');
-        $size = 40;
-        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->email))) . "?d=" . urlencode($default) . "&s=" . $size;
+        $default = 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email))) . '?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/' . urlencode($this->name) . '/64/EBF4FF/7F9CF5';
+        return $default;
     }
 }
