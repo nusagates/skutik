@@ -14,7 +14,7 @@
                                 <b>{{$answer->challenge->challenge_title}}.</b>
                                 Berikut ini adalah hasilnya.
                             </p>
-                            <img src="{{route('challenge.result.image', $answer->slug)}}"/>
+                            <img style="max-width: 100%" src="{{route('challenge.result.image', $answer->slug)}}"/>
                         </div>
                         <table class="mt-2 ">
                             <tr>
