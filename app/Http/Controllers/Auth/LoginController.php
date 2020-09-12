@@ -69,9 +69,10 @@ class LoginController extends Controller
             Auth::loginUsingId($new_user->id, true);
 
         }
-        if (!session()->has('url.intended')) {
-            session(['url.intended' => url()->previous()]);
+
+        if (request()->has('previous')) {
+            $this->redirectTo = request()->get('previous');
         }
-        return view('auth.login');
+        return $this->redirectTo ?? '/home';
     }
 }
