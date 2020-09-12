@@ -70,9 +70,9 @@ class LoginController extends Controller
 
         }
 
-        if (request()->has('previous')) {
-            $this->redirectTo = request()->get('previous');
+        if (Auth::check()) {
+            return Redirect::intended();
         }
-        return $this->redirectTo ?? '/home';
+        return view('auth.login');
     }
 }
