@@ -24,4 +24,9 @@ class Challenge extends Model
     {
         return $this->created_at->diffForHumans();
     }
+
+    public function getAuthorAttribute()
+    {
+        return $this->user->name;
+    }
 }

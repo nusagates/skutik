@@ -165,8 +165,8 @@ class ChallengeController extends Controller
             $label = "Kurang";
         }
         header('Content-type: image/png');
-        $im = imagecreatefrompng(public_path('images/Skutik.png'));
-        $greeting = 'Hasil Tantangan';
+        $im = imagecreatefrompng(public_path('images/bg_result.png'));
+        $greeting = 'Challenge Result';
 
         $red = new Color(255, 0, 0);
         $orange = new Color(255, 163, 0);
@@ -181,7 +181,7 @@ class ChallengeController extends Controller
         $box->setFontColor($pink);
         $box->setTextAlign('center', 'top');
         $box->setBox(15, 27, 640, 60);
-        $box->setFontSize(20);
+        $box->setFontSize(16);
         $box->draw(strtoupper($greeting));
 
         $box2 = new Box($im);
@@ -189,7 +189,7 @@ class ChallengeController extends Controller
         $box2->setFontColor($pink);
         $box2->setTextAlign('center', 'top');
         $box2->setBox(15, 67, 640, 60);
-        $box2->setFontSize(20);
+        $box2->setFontSize(16);
         $box2->draw(strtoupper($answer->challenge->challenge_title));
 
         //bagian nama
@@ -199,7 +199,7 @@ class ChallengeController extends Controller
         $box3->setTextAlign('left', 'top');
         $box3->setBox(15, 110, 640, 60);
         $box3->setFontSize(16);
-        $box3->draw("Nama");
+        $box3->draw("Name");
 
         $box3b = new Box($im);
         $box3b->setFontFace($font);
@@ -216,7 +216,7 @@ class ChallengeController extends Controller
         $box4->setTextAlign('left', 'top');
         $box4->setBox(15, 150, 640, 60);
         $box4->setFontSize(16);
-        $box4->draw("Skor");
+        $box4->draw("Score");
 
         $box3b = new Box($im);
         $box3b->setFontFace($font);
@@ -233,7 +233,23 @@ class ChallengeController extends Controller
         $box5->setTextAlign('center', 'top');
         $box5->setBox(15, 190, 640, 60);
         $box5->setFontSize(16);
-        $box5->draw("Selamat! Kamu Berhasil Menyelesaikan Tantangan dengan Predikat");
+        $box5->draw("Congrats! You have successfully completed the challenge with the title");
+
+        //signature
+        $box5 = new Box($im);
+        $box5->setFontFace($font);
+        $box5->setFontColor($black);
+        $box5->setTextAlign('center', 'top');
+        $box5->setBox(330, 280, 300, 60);
+        $box5->setFontSize(14);
+        $box5->draw("challenger");
+        $box5 = new Box($im);
+        $box5->setFontFace($font);
+        $box5->setFontColor($black);
+        $box5->setTextAlign('center', 'top');
+        $box5->setBox(330, 310, 300, 60);
+        $box5->setFontSize(14);
+        $box5->draw($answer->challenge->author);
 
         //predikat
         $box5 = new Box($im);
