@@ -65,6 +65,11 @@
                             </div>
                         </div>
                     </form>
+                    <hr>
+                    <div class="text-center">
+                        <div class="d-block">atau login menggunakan</div>
+                        <a class="btn btn-primary" href="{{url('auth/facebook')}}">Facebook</a>
+                    </div>
                 </div>
             </div>
         </div>

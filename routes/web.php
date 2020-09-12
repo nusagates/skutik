@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/* Social Media Auth*/
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('/', 'PostController@index')->name('root');
 
@@ -35,6 +38,8 @@ Route::post('/challenge/quiz/answer', 'QuizAnswerController@store')->name('quiz.
 Route::post('/challenge/{id}/finish', 'ChallengeController@finish')->name('challenge.finish');
 Route::get('/challenge/result/{slug}', 'ChallengeController@result')->name('challenge.result');
 Route::get('/challenge/result/image/{slug}', 'ChallengeController@result_image')->name('challenge.result.image');
+
+
 
 /* media */
 Route::group(['prefix' => 'media'], function () {
