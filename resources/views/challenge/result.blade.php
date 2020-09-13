@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', set_title('Hasil Tantangan '.$answer->user->name))
 @section('content')
-    @include('layouts._meta', ['meta_image'=>route('challenge.result.image', $answer->slug), 'meta_title'=>set_title('Hasil Tantangan '.$answer->user->name), 'meta_description'=>set_title('Hasil Tantangan '.$answer->user->name)])
+    @include('layouts._meta', ['meta_image'=>route('challenge.result.image', $answer->slug), 'meta_title'=>set_title('Hasil Tantangan '.$answer->user->name), 'meta_description'=>set_title($answer->user->name.' mendapat predikat '.strip_tags($label).' pada tantangan '.ucwords($answer->challenge->challenge_title))])
     <div class="container">
         <div class="row justify-content-center">
 
