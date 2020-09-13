@@ -1982,6 +1982,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['challenge'],
@@ -1989,6 +2013,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
       processing: false,
+      editing: false,
+      data_edit: '',
       message: '',
       question: '',
       answers: {
@@ -2067,6 +2093,59 @@ __webpack_require__.r(__webpack_exports__);
           _this.processing = false;
         });
       }
+    },
+    remove: function remove(id) {
+      var _this2 = this;
+
+      this.processing = true;
+
+      if (confirm("Apakah kamu ingin menghapus item ini?")) {
+        axios["delete"]("/challenge/".concat(this.challenge.id, "/quiz/").concat(id, " "), {
+          question: this.question,
+          answer: this.answers,
+          correct: this.correct
+        }).then(function (res) {
+          if (res.data.code === 200) {
+            _this2.quizes = res.data.quiz;
+            _this2.message = 'Pertanyaan berhasil dihapus';
+            _this2.processing = false;
+          }
+        })["catch"](function (err) {
+          _this2.message = 'ada kesalahan teknis saat memroses data';
+          _this2.processing = false;
+        });
+      }
+    },
+    edit: function edit(quiz) {
+      this.editing = true;
+      this.data_edit = quiz;
+      var choice = quiz.choices;
+
+      for (var i = 0; i < choice.length; i++) {
+        if (choice[i].correct != 0) {
+          this.data_edit.selected = choice[i].key;
+        }
+      }
+    },
+    update: function update() {
+      var _this3 = this;
+
+      this.processing = true;
+      axios.put("/challenge/".concat(this.challenge.id, "/quiz/").concat(this.data_edit.id, " "), this.data_edit).then(function (res) {
+        if (res.data.code === 200) {
+          _this3.quizes = res.data.quiz;
+          _this3.message = 'Pertanyaan berhasil diperbarui';
+          _this3.processing = false;
+          _this3.editing = false;
+        }
+      })["catch"](function (err) {
+        _this3.message = 'ada kesalahan teknis saat memroses data';
+        _this3.processing = false;
+      });
+    },
+    cancel: function cancel(quiz) {
+      this.editing = false;
+      this.data_edit = '';
     },
     clear: function clear() {
       this.question = '';
@@ -38092,46 +38171,178 @@ var render = function() {
   return _c("div", [
     _c(
       "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: !_vm.editing,
+            expression: "!editing"
+          }
+        ],
+        staticClass: "form-group"
+      },
+      _vm._l(_vm.quizes, function(quiz, index) {
+        return _c(
+          "div",
+          [
+            _c("div", { domProps: { innerHTML: _vm._s(quiz.question) } }),
+            _vm._v(" "),
+            _vm._l(quiz.choices, function(q) {
+              return _c("div", { staticClass: "input-group" }, [
+                _c("div", { staticClass: "radio" }, [
+                  _c("label", { staticClass: "w-100" }, [
+                    _c("input", {
+                      staticClass: "mr-2",
+                      attrs: { disabled: "", type: "radio" },
+                      domProps: { checked: q.correct == 1, value: q.key }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "d-inline",
+                      domProps: { innerHTML: _vm._s(q.answer) }
+                    })
+                  ])
+                ])
+              ])
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-sm",
+                on: {
+                  click: function($event) {
+                    return _vm.remove(quiz.id)
+                  }
+                }
+              },
+              [_vm._v("Hapus")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-sm",
+                on: {
+                  click: function($event) {
+                    return _vm.edit(quiz)
+                  }
+                }
+              },
+              [_vm._v("Edit")]
+            ),
+            _vm._v(" "),
+            _c("hr")
+          ],
+          2
+        )
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _vm.editing
+      ? _c("div", { staticClass: "form-group" }, [
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("ckeditor", {
+                attrs: { editor: _vm.editor, config: _vm.editorConfig },
+                model: {
+                  value: _vm.data_edit.question,
+                  callback: function($$v) {
+                    _vm.$set(_vm.data_edit, "question", $$v)
+                  },
+                  expression: "data_edit.question"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            _vm._l(_vm.data_edit.choices, function(choice) {
+              return _c(
+                "div",
+                { staticClass: "input-group" },
+                [
+                  _c("div", { staticClass: "input-group-prepend" }, [
+                    _c("div", { staticClass: "input-group-text" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.data_edit.selected,
+                            expression: "data_edit.selected"
+                          }
+                        ],
+                        attrs: { type: "radio", name: "correct[]" },
+                        domProps: {
+                          checked: choice.correct == 1,
+                          value: choice.key,
+                          checked: _vm._q(_vm.data_edit.selected, choice.key)
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(
+                              _vm.data_edit,
+                              "selected",
+                              choice.key
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("ckeditor", {
+                    attrs: { editor: _vm.editor, config: _vm.editorConfig },
+                    model: {
+                      value: choice.answer,
+                      callback: function($$v) {
+                        _vm.$set(choice, "answer", $$v)
+                      },
+                      expression: "choice.answer"
+                    }
+                  })
+                ],
+                1
+              )
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary btn-sm",
+                on: { click: _vm.cancel }
+              },
+              [_vm._v("Batal")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-sm",
+                on: { click: _vm.update }
+              },
+              [_vm._v("Perbarui")]
+            )
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
       { staticClass: "form-group" },
       [
-        _c("label", [_vm._v("Pertanyaan")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          _vm._l(_vm.quizes, function(quiz, index) {
-            return _c(
-              "div",
-              [
-                _c("div", { domProps: { innerHTML: _vm._s(quiz.question) } }),
-                _vm._v(" "),
-                _vm._l(quiz.choices, function(q) {
-                  return _c("div", { staticClass: "input-group" }, [
-                    _c("div", { staticClass: "radio" }, [
-                      _c("label", { staticClass: "w-100" }, [
-                        _c("input", {
-                          attrs: {
-                            readonly: "",
-                            name: "options[]",
-                            type: "radio"
-                          },
-                          domProps: { checked: q.correct == 1, value: q.key }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "d-inline",
-                          domProps: { innerHTML: _vm._s(q.answer) }
-                        })
-                      ])
-                    ])
-                  ])
-                })
-              ],
-              2
-            )
-          }),
-          0
-        ),
+        _c("h3", [_vm._v("Pertanyaan")]),
         _vm._v(" "),
         _c("ckeditor", {
           attrs: { editor: _vm.editor, config: _vm.editorConfig },
@@ -38150,51 +38361,55 @@ var render = function() {
     _c(
       "div",
       { staticClass: "form-group" },
-      _vm._l(_vm.answers, function(answer, index) {
-        return _c(
-          "div",
-          { staticClass: "input-group" },
-          [
-            _c("div", { staticClass: "input-group-prepend" }, [
-              _c("div", { staticClass: "input-group-text" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.correct,
-                      expression: "correct"
+      [
+        _c("h3", [_vm._v("Jawaban")]),
+        _vm._v(" "),
+        _vm._l(_vm.answers, function(answer, index) {
+          return _c(
+            "div",
+            { staticClass: "input-group" },
+            [
+              _c("div", { staticClass: "input-group-prepend" }, [
+                _c("div", { staticClass: "input-group-text" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.correct,
+                        expression: "correct"
+                      }
+                    ],
+                    attrs: { type: "radio", name: "correct[]" },
+                    domProps: {
+                      value: index,
+                      checked: _vm._q(_vm.correct, index)
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.correct = index
+                      }
                     }
-                  ],
-                  attrs: { type: "radio", name: "correct[]" },
-                  domProps: {
-                    value: index,
-                    checked: _vm._q(_vm.correct, index)
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("ckeditor", {
+                attrs: { editor: _vm.editor, config: _vm.editorConfig },
+                model: {
+                  value: _vm.answers[index],
+                  callback: function($$v) {
+                    _vm.$set(_vm.answers, index, $$v)
                   },
-                  on: {
-                    change: function($event) {
-                      _vm.correct = index
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("ckeditor", {
-              attrs: { editor: _vm.editor, config: _vm.editorConfig },
-              model: {
-                value: _vm.answers[index],
-                callback: function($$v) {
-                  _vm.$set(_vm.answers, index, $$v)
-                },
-                expression: "answers[index]"
-              }
-            })
-          ],
-          1
-        )
-      }),
-      0
+                  expression: "answers[index]"
+                }
+              })
+            ],
+            1
+          )
+        })
+      ],
+      2
     ),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [

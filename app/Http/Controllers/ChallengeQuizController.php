@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Challenge;
 use App\ChallengeQuiz;
+use App\Choice;
 use App\QuizAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class ChallengeQuizController extends Controller
     public function index(Challenge $challenge)
     {
         $quiz = ChallengeQuiz::with('choices')->where('challenge_id', $challenge->id)->paginate(1);
-        $answer_count = QuizAnswer::where(['user_id'=> Auth::id(), 'challenge_id'=>$challenge->id])->get()->count();
+        $answer_count = QuizAnswer::where(['user_id' => Auth::id(), 'challenge_id' => $challenge->id])->get()->count();
 
         return view('challenge.quiz', compact(['quiz', 'challenge']));
     }
@@ -86,21 +87,36 @@ class ChallengeQuizController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\ChallengeQuiz $challengeQuiz
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, ChallengeQuiz $challengeQuiz)
+    public function update(Request $request, Challenge $challenge, $quiz)
     {
-        //
+        $challengeQuiz = ChallengeQuiz::find($quiz)->update(['question' => $request->question]);
+        $choices = $request->choices;
+        foreach ($choices as $item) {
+            $id = $item['id'];
+            $data = [
+                'answer' => $item['answer'],
+                'correct' => $request->selected == $item['key'] ? 1 : 0
+            ];
+            Choice::find($id)->update($data);
+        }
+        $challenge = Challenge::with('quizes.choices')->find($challenge->id);
+        return response()->json(['code' => 200, 'quiz' => $challenge->quizes]);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param \App\ChallengeQuiz $challengeQuiz
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(ChallengeQuiz $challengeQuiz)
+    public function destroy(Challenge $challenge, ChallengeQuiz $challengeQuiz, $quiz)
     {
-        //
+        $challengeQuiz = ChallengeQuiz::find($quiz);
+        $challengeQuiz->delete();
+        $challenge = Challenge::with('quizes.choices')->find($challenge->id);
+        return response()->json(['code' => 200, 'quiz' => $challenge->quizes]);
     }
 }

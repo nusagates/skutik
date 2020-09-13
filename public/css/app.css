@@ -11065,7 +11065,6 @@ pre {
 
 input[type=radio] {
   float: left;
-  margin-left: -30px;
 }
 
 label {
