@@ -72,7 +72,7 @@
                         <a class="nav-link" href="{{ route('post.index') }}"><i class="fa fa-book"></i> {{ __('post.label_post') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('challenge.index') }}"><i class="fa fa-gamepad"></i> {{ __('general.label_challenge') }}</a>
+                        <a class="nav-link" href="{{ route('challenge.index') }}"><i class="fa fa-gamepad"></i>Challenge</a>
                     </li>
                 </ul>
 
