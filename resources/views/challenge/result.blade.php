@@ -46,6 +46,10 @@
                         <a target="_blank" class="btn btn-facebook btn-primary mt-1" href="https://www.facebook.com/sharer.php?u={{Request::url()}}&app_id=3223075517741573">Facebook</a>
                         <a target="_blank" class="btn btn-facebook btn-success mt-1" href="https://api.whatsapp.com/send?text={{Request::url()}}">Whatsapp</a>
                     </div>
+                    <div class="card-body popular-post">
+                        <h4>Challenge Terbaru</h4>
+                        {!! get_latest_challenge() !!}
+                    </div>
                 </div>
             </div>
         </div>

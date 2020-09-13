@@ -4,6 +4,7 @@ use App\Post;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
+use App\Challenge;
 
 if (!function_exists('set_title')) {
     function set_title($title = '')
@@ -127,6 +128,22 @@ if (!function_exists('get_popular_posts')) {
             $html = '<ul>';
             foreach ($post as $item) {
                 $html .= '<li><a class="text-success" href="'.$item->url.'">'.$item->post_title.'</a></li>';
+            }
+            $html .= '</ul>';
+            return $html;
+        }
+    }
+}
+if (!function_exists('get_latest_challenge')) {
+    function get_latest_challenge()
+    {
+        if (Schema::hasTable('challenges')) {
+            $post = Challenge::where('challenge_type', 'post')
+                ->where('challenge_status', 'publish')
+                ->latest()->paginate(5);
+            $html = '<ul>';
+            foreach ($post as $item) {
+                $html .= '<li><a href="'.$item->url.'">'.$item->challenge_title.'</a></li>';
             }
             $html .= '</ul>';
             return $html;

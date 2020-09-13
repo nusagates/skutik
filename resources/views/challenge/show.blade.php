@@ -32,7 +32,9 @@
                                 </div>
                                 <hr/>
                                 @can('update', $challenge)
-                                    <challenge-item :challenge="{{$challenge}}"></challenge-item>
+                                    <div style="max-width: 100%">
+                                        <challenge-item :challenge="{{$challenge}}"></challenge-item>
+                                    </div>
                                 @endcan
                             </div>
                         </div>

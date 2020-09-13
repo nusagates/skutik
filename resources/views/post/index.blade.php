@@ -31,7 +31,7 @@
             </div>
 
             <div class="col-md-4 popular-post">
-                {{-- Artikel Terbaru --}}
+                {{-- Artikel Populer --}}
                 <div class="card shadow mb-2">
                     <div class="card-header mb-2">
                         <h3 class="card-title">Artikel Populer</h3>
@@ -39,6 +39,13 @@
                     {!! get_popular_post() !!}
                 </div>
 
+                {{-- Tantangan Terbaru --}}
+                <div class="card shadow mb-2">
+                    <div class="card-header mb-2">
+                        <h3 class="card-title">Challenge Terbaru</h3>
+                    </div>
+                    {!! get_latest_challenge() !!}
+                </div>
                 {{-- Tag populer--}}
                 <div class="card shadow">
                     <div class="card-header">
@@ -48,6 +55,8 @@
                         {{get_all_tags()}}
                     </div>
                 </div>
+
+
 
             </div>
         </div>

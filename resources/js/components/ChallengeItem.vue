@@ -37,19 +37,21 @@
                 <button @click="update" class="btn btn-success btn-sm">Perbarui</button>
             </div>
         </div>
-        <div class="form-group">
-            <h3>Pertanyaan</h3>
-            <ckeditor :editor="editor" v-model="question" :config="editorConfig"></ckeditor>
-        </div>
-        <div class="form-group">
-            <h3>Jawaban</h3>
-            <div v-for="(answer, index) of answers" class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input v-model="correct" type="radio" name="correct[]" :value="index">
+        <div class="w-100">
+            <div class="form-group">
+                <h3>Pertanyaan</h3>
+                <ckeditor :editor="editor" v-model="question" :config="editorConfig"></ckeditor>
+            </div>
+            <div class="form-group">
+                <h3>Jawaban</h3>
+                <div v-for="(answer, index) of answers" class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input v-model="correct" type="radio" name="correct[]" :value="index">
+                        </div>
                     </div>
+                    <ckeditor :editor="editor" v-model="answers[index]" :config="editorConfig"></ckeditor>
                 </div>
-                <ckeditor :editor="editor" v-model="answers[index]" :config="editorConfig"></ckeditor>
             </div>
         </div>
         <div class="form-group">
