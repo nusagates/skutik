@@ -16,8 +16,8 @@ class CreateQuizAnswersTable extends Migration
         Schema::create('quiz_answers', function (Blueprint $table) {
             $table->id();
             $table->string('slug');
-            $table->foreignId('user_id')->constrained('challenge_quizzes')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('challenge_id')->constrained('challenge_quizzes')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('challenge_id')->constrained('challenges')->onUpdate('cascade')->onDelete('cascade');
             $table->string('status')->default('incompleted');
             $table->timestamps();
         });
