@@ -22,7 +22,7 @@ class QuizAnswerController extends Controller
     public function store(Request $request)
     {
 
-        $qa = QuizAnswer::updateOrCreate(
+        $qa = QuizAnswer::firstOrCreate(
             ['user_id' => Auth::id(), 'challenge_id' => $request->challenge_id],
             ['slug' => md5(Carbon::now()->timestamp)]
         );
