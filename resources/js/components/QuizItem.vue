@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="mt-2">
         <div v-for="item of quiz.choices" class="form-group">
             <div class="input-group">
                 <div class="radio">
                     <label class="w-100">
-                        <input :disabled="processing" @click="submit(item.key)" :value="item.key" name="options[]"
-                               v-model="selected" type="radio"> {{item.answer }}
+                        <input class="mr-2" :disabled="processing" @click="submit(item.key)" :value="item.key" name="options[]"
+                               v-model="selected" type="radio"> <div class="answer-item" v-html="item.answer"/>
                     </label>
                 </div>
             </div>

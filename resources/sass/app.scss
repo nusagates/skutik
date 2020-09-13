@@ -159,3 +159,11 @@ pre {
     list-style: url("/images/hand_arrow.png");
     padding-bottom: 15px;
 }
+input[type=radio] {
+    float: left;
+    margin-left: -30px;
+}
+label {
+    margin-left: 30px;
+    display: block;
+}

@@ -26,17 +26,18 @@
                                     </div>
                                 </div>
                                 <h2 class="title">{{$challenge->challenge_title}}</h2>
-                                {!! $challenge->challenge_content !!}
                                 <hr/>
-                                <div class="text-center">
+                                <div>
                                     <div class="card">
-                                        <div class="card-header">
+                                        <div class="card-header text-center">
                                             <h4 class="card-title">Pertanyaan {{$quiz->currentPage()}}
                                                 dari {{$quiz->lastPage()}}</h4>
                                         </div>
                                         <div class="card-body">
                                             @foreach($quiz as $item)
-                                                {{$item->question}}
+                                                <h4>
+                                                    {!! $item->question !!}
+                                                </h4>
                                                 <quiz-item :quiz="{{$item}}" prev="{{$quiz->previousPageUrl()}}"
                                                            next="{{$quiz->nextPageUrl()}}"></quiz-item>
                                             @endforeach

@@ -4,19 +4,19 @@
             <label>Pertanyaan</label>
             <div class="form-group">
                 <div v-for="(quiz, index) of quizes">
-                    <div>{{quiz.question}}</div>
+                    <div v-html="quiz.question"/>
                     <div v-for="q of quiz.choices" class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input :checked="q.correct==1" readonly type="radio"
-                                       aria-label="Radio button for following text input">
-                            </div>
+
+                        <div class="radio">
+                            <label class="w-100">
+                                <input :checked="q.correct==1" readonly  :value="q.key" name="options[]"
+                                        type="radio"> <span class="d-inline" v-html="q.answer"/>
+                            </label>
                         </div>
-                        <input readonly type="text" class="form-control" :value="q.answer">
                     </div>
                 </div>
             </div>
-            <textarea placeholder="Detail pertanyaan" class="form-control" v-model="question"></textarea>
+            <ckeditor :editor="editor" v-model="question" :config="editorConfig"></ckeditor>
         </div>
         <div class="form-group">
             <div v-for="(answer, index) of answers" class="input-group">
@@ -25,7 +25,7 @@
                         <input v-model="correct" type="radio" name="correct[]" :value="index">
                     </div>
                 </div>
-                <input v-model="answers[index]" placeholder="jawaban..." type="text" class="form-control">
+                <ckeditor :editor="editor" v-model="answers[index]" :config="editorConfig"></ckeditor>
             </div>
         </div>
         <div class="form-group">
@@ -39,10 +39,12 @@
 </template>
 
 <script>
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     export default {
         props: ['challenge'],
         data() {
             return {
+                editor: ClassicEditor,
                 processing: false,
                 message: '',
                 question: '',
@@ -54,7 +56,22 @@
                     5: '',
                 },
                 correct: 0,
-                quizes: this.challenge.quizes
+                quizes: this.challenge.quizes,
+                editorConfig: {
+                    ckfinder: {
+                        // Upload the images to the server using the CKFinder QuickUpload command.
+                        uploadUrl: '/media/image/upload'
+                    },
+                    heading: {
+                        options: [
+                            { model: 'normal', view: 'span', title: 'Normal', class: 'ck-heading_paragraph' },
+                            { model: 'paragraph', view:'span', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
+                        ]
+                    }
+                }
             }
         },
         methods: {
@@ -94,7 +111,7 @@
                     this.answers[i] = ''
                 }
             }
-        }
+        },
     }
 </script>
 
