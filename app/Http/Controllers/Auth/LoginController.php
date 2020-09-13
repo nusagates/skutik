@@ -65,8 +65,10 @@ class LoginController extends Controller
                 'username' => strrev(Carbon::now()->timestamp),
                 'name' => $name,
                 'email' => $email,
-                'password' => Hash::make($pass),
+                'password' => Hash::make($pass)
             ]);
+            $new_user->email_verified_at = is_null($new_user->email_verified_at) ? now() : $new_user->email_verified_at;
+            $new_user->save();
             Auth::loginUsingId($new_user->id, true);
 
         }
