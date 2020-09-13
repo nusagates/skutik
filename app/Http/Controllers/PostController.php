@@ -49,7 +49,13 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $post = $request->user()->posts()->create($request->only("post_title", "post_content", 'post_status'));
+        $data = [
+            "post_title" => $request->post_title,
+            "post_content" => $request->post_content,
+            'post_status' => $request->post_status,
+            'slug' => set_post_slug($request->post_title)
+        ];
+        $post = $request->user()->posts()->create($data);
         if (!empty($request->post_tags)) {
             $tags = array_unique(explode(",", $request->post_tags));
             $tagIds = array();
@@ -140,14 +146,14 @@ class PostController extends Controller
     public function author(User $user)
     {
 
-        if(!(Auth::check() || Auth::id()== $user->id)){
+        if (!(Auth::check() || Auth::id() == $user->id)) {
             $post = Post::where('user_id', $user->id)
                 ->where('post_status', 'publish')
                 ->paginate(15);
-        }else{
+        } else {
             $post = Post::where('user_id', $user->id)
                 ->paginate(15);
         }
-        return view('post.author', ['post' => $post,"title" => trans('post.label_tag_author', ['author' => $user->name])]);
+        return view('post.author', ['post' => $post, "title" => trans('post.label_tag_author', ['author' => $user->name])]);
     }
 }

@@ -26,11 +26,6 @@ class Post extends Model
         return $this->hasMany(PostTags::class);
     }
 
-    public function setPostTitleAttribute($value)
-    {
-        $this->attributes['post_title'] = $value;
-        $this->attributes['slug'] = set_post_slug($value, $this->id);
-    }
 
     public function getCreatedDateAttribute()
     {
