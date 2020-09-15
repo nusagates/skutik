@@ -31,4 +31,8 @@ class QuizAnswer extends Model
     {
         return $this->updated_at->format('c');
     }
+    public function getUrlAttribute()
+    {
+        return route('challenge.result', $this->slug);
+    }
 }
