@@ -139,6 +139,7 @@ class PostController extends Controller
     {
         $post = Tags::find($tag->id)->tag()
             ->where('post_status', 'publish')
+            ->orderBy('updated_at', 'desc')
             ->paginate(15);
         return view('post.index', ['post' => $post, "title" => $tag->name]);
     }
@@ -149,6 +150,7 @@ class PostController extends Controller
         if (!(Auth::check() || Auth::id() == $user->id)) {
             $post = Post::where('user_id', $user->id)
                 ->where('post_status', 'publish')
+                ->orderBy('updated_at', 'desc')
                 ->paginate(15);
         } else {
             $post = Post::where('user_id', $user->id)
