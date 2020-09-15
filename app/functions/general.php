@@ -163,11 +163,6 @@ if (!function_exists('sitemap_posts')) {
                 $xmlString .= '<url>';
                 $xmlString .= '<loc>' . $item->url . '</loc>';
                 $xmlString .= '<lastmod>' . $item->updated_at_iso . '</lastmod>';
-                $xmlString .= '<image:image>';
-                $xmlString .= '<image:loc>' . $item->featured_image . '</image:loc>';
-                $xmlString .= '<image:title><![CDATA[' . $item->post_title . ']]></image:title>';
-                $xmlString .= '<image:caption><![CDATA[' . $item->post_title . ']]></image:caption>';
-                $xmlString .= '</image:image>';
                 $xmlString .= '<changefreq>daily</changefreq>';
                 $xmlString .= '<priority>1.0</priority>';
                 $xmlString .= '</url>';
