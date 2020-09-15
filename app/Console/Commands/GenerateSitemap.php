@@ -40,10 +40,10 @@ class GenerateSitemap extends Command
     public function handle()
     {
         $path = public_path('sitemap');
-        if (!is_dir($path)) {
-            mkdir($path, 0777);
-        }
-        $sitemap = SitemapGenerator::create(config('app.url'))->maxTagsPerSitemap(5000)->writeToFile($path . "/sitemap.xml");
+        sitemap_posts();
+        sitemap_tags();
+        sitemap_challenge();
+        sitemap_media();
         $files = array_diff(scandir($path), array('.', '..'));
 
         $sitemap_index = SitemapIndex::create();
@@ -51,8 +51,8 @@ class GenerateSitemap extends Command
             $sitemap_index->add("sitemap/" . $item);
         }
         $sitemap_index->writeToFile(public_path('sitemap_index.xml'));
-        ping_SE('bing');
-        ping_SE('google');
-        ping_SE('pingomatic');
+        //ping_SE('bing');
+        //ping_SE('google');
+        //ping_SE('pingomatic');
     }
 }

@@ -29,4 +29,13 @@ class Challenge extends Model
     {
         return $this->user->name;
     }
+    public function getCreatedAtIsoAttribute()
+    {
+        return $this->created_at->format('c');
+    }
+
+    public function getUpdatedAtIsoAttribute()
+    {
+        return $this->updated_at->format('c');
+    }
 }

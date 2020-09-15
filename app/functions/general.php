@@ -1,6 +1,7 @@
 <?php
 
 use App\Post;
+use App\Tags;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
@@ -110,7 +111,7 @@ if (!function_exists('get_latest_posts')) {
                 ->latest()->paginate(5);
             $html = '<ul>';
             foreach ($post as $item) {
-                $html .= '<li><a href="'.$item->url.'">'.$item->post_title.'</a></li>';
+                $html .= '<li><a href="' . $item->url . '">' . $item->post_title . '</a></li>';
             }
             $html .= '</ul>';
             return $html;
@@ -127,7 +128,7 @@ if (!function_exists('get_popular_posts')) {
                 ->paginate(5);
             $html = '<ul>';
             foreach ($post as $item) {
-                $html .= '<li><a class="text-success" href="'.$item->url.'">'.$item->post_title.'</a></li>';
+                $html .= '<li><a class="text-success" href="' . $item->url . '">' . $item->post_title . '</a></li>';
             }
             $html .= '</ul>';
             return $html;
@@ -143,10 +144,175 @@ if (!function_exists('get_latest_challenge')) {
                 ->latest()->paginate(5);
             $html = '<ul>';
             foreach ($post as $item) {
-                $html .= '<li><a href="'.$item->url.'">'.$item->challenge_title.'</a></li>';
+                $html .= '<li><a href="' . $item->url . '">' . $item->challenge_title . '</a></li>';
             }
             $html .= '</ul>';
             return $html;
+        }
+    }
+}
+if (!function_exists('sitemap_posts')) {
+    function sitemap_posts()
+    {
+        if (Schema::hasTable('posts')) {
+            $xmlString = '<?xml version="1.0" encoding="UTF-8"?>';
+            $xmlString .= '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+
+            $post = Post::where('post_status', 'publish')->latest()->get();
+            foreach ($post as $item) {
+                $xmlString .= '<url>';
+                $xmlString .= '<loc>' . $item->url . '</loc>';
+                $xmlString .= '<lastmod>' . $item->updated_at_iso . '</lastmod>';
+                $xmlString .= '<image:image>';
+                $xmlString .= '<image:loc>' . $item->featured_image . '</image:loc>';
+                $xmlString .= '<image:title><![CDATA[' . $item->post_title . ']]></image:title>';
+                $xmlString .= '<image:caption><![CDATA[' . $item->post_title . ']]></image:caption>';
+                $xmlString .= '</image:image>';
+                $xmlString .= '<changefreq>daily</changefreq>';
+                $xmlString .= '<priority>1.0</priority>';
+                $xmlString .= '</url>';
+            }
+
+
+            $xmlString .= '</urlset>';
+
+            $dom = new DOMDocument;
+            $dom->preserveWhiteSpace = FALSE;
+            $dom->loadXML($xmlString);
+
+            $dom->save(public_path('sitemap/sitemap_post.xml'));
+        }
+    }
+}
+if (!function_exists('sitemap_challenge')) {
+    function sitemap_challenge()
+    {
+        if (Schema::hasTable('challenges')) {
+            $xmlString = '<?xml version="1.0" encoding="UTF-8"?>';
+            $xmlString .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
+
+
+            $post = Challenge::where('challenge_status', 'publish')->latest()->get();
+            foreach ($post as $item) {
+                $xmlString .= '<url>';
+                $xmlString .= '<loc>' . $item->url . '</loc>';
+                $xmlString .= '<lastmod>' . $item->updated_at_iso . '</lastmod>';
+                $xmlString .= '<changefreq>daily</changefreq>';
+                $xmlString .= '<priority>1.0</priority>';
+                $xmlString .= '</url>';
+            }
+
+
+            $xmlString .= '</urlset>';
+
+            $dom = new DOMDocument;
+            $dom->preserveWhiteSpace = FALSE;
+            $dom->loadXML($xmlString);
+
+            $dom->save(public_path('sitemap/sitemap_challenge.xml'));
+        }
+    }
+}
+if (!function_exists('sitemap_result')) {
+    function sitemap_result()
+    {
+        if (Schema::hasTable('quiz_answers')) {
+            $xmlString = '<?xml version="1.0" encoding="UTF-8"?>';
+            $xmlString .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
+
+
+            $post = \App\QuizAnswer::where('status', 'finished')->latest()->get();
+            foreach ($post as $item) {
+                $xmlString .= '<url>';
+                $xmlString .= '<loc>' . $item->url . '</loc>';
+                $xmlString .= '<lastmod>' . $item->updated_at_iso . '</lastmod>';
+                $xmlString .= '<changefreq>daily</changefreq>';
+                $xmlString .= '<priority>1.0</priority>';
+                $xmlString .= '</url>';
+            }
+
+
+            $xmlString .= '</urlset>';
+
+            $dom = new DOMDocument;
+            $dom->preserveWhiteSpace = FALSE;
+            $dom->loadXML($xmlString);
+
+            $dom->save(public_path('sitemap/sitemap_result.xml'));
+        }
+    }
+}
+if (!function_exists('sitemap_media')) {
+    function sitemap_media()
+    {
+        if (Schema::hasTable('media')) {
+            ob_start();
+            $xmlString = '<?xml version="1.0" encoding="UTF-8"?>';
+            $xmlString .= '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+            $media = \App\Media::latest()->get();
+            foreach ($media as $item) {
+                $xmlString .= '<url>';
+                $xmlString .= '<loc>' . url('media/image/' . $item->url) . '</loc>';
+                $xmlString .= '<lastmod>' . $item->updated_at_iso . '</lastmod>';
+                $xmlString .= '<image:image>';
+                $xmlString .= '<image:loc>' . url('media/image/' . $item->url) . '</image:loc>';
+                $xmlString .= '<image:title><![CDATA[' . $item->title . ']]></image:title>';
+                $xmlString .= '<image:caption><![CDATA[' . $item->description . ']]></image:caption>';
+                $xmlString .= '</image:image>';
+                $xmlString .= '<changefreq>daily</changefreq>';
+                $xmlString .= '<priority>1.0</priority>';
+                $xmlString .= '</url>';
+            }
+
+
+            $xmlString .= '</urlset>';
+
+            $dom = new DOMDocument;
+            $dom->preserveWhiteSpace = FALSE;
+            $dom->loadXML($xmlString);
+
+            $dom->save(public_path('sitemap/sitemap_media.xml'));
+        }
+    }
+}
+if (!function_exists('sitemap_tags')) {
+    function sitemap_tags()
+    {
+        if (Schema::hasTable('posts')) {
+            $xmlString = '<?xml version="1.0" encoding="UTF-8"?>';
+            $xmlString .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
+            $tid = array();
+
+            //ambil semua tag yang digunakan pada post
+            $post_tags = \App\PostTags::all();
+            foreach ($post_tags as $tag) {
+                $tid[] = [$tag->tag_id];
+            }
+
+            //hapus semua tags yang tidak digunakan pada post
+            Tags::whereNotIn('id', $tid)->delete();
+
+            //ambil semua tags untuk dimasukkan ke dalam sitemap
+            $tags = Tags::all();
+            foreach ($tags as $item) {
+                $xmlString .= '<url>';
+                $xmlString .= '<loc>' . $item->url . '</loc>';
+                $xmlString .= '<lastmod>' . date(DATE_ATOM, time()) . '</lastmod>';
+                $xmlString .= '<changefreq>daily</changefreq>';
+                $xmlString .= '<priority>1.0</priority>';
+                $xmlString .= '</url>';
+            }
+
+
+            $xmlString .= '</urlset>';
+
+            $dom = new DOMDocument;
+            $dom->preserveWhiteSpace = FALSE;
+            $dom->loadXML($xmlString);
+
+            $dom->save(public_path('sitemap/sitemap_tag.xml'));
         }
     }
 }

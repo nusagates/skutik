@@ -22,4 +22,13 @@ class QuizAnswer extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function getCreatedAtIsoAttribute()
+    {
+        return $this->created_at->format('c');
+    }
+
+    public function getUpdatedAtIsoAttribute()
+    {
+        return $this->updated_at->format('c');
+    }
 }
