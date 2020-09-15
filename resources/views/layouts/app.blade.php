@@ -47,9 +47,8 @@
         }
     </script>
     @yield('meta')
-    @if(env('APP_ENV')=='production')
-        <script data-ad-client="ca-pub-3544553303695951" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    @endif
+    <script data-ad-client="ca-pub-3544553303695951" async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
 <div id="app">
@@ -69,10 +68,12 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('root') }}"><i class="fa fa-home"></i> {{ __('general.label_home') }}</a>
+                        <a class="nav-link" href="{{ route('root') }}"><i
+                                class="fa fa-home"></i> {{ __('general.label_home') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.index') }}"><i class="fa fa-book"></i> {{ __('post.label_post') }}</a>
+                        <a class="nav-link" href="{{ route('post.index') }}"><i
+                                class="fa fa-book"></i> {{ __('post.label_post') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('challenge.index') }}"><i class="fa fa-gamepad"></i>Challenge</a>
@@ -95,7 +96,7 @@
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                               <i class="fa fa-user-circle"></i> {{ Auth::user()->name }}
+                                <i class="fa fa-user-circle"></i> {{ Auth::user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
