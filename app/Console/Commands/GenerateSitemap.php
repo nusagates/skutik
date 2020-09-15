@@ -40,6 +40,7 @@ class GenerateSitemap extends Command
     public function handle()
     {
         $path = public_path('sitemap');
+        if(!is_dir($path))mkdir($path, 0777);
         sitemap_posts();
         sitemap_tags();
         sitemap_challenge();
