@@ -45,6 +45,7 @@ class GenerateSitemap extends Command
         sitemap_tags();
         sitemap_challenge();
         sitemap_media();
+        sitemap_result();
         $files = array_diff(scandir($path), array('.', '..'));
 
         $sitemap_index = SitemapIndex::create();
@@ -52,8 +53,8 @@ class GenerateSitemap extends Command
             $sitemap_index->add("sitemap/" . $item);
         }
         $sitemap_index->writeToFile(public_path('sitemap_index.xml'));
-        //ping_SE('bing');
-        //ping_SE('google');
-        //ping_SE('pingomatic');
+        ping_SE('bing');
+        ping_SE('google');
+        ping_SE('pingomatic');
     }
 }
