@@ -216,7 +216,7 @@ if (!function_exists('sitemap_result')) {
             $xmlString .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
 
 
-            $post = \App\QuizAnswer::where('status', 'finished')->latest()->get();
+            $post = \App\QuizAnswer::latest()->get();
             foreach ($post as $item) {
                 $xmlString .= '<url>';
                 $xmlString .= '<loc>' . $item->url . '</loc>';
