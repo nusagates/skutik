@@ -7,6 +7,7 @@ use App\Post;
 use App\Tags;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -24,10 +25,11 @@ class PostController extends Controller
      */
     public function index()
     {
+        Paginator::useBootstrap();
         $post = Post::with(['user', 'tags'])
             ->where('post_type', 'post')
             ->where('post_status', 'publish')
-            ->latest()->paginate(15);
+            ->latest()->paginate(10);
         return view('post.index', ['post' => $post, 'latest' => $post]);
     }
 
@@ -137,24 +139,27 @@ class PostController extends Controller
 
     public function tag(Tags $tag)
     {
+        Paginator::useBootstrap();
         $post = Tags::find($tag->id)->tag()
             ->where('post_status', 'publish')
             ->orderBy('updated_at', 'desc')
-            ->paginate(15);
+            ->paginate(10);
         return view('post.index', ['post' => $post, "title" => $tag->name]);
     }
 
     public function author(User $user)
     {
+        Paginator::useBootstrap();
 
         if (!(Auth::check() || Auth::id() == $user->id)) {
             $post = Post::where('user_id', $user->id)
                 ->where('post_status', 'publish')
                 ->orderBy('updated_at', 'desc')
-                ->paginate(15);
+                ->paginate(10);
         } else {
             $post = Post::where('user_id', $user->id)
-                ->paginate(15);
+                ->orderBy('updated_at', 'desc')
+                ->paginate(10);
         }
         return view('post.author', ['post' => $post, "title" => trans('post.label_tag_author', ['author' => $user->name])]);
     }
