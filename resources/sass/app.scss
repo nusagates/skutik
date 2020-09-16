@@ -166,3 +166,13 @@ label {
     margin-left: 30px;
     display: block;
 }
+figure{
+    display: table;
+    margin: 0 auto 0.55em
+}
+figcaption{
+    background: #eee;
+    text-align: center;
+    padding: 5px;
+    font-size: 10pt;
+}
