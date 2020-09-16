@@ -87,7 +87,7 @@ if (!function_exists('set_image_slug')) {
             $urls = substr($url, 0 , (strrpos($url, ".")));
             $newSlug = $url . '-' . $i.$ext;
             if (!$allSlugs->contains('url', $newSlug)) {
-                return $newSlug;
+                return $newSlug.$ext;
             }
         }
 
