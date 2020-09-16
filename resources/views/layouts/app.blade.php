@@ -40,7 +40,6 @@
     </script>
     @yield('meta')
     <script data-ad-client="ca-pub-3544553303695951" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    @laravelPWA
 </head>
 <body>
 <div id="app">
