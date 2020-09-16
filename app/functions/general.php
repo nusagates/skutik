@@ -68,12 +68,46 @@ if (!function_exists('set_post_slug')) {
         throw new \Exception('Can not create a unique slug');
     }
 }
+if (!function_exists('set_image_slug')) {
+    function set_image_slug($title, $ext='.png')
+    {
+        $url = Str::slug($title);
+
+        // Get any that could possibly be related.
+        // This cuts the queries down by doing it once.
+        $allSlugs = get_image_slug($url);
+
+        // If we haven't used it before then we are all good.
+        if (!$allSlugs->contains('url', $url)) {
+            return $url;
+        }
+
+        // Just append numbers like a savage until we find not used.
+        for ($i = 1; $i <= 10; $i++) {
+            $urls = substr($url, 0 , (strrpos($url, ".")));
+            $newSlug = $url . '-' . $i.$ext;
+            if (!$allSlugs->contains('url', $newSlug)) {
+                return $newSlug;
+            }
+        }
+
+        throw new \Exception('Can not create a unique slug');
+    }
+}
 if (!function_exists("get_related_slug")) {
     function get_related_slug($slug, $id = 0)
     {
 
         return \App\Post::select('slug')->where('slug', 'like', $slug . '%')
             ->where('id', '<>', $id)
+            ->get();
+    }
+}
+if (!function_exists("get_image_slug")) {
+    function get_image_slug($url)
+    {
+
+        return \App\Media::select('url')->where('url', 'like', $url. '%')
             ->get();
     }
 }

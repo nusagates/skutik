@@ -24,7 +24,8 @@ class MediaController extends Controller
             $name = explode('.', $name);
             $name = $name[0];
             $ext = $file->getClientOriginalExtension();
-            $name_formated = Str::slug($name) . ".png";
+            $name_formated = set_image_slug($name, '.png');
+
             $filename = $time . $name_formated;
             $data = [
                 'user_id' => Auth::id(),
