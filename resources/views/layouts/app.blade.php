@@ -37,17 +37,10 @@
 
         gtag('js', new Date());
         gtag('config', 'UA-73062055-14');
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then((reg) => {
-                        console.log('Service worker registered.', reg);
-                    });
-            });
-        }
     </script>
     @yield('meta')
     <script data-ad-client="ca-pub-3544553303695951" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    @laravelPWA
 </head>
 <body>
 <div id="app">
