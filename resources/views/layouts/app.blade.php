@@ -140,11 +140,11 @@
                         <!-- Links -->
                         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">@lang('general.label_about')</h5>
 
-                        <ul class="list-unstyled">
-                            <li><a href="{{route('root')}}">@lang('general.label_home')</a></li>
-                            <li><a href="{{url('post/about')}}">@lang('general.label_profile')</a></li>
-                            <li><a href="{{url('post/privacy')}}">@lang('general.label_privacy')</a></li>
-                            <li><a href="{{url('post/contact')}}">@lang('general.label_contact')</a></li>
+                        <ul class="fa-ul">
+                            <li class="mb-2"><i class="fa fa-home fa-li"></i> <a class="btn-link" href="{{route('root')}}">@lang('general.label_home')</a></li>
+                            <li class="mb-2"><i class="fa fa-user fa-li"></i> <a class="btn-link" href="{{url('post/about')}}">@lang('general.label_profile')</a></li>
+                            <li class="mb-2"><i class="fa  fa-exclamation-circle fa-li"></i> <a class="btn-link" href="{{url('post/privacy')}}">@lang('general.label_privacy')</a></li>
+                            <li class="mb-2"><i class="fa fa-address-book fa-li"></i> <a class="btn-link" href="{{url('post/contact')}}">@lang('general.label_contact')</a></li>
                         </ul>
 
                     </div>
