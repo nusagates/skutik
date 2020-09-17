@@ -12,7 +12,8 @@
                 </div>
                 <div class="form-group">
                     <label for="post_content">Artikel</label>
-                    <ckeditor :editor="editor" v-model="post_content" :config="editorConfig"></ckeditor>
+                    <ckeditor :editor="editor" v-model="post_content" :config="editorConfig"
+                              @blur="autosave"></ckeditor>
                 </div>
                 <div class="form-group">
                     <label for="post_tags">Tag</label>
@@ -48,7 +49,7 @@
                 tags: this.post == undefined ? "" : this.post.all_tags,
                 content_cache: null,
                 editor: ClassicEditor,
-                status: '',
+                status: this.post.post_status,
                 is_error: true,
                 is_processing: false,
                 editorConfig: {
@@ -59,33 +60,20 @@
                 }
             }
         },
-        created() {
-            setInterval(function () {
-                this.status = ''
-                this.is_error = true
-                this.is_processing = true
-                if (this.post_title==undefined||this.post_title.length < 1) {
-                    this.status = "Judul artikel tidak boleh kosong"
-                    this.is_processing = false
-                } else if (this.post_content==undefined||this.post_content.length < 1) {
-                    this.status = "Isi artikel tidak boleh kosong"
-                    this.is_processing = false
-                }  else if (this.id == undefined) {
-                    this.save('draft')
-                } else {
-                    this.update('draft')
-                }
-            }, 10000)
+        mounted() {
+            if (!(this.id == null || this.id == undefined || this.id == "")) {
+                setInterval(this.autosave, 30000)
+            }
         },
         methods: {
             publish() {
                 this.status = ''
                 this.is_error = this.post == undefined ? true : false
-                this.is_processing = this.post == undefined ? true : false
-                if (this.post_title==undefined||this.post_title.length < 1) {
+                this.is_processing = true
+                if (this.post_title == undefined || this.post_title.length < 1) {
                     this.status = "Judul artikel tidak boleh kosong"
                     this.is_processing = false
-                } else if (this.post_content==undefined||this.post_content.length < 1) {
+                } else if (this.post_content == undefined || this.post_content.length < 1) {
                     this.status = "Isi artikel tidak boleh kosong"
                     this.is_processing = false
                 } else if (this.id == undefined) {
@@ -98,13 +86,13 @@
                 this.status = ''
                 this.is_error = true
                 this.is_processing = true
-                if (this.post_title==undefined||this.post_title.length < 1) {
+                if (this.post_title == undefined || this.post_title.length < 1) {
                     this.status = "Judul artikel tidak boleh kosong"
                     this.is_processing = false
-                } else if (this.post_content==undefined||this.post_content.length < 1) {
+                } else if (this.post_content == undefined || this.post_content.length < 1) {
                     this.status = "Isi artikel tidak boleh kosong"
                     this.is_processing = false
-                }  else if (this.id == undefined) {
+                } else if (this.id == undefined) {
                     this.save('draft')
                 } else {
                     this.update('draft')
@@ -124,6 +112,7 @@
                         this.status = 'Artikel berhasil diterbitkan dengan status ' + this.data.post_status
                         this.is_error = false
                         this.is_processing = false
+                        location.href = '/post/' + res.data.data.id + "/edit"
 
                     })
                     .catch(err => {
@@ -148,11 +137,18 @@
                         this.is_processing = false
                     })
                     .catch(err => {
-                        console.log(err.data.message)
+                        console.log(err)
                         if (err.code == 422) {
                             console.log(err.response.data)
                         }
                     })
+            },
+            autosave() {
+                if (this.status == 'publish') {
+                    this.update('publish')
+                } else {
+                    this.update('draft')
+                }
             }
         },
         computed: {}
