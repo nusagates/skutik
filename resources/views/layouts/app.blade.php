@@ -39,7 +39,7 @@
         gtag('config', 'UA-73062055-14');
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/serviceworker.js?n')
+                navigator.serviceWorker.register('/serviceworker.js?p')
                     .then((reg) => {
                         console.log('Service worker registered.', reg);
                     });

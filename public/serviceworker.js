@@ -1,4 +1,5 @@
-const CACHE_VERSION = '1.2.1';
+const CURENT_TIME = new Date().getTime();
+const CACHE_VERSION = CURENT_TIME;
 
 self.addEventListener('notificationclick', event => {
     event.notification.close()
@@ -16,6 +17,8 @@ const BASE_CACHE_FILES = [
 
 const OFFLINE_CACHE_FILES = [
     BASE_URL,
+    '/css/app.css?'+CURENT_TIME ,
+    '/js/app.js?'+CURENT_TIME,
 ];
 
 const NOT_FOUND_CACHE_FILES = [
@@ -132,7 +135,7 @@ function pwaForWpinstallServiceWorker() {
 
                         }
 
-                        //return cache.addAll(BASE_CACHE_FILES);
+                        return cache.addAll(BASE_CACHE_FILES);
                     }
                 ),
             caches.open(CACHE_VERSIONS.offline)
