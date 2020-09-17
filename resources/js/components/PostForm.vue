@@ -49,7 +49,8 @@
                 tags: this.post == undefined ? "" : this.post.all_tags,
                 content_cache: null,
                 editor: ClassicEditor,
-                status: this.post.post_status,
+                status: '',
+                post_status: this.post.post_status,
                 is_error: true,
                 is_processing: false,
                 editorConfig: {
@@ -123,6 +124,8 @@
                     })
             },
             update(status) {
+                this.is_processing = true
+                this.status = "memroses data..."
                 axios.patch(`/post/${this.id} `, {
                     post_title: this.post_title,
                     post_content: this.post_content,
@@ -144,7 +147,7 @@
                     })
             },
             autosave() {
-                if (this.status == 'publish') {
+                if (this.post_status == 'publish') {
                     this.update('publish')
                 } else {
                     this.update('draft')

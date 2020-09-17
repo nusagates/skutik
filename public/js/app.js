@@ -2312,7 +2312,8 @@ __webpack_require__.r(__webpack_exports__);
       tags: this.post == undefined ? "" : this.post.all_tags,
       content_cache: null,
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__,
-      status: this.post.post_status,
+      status: '',
+      post_status: this.post.post_status,
       is_error: true,
       is_processing: false,
       editorConfig: {
@@ -2390,6 +2391,8 @@ __webpack_require__.r(__webpack_exports__);
     update: function update(status) {
       var _this2 = this;
 
+      this.is_processing = true;
+      this.status = "memroses data...";
       axios.patch("/post/".concat(this.id, " "), {
         post_title: this.post_title,
         post_content: this.post_content,
@@ -2410,7 +2413,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     autosave: function autosave() {
-      if (this.status == 'publish') {
+      if (this.post_status == 'publish') {
         this.update('publish');
       } else {
         this.update('draft');
