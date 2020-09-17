@@ -66,6 +66,9 @@ class PostController extends Controller
             }
             $post->tags()->attach($tagIds);
         }
+        sitemap_posts();
+        sitemap_media();
+        sitemap_tags();
         return response()->json([
             'data' => $post,
             'code' => 200,

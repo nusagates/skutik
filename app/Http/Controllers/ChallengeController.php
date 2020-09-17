@@ -60,6 +60,7 @@ class ChallengeController extends Controller
             'challenge_slug' => Str::slug($request->title) . "-" . Carbon::now()->timestamp,
         ];
         $challenge = $request->user()->challenges()->create($data);
+        sitemap_challenge();
         return redirect()->route('challenge.show', $challenge->challenge_slug)->with('success', "Tantangan berhasil dibuat");
 
     }
@@ -117,6 +118,7 @@ class ChallengeController extends Controller
         $answer = QuizAnswer::find($request->answer_id);
         $answer->status = 'finished';
         $answer->save();
+        sitemap_result();
         return ['code' => 200, 'url' => url('challenge/result/' . $answer->slug)];
     }
 
