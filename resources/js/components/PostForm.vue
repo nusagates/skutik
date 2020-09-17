@@ -2,7 +2,8 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h3>Edit</h3>
-            <a target="_blank" v-show="post.slug!=null" class="btn btn-outline-info" :href="'/post/'+post.slug">Lihat Artikel</a>
+            <a target="_blank" v-show="post.slug!=null" class="btn btn-outline-info" :href="'/post/'+post.slug">Lihat
+                Artikel</a>
         </div>
         <div class="card-body">
             <form method="post">
@@ -56,15 +57,17 @@
                 editorConfig: {
                     ckfinder: {
                         // Upload the images to the server using the CKFinder QuickUpload command.
-                        uploadUrl: '/media/image/upload'
+                        uploadUrl: '/media/image/upload',
+                        options: {
+                            resourceType: 'Images'
+
+                        }
                     }
                 }
             }
         },
         mounted() {
-            if (!(this.id == null || this.id == undefined || this.id == "")) {
-                setInterval(this.autosave, 30000)
-            }
+            setInterval(this.autosave, 30000)
         },
         methods: {
             publish() {
@@ -147,10 +150,12 @@
                     })
             },
             autosave() {
-                if (this.post_status == 'publish') {
-                    this.update('publish')
-                } else {
-                    this.update('draft')
+                if (!(this.id == null || this.id == "")) {
+                    if (this.post_status == 'publish') {
+                        this.update('publish')
+                    } else {
+                        this.update('draft')
+                    }
                 }
             }
         },

@@ -19,6 +19,11 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 Route::get('/', 'PostController@index')->name('root');
 
 Auth::routes(['verify' => true]);
+Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+    ->name('ckfinder_connector');
+
+Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+    ->name('ckfinder_browser');
 Route::get('/home', 'PostController@index')->name('home');
 Route::get('/notify/comment', 'NotificationController@comment')->name('notif.comment');
 

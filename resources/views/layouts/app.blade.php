@@ -23,7 +23,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{url('vendor/fontawesome/css/all.css')}}">
-    <link rel="stylesheet" href="{{url('vendor/ckeditor/plugins/prism/lib/prism/prism_patched.min.css')}}"/>
+    <link rel="stylesheet" href="{{url('vendor/prismjs/prism.css')}}"/>
     <link href="{{url('vendor/ckeditor/plugins/chart/chart.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{url('images/icon.png')}}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -191,9 +191,7 @@
         <!-- Footer -->
     </div>
 </div>
-<script src="{{url('vendor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js')}}"></script>
-<script src="{{url('vendor/ckeditor/plugins/chart/lib/chart.min.js')}}"></script>
-<script src="{{url('vendor/ckeditor/plugins/chart/widget2chart.js')}}"></script>
+@include('ckfinder::setup')
 @yield('script')
 </body>
 </html>
