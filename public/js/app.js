@@ -38505,7 +38505,26 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "card-header d-flex justify-content-between" }, [
+      _c("h3", [_vm._v("Edit")]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.post.slug != null,
+              expression: "post.slug!=null"
+            }
+          ],
+          staticClass: "btn btn-outline-info",
+          attrs: { target: "_blank", href: "/post/" + _vm.post.slug }
+        },
+        [_vm._v("Lihat Artikel")]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("form", { attrs: { method: "post" } }, [
@@ -38583,7 +38602,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(1)
+          _vm._m(0)
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group text-center" }, [
@@ -38658,22 +38677,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card-header d-flex justify-content-between" },
-      [
-        _c("h3", [_vm._v("Terbaru")]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-outline-info", attrs: { href: "/" } }, [
-          _vm._v("Semua Artikel")
-        ])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

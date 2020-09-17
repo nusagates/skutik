@@ -1,8 +1,8 @@
 <template>
     <div class="card">
         <div class="card-header d-flex justify-content-between">
-            <h3>Terbaru</h3>
-            <a class="btn btn-outline-info" href="/">Semua Artikel</a>
+            <h3>Edit</h3>
+            <a target="_blank" v-show="post.slug!=null" class="btn btn-outline-info" :href="'/post/'+post.slug">Lihat Artikel</a>
         </div>
         <div class="card-body">
             <form method="post">
