@@ -9,7 +9,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import TextareaAutosize from 'vue-textarea-autosize'
 
+Vue.use(TextareaAutosize)
 Vue.use( CKEditor );
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
