@@ -11,4 +11,10 @@ class TodoMember extends Model
 
     protected $guarded = [];
     public $timestamps = false;
+    public function todo(){
+        return $this->belongsTo(Todos::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

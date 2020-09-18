@@ -23,8 +23,8 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $data = Todos::latest()->limit(10)->get();
-        return view('todo.index', compact('data'));
+        $data = Auth::user()->todos;
+       return view('todo.index', compact('data'));
     }
 
     /**

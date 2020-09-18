@@ -77,6 +77,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('challenge.index') }}"><i class="fa fa-gamepad"></i>Challenge</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('todo.index') }}"><i class="fa fa-list"></i>Todo</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

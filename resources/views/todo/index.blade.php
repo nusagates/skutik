@@ -9,7 +9,7 @@
                     <div class="card-header d-flex justify-content-between">
                         <h3 class="card-title">Daftar Tantangan</h3>
                         <a class="btn btn-outline-primary"
-                           href="{{route('challenge.create')}}">{{__('general.label_create')}}</a>
+                           href="{{route('todo.create')}}">{{__('general.label_create')}}</a>
                     </div>
                 </div>
             </div>

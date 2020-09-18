@@ -18,7 +18,12 @@ class Todos extends Model
 
     public function members()
     {
-        return $this->belongsToMany(TodoMember::class, 'todo_members', 'todo_id', 'user_id');
+        return $this->belongsToMany(User::class, 'todo_members', 'todo_id', 'user_id');
+    }
+
+    public function mine()
+    {
+        return $this->hasMany(TodoMember::class, 'todo_id');
     }
 
     public function lists()
