@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between">
-                        <h3 class="card-title">Buat Tugas</h3>
+                        <h3 class="card-title">Buat Proyek</h3>
                         <a class="btn btn-outline-primary"
                            href="{{route('todo.index')}}">{{__('general.label_all')}}</a>
                     </div>
@@ -15,13 +15,13 @@
                         <form action="{{route('todo.store')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="title">Judul Tugas</label>
+                                <label for="title">Judul Proyek</label>
                                 <input value="{{old('title')}}" type="text"
                                        class="form-control @error('title') is-invalid @enderror" name="title"
                                        id="title"/>
                             </div>
                             <div class="form-group">
-                                <label for="description">Keterangan Tugas</label>
+                                <label for="description">Keterangan Proyek</label>
                                 <textarea class="form-control @error('description') is-invalid @enderror"
                                           name="description" id="description">{{old('description')}}</textarea>
                             </div>

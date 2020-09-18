@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between">
-                        <h3 class="card-title">Daftar Tantangan</h3>
+                        <h3 class="card-title">Daftar Proyek</h3>
                         <a class="btn btn-outline-primary"
                            href="{{route('todo.create')}}">{{__('general.label_create')}}</a>
                     </div>
