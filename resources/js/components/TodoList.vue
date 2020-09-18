@@ -32,7 +32,6 @@
 </template>
 
 <script>
-    import pace from 'pace-progressbar'
     export default {
         props: ['todo'],
         data() {
@@ -68,7 +67,6 @@
             update(id) {
                 this.message = 'processing...'
                 this.processing=true
-                pace.start({ajax: false})
                 axios.patch(`/todo/${this.data.id}/list/${id}`, {
                     list_id: id
                 })
@@ -77,7 +75,6 @@
                         this.processing = false
                         this.data = res.data
                         this.content = ''
-                        pace.stop()
                     })
                     .catch(err => {
                         this.message = 'an error occured'
