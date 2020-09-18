@@ -2,47 +2,56 @@
     <div>
         <div class="card shadow">
             <div class="card-body">
-                <h4 v-html="data.title+' Tasks List'"/>
+                <div class="text-center"><h4 v-html="data.title+' Tasks List'"/></div>
                 <div class="form-group" v-if="data.lists.length>0">
-                    <span v-html="this.done+' of '+data.lists.length"/>
-                    <i class="fa"
-                       v-bind:class="!processing?'text-success fa-check-circle':'fa-spin fa-spinner'"></i>
+                    <div class="text-center border-bottom">
+                        <span v-html="this.done+' of '+data.lists.length"/>
+                        <i class="fa"
+                           v-bind:class="!processing?'text-success fa-check-circle':'fa-spin fa-spinner'"></i>
+                    </div>
                     <ul class="fa-ul">
-                        <li v-for="list of data.lists">
-                            <div class="d-block">
-                                <div @click="update(list.id)">
-                                    <i v-bind:class="{'text-success fa-check-circle':list.status==='finished', 'text-muted fa-square':list.status!=='finished',}"
-                                       class="fa fa-li"></i>
-                                    <label class="checkbox-inline">
+                        <li v-for="(list, index) of data.lists">
+                            <div>
+                                <div class="align-self-center">
+                                    <i @click="update(list.id)"
+                                       v-bind:class="{'text-success fa-check-circle':list.status==='finished', 'text-muted fa-circle':list.status!=='finished',}"
+                                       class="fas fa-2x fa-li"></i>
+                                    <label class="pt-2 align-middle"
+                                           v-bind:class="show_index===index?'d-none':'d-block'"
+                                           @click="edit(list.id, list.description, index)">
                                         <s v-if="list.status==='finished'" v-html="list.description"/>
                                         <span v-else v-html="list.description"/>
                                     </label>
+                                    <div v-bind:class="show_index===index?'d-block':'d-none'" class="form-group">
+                                        <textarea placeholder="Task description..."
+                                                  class="form-control" v-model="content_edit"></textarea>
+                                    </div>
                                 </div>
-                                <div>
-                                    <button @click="edit(list.id, list.description)" class="badge badge-success"><i
-                                        class="fa fa-pencil-alt"></i></button>
-                                    <button @click="remove(list.id)" class="badge badge-danger"><i
-                                        class="fa fa-times"></i></button>
-                                </div>
+
+                                <button v-show="show_index===index" @click="remove(list.id)"
+                                        class="badge badge-danger">Remove
+                                </button>
+                                <button v-show="show_index===index" @click="cancel"
+                                        class="badge badge-primary">Cancel
+                                </button>
+                                <button v-show="show_index===index" @click="update_list"
+                                        class="badge badge-success">Update
+                                </button>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="form-group" v-else>Belum ada tugas pada Todo ini</div>
+                <hr>
                 <div class="form-group">
+                    <h5>Add Task</h5>
                     <textarea placeholder="Task description..." class="form-control" v-model="content"></textarea>
                 </div>
                 <div v-show="message!=''" class="form-group alert alert-warning" v-html="message"/>
                 <div class="form-group">
                     <button v-show="!editing" :disabled="processing" @click="add" class="btn btn-success btn-sm">Add
                     </button>
-                    <button v-show="editing" :disabled="processing" @click="cancel"
-                            class="btn btn-primary btn-sm">
-                        Cancel
-                    </button>
-                    <button v-show="editing" :disabled="processing" @click="update_list" class="btn btn-success btn-sm">
-                        Update
-                    </button>
+
                 </div>
             </div>
         </div>
@@ -57,9 +66,11 @@
                 data: this.todo,
                 editing: false,
                 content: '',
+                content_edit: '',
                 message: '',
                 processing: false,
                 update_id: 0,
+                show_index: -1,
             }
         },
         methods: {
@@ -118,19 +129,20 @@
                         })
                 }
             },
-            edit(id, content) {
+            edit(id, content, index) {
                 this.editing = true
-                this.content = content
+                this.content_edit = content
                 this.update_id = id
+                this.show_index = index
             },
             update_list() {
-                if (this.content === '') {
+                if (this.content_edit === '') {
                     this.message = 'Please describe your task'
                 } else {
                     this.processing = true
                     this.message = 'processing...'
                     axios.patch(`/todo/${this.data.id}/list/${this.update_id}`, {
-                        description: this.content,
+                        description: this.content_edit,
                         list_id: this.update_id,
                         update: true
                     })
@@ -151,6 +163,7 @@
                 this.editing = false
                 this.content = ''
                 this.update_id = 0
+                this.show_index = -1
             }
         },
         computed: {
