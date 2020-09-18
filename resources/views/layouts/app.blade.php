@@ -24,7 +24,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{url('vendor/fontawesome/css/all.css')}}">
     <link rel="stylesheet" href="{{url('vendor/prismjs/prism.css')}}"/>
-    <link href="{{url('vendor/ckeditor/plugins/chart/chart.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{url('images/icon.png')}}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73062055-14"></script>
@@ -47,7 +46,10 @@
         }
     </script>
     @yield('meta')
-    <script data-ad-client="ca-pub-3544553303695951" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    @if(Request::segment(1)!='todo')
+        <script data-ad-client="ca-pub-3544553303695951" async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    @endif
 </head>
 <body>
 <div id="app">
@@ -152,10 +154,18 @@
                         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">@lang('general.label_about')</h5>
 
                         <ul class="fa-ul">
-                            <li class="mb-2"><i class="fa fa-home fa-li"></i> <a class="btn-link" href="{{route('root')}}">@lang('general.label_home')</a></li>
-                            <li class="mb-2"><i class="fa fa-user fa-li"></i> <a class="btn-link" href="{{url('post/about')}}">@lang('general.label_profile')</a></li>
-                            <li class="mb-2"><i class="fa  fa-exclamation-circle fa-li"></i> <a class="btn-link" href="{{url('post/privacy')}}">@lang('general.label_privacy')</a></li>
-                            <li class="mb-2"><i class="fa fa-address-book fa-li"></i> <a class="btn-link" href="{{url('post/contact')}}">@lang('general.label_contact')</a></li>
+                            <li class="mb-2"><i class="fa fa-home fa-li"></i> <a class="btn-link"
+                                                                                 href="{{route('root')}}">@lang('general.label_home')</a>
+                            </li>
+                            <li class="mb-2"><i class="fa fa-user fa-li"></i> <a class="btn-link"
+                                                                                 href="{{url('post/about')}}">@lang('general.label_profile')</a>
+                            </li>
+                            <li class="mb-2"><i class="fa  fa-exclamation-circle fa-li"></i> <a class="btn-link"
+                                                                                                href="{{url('post/privacy')}}">@lang('general.label_privacy')</a>
+                            </li>
+                            <li class="mb-2"><i class="fa fa-address-book fa-li"></i> <a class="btn-link"
+                                                                                         href="{{url('post/contact')}}">@lang('general.label_contact')</a>
+                            </li>
                         </ul>
 
                     </div>

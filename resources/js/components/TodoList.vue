@@ -3,13 +3,18 @@
         <div class="card shadow">
             <div class="card-body">
                 <div class="form-group" v-if="data.lists.length>0">
-                    <div v-for="list of data.lists" class="checkbox">
-                        <label>
-                            <input :checked="list.status==='finished'" @click="update(list.id)" type="checkbox"
-                                   :value="list.id">
-                            <s v-if="list.status==='finished'" v-html="list.description"/>
-                            <span v-else v-html="list.description"/>
-                        </label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="fa-ul">
+                                <li @click="update(list.id)" v-for="list of data.lists">
+                                    <i v-bind:class="list.status==='finished'?'text-success':'text-muted'" class="fa fa-check-circle fa-li list.status==='finished'?'text-success':''"></i>
+                                    <label class="checkbox-inline">
+                                        <s v-if="list.status==='finished'" v-html="list.description"/>
+                                        <span v-else v-html="list.description"/>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group" v-else>Belum ada tugas pada Todo ini</div>
@@ -59,11 +64,12 @@
                 }
             },
             update(id) {
+                this.message='memroses...'
                 axios.patch(`/todo/${this.data.id}/list/${id}`, {
                     list_id: id
                 })
                     .then(res => {
-                        this.message = 'Tugas berhasil diselesaikan'
+                        this.message = ''
                         this.processing = false
                         this.data = res.data
                         this.content = ''

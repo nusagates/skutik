@@ -5,7 +5,7 @@
                 <div v-html="quiz.question"/>
                 <div v-for="q of quiz.choices" class="input-group">
                     <div class="radio">
-                        <label class="w-100">
+                        <label class="w-100 label-item">
                             <input class="mr-2" :checked="q.correct==1" disabled :value="q.key"
                                    type="radio"> <span class="d-inline" v-html="q.answer"/>
                         </label>

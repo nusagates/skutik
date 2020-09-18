@@ -162,9 +162,10 @@ pre {
 input[type=radio] {
     float: left;
 }
-label {
-    margin-left: 0px;
+.label-item {
+    margin-left: 30px;
     display: block;
+    vertical-align: top;
 }
 figure{
     display: table;
