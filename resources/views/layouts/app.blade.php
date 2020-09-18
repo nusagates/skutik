@@ -21,6 +21,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{url('vendor/fontawesome/css/all.css')}}">
     <link rel="stylesheet" href="{{url('vendor/prismjs/prism.css')}}"/>
@@ -130,7 +131,7 @@
         <footer class="page-footer bg-white font-small stylish-color-dark pt-4">
 
             <!-- Footer Links -->
-            <div class="container text-center text-md-left">
+            <div class="container text-md-left">
 
                 <!-- Grid row -->
                 <div class="row">
