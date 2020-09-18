@@ -27,25 +27,7 @@
     <link rel="stylesheet" href="{{url('vendor/prismjs/prism.css')}}"/>
     <link rel="shortcut icon" href="{{url('images/icon.png')}}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73062055-14"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-        gtag('config', 'UA-73062055-14');
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/serviceworker.js?p')
-                    .then((reg) => {
-                        console.log('Service worker registered.', reg);
-                    });
-            });
-        }
-    </script>
     @yield('meta')
     @if(Request::segment(1)!='todo')
         <script data-ad-client="ca-pub-3544553303695951" async

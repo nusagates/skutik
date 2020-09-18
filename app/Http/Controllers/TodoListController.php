@@ -28,7 +28,7 @@ class TodoListController extends Controller
         $todos = Todos::find($todo);
         $list = $todos->lists()->create($data);
         $todos->log()->create(['log_type' => 'list', 'list_id' => $list->id, 'log_content' => Auth::user()->name . ' Membuat tugas baru ' . $request->description]);
-        return Todos::with(['lists'=>function($q){
+        return Todos::with(['lists' => function ($q) {
             $q->orderBy('created_at', 'desc');
         }])->find($todo);
 
@@ -44,24 +44,39 @@ class TodoListController extends Controller
      */
     public function update(Request $request)
     {
-        $list_id = $request->list_id;
-        $list = TodoList::find($list_id);
-        $list->status = $list->status == 'assigned' ? 'finished' : 'assigned';
-        $list->progress = $list->status == 'assigned' ? '0' : '100';
-        $list->save();
-        return Todos::with(['lists'=>function($q){
-            $q->orderBy('created_at', 'desc');
-        }])->find($list->todo_id);
+        if ($request->has('update')) {
+            $list_id = $request->list_id;
+            $list = TodoList::find($list_id);
+            $list->description = $request->description;
+            $list->save();
+            return Todos::with(['lists' => function ($q) {
+                $q->orderBy('created_at', 'desc');
+            }])->find($list->todo_id);
+        } else {
+            $list_id = $request->list_id;
+            $list = TodoList::find($list_id);
+            $list->status = $list->status == 'assigned' ? 'finished' : 'assigned';
+            $list->progress = $list->status == 'assigned' ? '0' : '100';
+            $list->save();
+            return Todos::with(['lists' => function ($q) {
+                $q->orderBy('created_at', 'desc');
+            }])->find($list->todo_id);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param \App\TodoList $todoList
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
      */
-    public function destroy(TodoList $todoList)
+    public function destroy(TodoList $todoList, Request $request, $todo, $list)
     {
-        //
+        $list = TodoList::find($list);
+        $todo_id = $list->todo_id;
+        $list->delete();
+        return Todos::with(['lists' => function ($q) {
+            $q->orderBy('created_at', 'desc');
+        }])->find($todo_id);
     }
 }
