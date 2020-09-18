@@ -70,11 +70,11 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('root') }}"><i
-                                class="fa fa-home"></i> {{ __('general.label_home') }}</a>
+                                class="fa fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('post.index') }}"><i
-                                class="fa fa-book"></i> {{ __('post.label_post') }}</a>
+                                class="fa fa-book"></i> Post</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('challenge.index') }}"><i class="fa fa-gamepad"></i> Challenge</a>

@@ -25,5 +25,8 @@
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
     },
-    "dependencies": []
+    "dependencies": {
+        "@ckeditor/ckeditor5-vue": "^1.0.2",
+        "pace-progressbar": "^1.0.9"
+    }
 }

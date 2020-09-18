@@ -2,28 +2,29 @@
     <div>
         <div class="card shadow">
             <div class="card-body">
+                <h4 v-html="data.title+' Tasks List'"/>
                 <div class="form-group" v-if="data.lists.length>0">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <ul class="fa-ul">
-                                <li @click="update(list.id)" v-for="list of data.lists">
-                                    <i v-bind:class="list.status==='finished'?'text-success':'text-muted'" class="fa fa-check-circle fa-li list.status==='finished'?'text-success':''"></i>
-                                    <label class="checkbox-inline">
-                                        <s v-if="list.status==='finished'" v-html="list.description"/>
-                                        <span v-else v-html="list.description"/>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <span v-html="this.done+' of '+data.lists.length"/>
+                    <i class="fa"
+                       v-bind:class="!processing?'text-success fa-check-circle':'fa-spin fa-spinner'"></i>
+                    <ul class="fa-ul">
+                        <li @click="update(list.id)" v-for="list of data.lists">
+                            <i v-bind:class="{'text-success fa-check-circle':list.status==='finished', 'text-muted fa-square':list.status!=='finished',}"
+                               class="fa fa-li"></i>
+                            <label class="checkbox-inline">
+                                <s v-if="list.status==='finished'" v-html="list.description"/>
+                                <span v-else v-html="list.description"/>
+                            </label>
+                        </li>
+                    </ul>
                 </div>
                 <div class="form-group" v-else>Belum ada tugas pada Todo ini</div>
                 <div class="form-group">
-                    <textarea class="form-control" v-model="content"></textarea>
+                    <textarea placeholder="Task description..." class="form-control" v-model="content"></textarea>
                 </div>
                 <div v-show="message!=''" class="form-group alert alert-warning" v-html="message"/>
                 <div class="form-group">
-                    <button :disabled="processing" @click="add" class="btn btn-success btn-sm">Tambah</button>
+                    <button :disabled="processing" @click="add" class="btn btn-success btn-sm">Add</button>
                 </div>
             </div>
         </div>
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+    import pace from 'pace-progressbar'
     export default {
         props: ['todo'],
         data() {
@@ -44,27 +46,29 @@
         methods: {
             add() {
                 if (this.content === '') {
-                    this.message = 'Silahkan isi deskripsi tugas terlebih dahulu'
+                    this.message = 'Please describe your task'
                 } else {
                     this.processing = true
-                    this.message = 'memrosess'
+                    this.message = 'processing...'
                     axios.post(`/todo/${this.data.id}/list`, {
                         description: this.content
                     })
                         .then(res => {
-                            this.message = 'Tugas berhasil ditambahkan'
+                            this.message = 'Task has been added successfully'
                             this.processing = false
                             this.data = res.data
                             this.content = ''
                         })
                         .catch(err => {
-                            this.message = 'terjadi kesalahan saat memroses data'
+                            this.message = 'an error occured'
                             this.processing = false
                         })
                 }
             },
             update(id) {
-                this.message='memroses...'
+                this.message = 'processing...'
+                this.processing=true
+                pace.start({ajax: false})
                 axios.patch(`/todo/${this.data.id}/list/${id}`, {
                     list_id: id
                 })
@@ -73,12 +77,26 @@
                         this.processing = false
                         this.data = res.data
                         this.content = ''
+                        pace.stop()
                     })
                     .catch(err => {
-                        this.message = 'terjadi kesalahan saat memroses data'
+                        this.message = 'an error occured'
                         this.processing = false
                     })
             }
+        },
+        computed: {
+            done() {
+                var d = 0;
+                var list = this.data.lists;
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i].status === "finished") {
+                        d++
+                    }
+                }
+                return d
+            }
         }
+
     }
 </script>
