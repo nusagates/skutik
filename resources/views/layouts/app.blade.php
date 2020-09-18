@@ -189,6 +189,25 @@
     </div>
 </div>
 @include('ckfinder::setup')
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-73062055-14"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-73062055-14');
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/serviceworker.js?p')
+                .then((reg) => {
+                    //console.log('Service worker registered.', reg);
+                });
+        });
+    }
+</script>
 @yield('script')
 </body>
 </html>
