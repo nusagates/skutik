@@ -24,9 +24,10 @@
                                     </label>
                                     <transition name="fade" mode="out-in">
                                         <div v-bind:class="show_index===index?'d-block':'d-none'" class="form-group">
-                                            <textarea-autosize input="update_html(this)" placeholder="Task description..."
-                                                 class="form-control edit-text"
-                                                 v-model="content_edit"></textarea-autosize>
+                                            <textarea-autosize input="update_html(this)"
+                                                               placeholder="Task description..."
+                                                               class="form-control edit-text"
+                                                               v-model="content_edit"></textarea-autosize>
                                         </div>
                                     </transition>
                                 </div>
@@ -117,6 +118,7 @@
             },
             remove(id) {
                 if (confirm('Apakah kamu ingin menghapus tugas ini?')) {
+                    this.cancel()
                     axios.delete(`/todo/${this.data.id}/list/` + id, {
                         list_id: id
                     })
@@ -138,9 +140,9 @@
                 this.update_id = id
                 this.show_index = index
             },
-            update_html(element){
+            update_html(element) {
                 element.style.height = "5px";
-                element.style.height = (element.scrollHeight)+"px";
+                element.style.height = (element.scrollHeight) + "px";
             },
             update_list() {
                 if (this.content_edit === '') {
