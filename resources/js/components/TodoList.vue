@@ -22,10 +22,12 @@
                                         <s v-if="list.status==='finished'" v-html="list.description"/>
                                         <span v-else v-html="list.description"/>
                                     </label>
-                                    <div v-bind:class="show_index===index?'d-block':'d-none'" class="form-group">
-                                        <textarea placeholder="Task description..."
-                                                  class="form-control" v-model="content_edit"></textarea>
-                                    </div>
+                                    <transition name="fade" mode="out-in">
+                                        <div v-bind:class="show_index===index?'d-block':'d-none'" class="form-group">
+                                            <div contentEditable placeholder="Task description..."
+                                                 class="form-control edit-text" v-html="content_edit"/>
+                                        </div>
+                                    </transition>
                                 </div>
 
                                 <button v-show="show_index===index" @click="remove(list.id)"
@@ -161,7 +163,7 @@
             },
             cancel() {
                 this.editing = false
-                this.content = ''
+                this.content_edit = ''
                 this.update_id = 0
                 this.show_index = -1
             }

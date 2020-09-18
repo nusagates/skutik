@@ -177,3 +177,19 @@ figcaption{
     padding: 5px;
     font-size: 10pt;
 }
+.edit-text{
+    border: ridge 2px;
+    padding: 7px;
+    width: 100%;
+    min-height: 3em;
+    height: auto;
+    overflow: auto;
+}
+
+/* vue transition */
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
