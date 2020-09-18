@@ -9,7 +9,7 @@
                        v-bind:class="!processing?'text-success fa-check-circle':'fa-spin fa-spinner'"></i>
                     <ul class="fa-ul">
                         <li v-for="list of data.lists">
-                            <div class="d-flex justify-content-between">
+                            <div class="d-block">
                                 <div @click="update(list.id)">
                                     <i v-bind:class="{'text-success fa-check-circle':list.status==='finished', 'text-muted fa-square':list.status!=='finished',}"
                                        class="fa fa-li"></i>
