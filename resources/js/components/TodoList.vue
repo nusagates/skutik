@@ -117,7 +117,6 @@
                     })
             },
             remove(id) {
-                this.show_index = -1
                 if (confirm('Apakah kamu ingin menghapus tugas ini?')) {
                     axios.delete(`/todo/${this.data.id}/list/` + id, {
                         list_id: id
@@ -127,6 +126,7 @@
                             this.processing = false
                             this.data = res.data
                             this.content = ''
+                            this.cancel()
                         })
                         .catch(err => {
                             this.message = 'an error occured'
