@@ -20,6 +20,7 @@ Vue.component('comment', require('./components/Comments').default);
 Vue.component('post-form', require('./components/PostForm.vue').default);
 Vue.component('challenge-item', require('./components/ChallengeItem.vue').default);
 Vue.component('quiz-item', require('./components/QuizItem.vue').default);
+Vue.component('todo-list', require('./components/TodoList').default);
 
 const app = new Vue({
     el: '#app',

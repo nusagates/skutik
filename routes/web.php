@@ -44,7 +44,10 @@ Route::post('/challenge/{id}/finish', 'ChallengeController@finish')->name('chall
 Route::get('/challenge/result/{slug}', 'ChallengeController@result')->name('challenge.result');
 Route::get('/challenge/result/image/{slug}', 'ChallengeController@result_image')->name('challenge.result.image');
 
-
+/* todo */
+Route::resource('todo', 'TodoController')->except('show');
+Route::resource('todo.list', 'TodoListController')->only('store', 'update', 'destroy');
+Route::get('/todo/{todo_slug}', 'TodoController@show')->name('todo.show');
 
 /* media */
 Route::group(['prefix' => 'media'], function () {

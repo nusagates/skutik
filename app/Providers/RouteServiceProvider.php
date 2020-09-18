@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Challenge;
 use App\Post;
 use App\Tags;
+use App\Todos;
 use App\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,11 @@ class RouteServiceProvider extends ServiceProvider
         });
         Route::bind('tag_slug', function ($slug) {
             return Tags::where('slug', $slug)->first() ?? abort(404);
+        });
+        Route::bind('todo_slug', function ($slug) {
+            return Todos::with(['lists' => function ($q) {
+                    $q->orderBy('created_at', 'desc');
+                }])->where('slug', $slug)->first() ?? abort(404);
         });
         Route::bind('username', function ($username) {
             return User::where('username', $username)->first() ?? abort(404);
