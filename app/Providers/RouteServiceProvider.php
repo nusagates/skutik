@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Challenge;
 use App\Post;
+use App\Room;
 use App\Tags;
 use App\Todos;
 use App\User;
@@ -56,6 +57,11 @@ class RouteServiceProvider extends ServiceProvider
         });
         Route::bind('todo_slug', function ($slug) {
             return Todos::with(['lists' => function ($q) {
+                    $q->orderBy('created_at', 'desc');
+                }])->where('slug', $slug)->first() ?? abort(404);
+        });
+        Route::bind('room_slug', function ($slug) {
+            return Room::with(['chats.user','chats' => function ($q) {
                     $q->orderBy('created_at', 'desc');
                 }])->where('slug', $slug)->first() ?? abort(404);
         });

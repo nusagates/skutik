@@ -49,6 +49,11 @@ Route::resource('todo', 'TodoController')->except('show');
 Route::resource('todo.list', 'TodoListController')->only('store', 'update', 'destroy');
 Route::get('/todo/{todo_slug}', 'TodoController@show')->name('todo.show');
 
+/* rooms */
+Route::resource('room', 'RoomController')->except('show');
+Route::resource('room.chat', 'RoomChatController')->only('store', 'update', 'destroy');
+Route::get('/room/{room_slug}', 'RoomController@show')->name('room.show');
+
 /* media */
 Route::group(['prefix' => 'media'], function () {
     Route::post('image/upload', 'MediaController@image_upload')->name('media.image.upload');

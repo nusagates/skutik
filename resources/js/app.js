@@ -23,6 +23,8 @@ Vue.component('post-form', require('./components/PostForm.vue').default);
 Vue.component('challenge-item', require('./components/ChallengeItem.vue').default);
 Vue.component('quiz-item', require('./components/QuizItem.vue').default);
 Vue.component('todo-list', require('./components/TodoList').default);
+Vue.component('chat-message', require('./components/ChatMessage').default);
+Vue.component('chat-form', require('./components/ChatForm').default);
 
 const app = new Vue({
     el: '#app',
