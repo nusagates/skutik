@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             @include('layouts._message')
 
-            <chat-message :room="{{$room}}"></chat-message>
+            <chat-message :room="{{$room}}" auth="{{Auth::check()}}"></chat-message>
 
         </div>
 

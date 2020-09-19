@@ -3,12 +3,23 @@
         <div class="card shadow">
             <div class="card-body">
                 <div class="text-center"><h4 v-html="data.title+' Tasks List'"/></div>
+                <div class="text-center border-bottom">
+                    <span v-html="this.done+' of '+data.lists.length"/>
+                    <i class="fa"
+                       v-bind:class="!processing?'text-success fa-check-circle':'fa-spin fa-spinner'"></i>
+                </div>
+                <div class="form-group mt-2">
+                    <textarea placeholder="Task description..." class="form-control" v-model="content"></textarea>
+                </div>
+                <div v-show="message!=''" class="form-group alert alert-warning" v-html="message"/>
+                <div class="form-group text-center">
+                    <button :disabled="processing" @click="add" class="btn btn-block btn-success btn-sm"><span
+                        v-if="processing"><i class="fa fa-spin fa-spinner"></i> processing...</span><span
+                        v-else>Add Task</span>
+                    </button>
+
+                </div>
                 <div class="form-group" v-if="data.lists.length>0">
-                    <div class="text-center border-bottom">
-                        <span v-html="this.done+' of '+data.lists.length"/>
-                        <i class="fa"
-                           v-bind:class="!processing?'text-success fa-check-circle':'fa-spin fa-spinner'"></i>
-                    </div>
                     <ul class="fa-ul">
                         <li v-for="(list, index) of data.lists">
                             <div>
@@ -45,18 +56,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="form-group" v-else>Belum ada tugas pada Todo ini</div>
-                <hr>
-                <div class="form-group">
-                    <h5>Add Task</h5>
-                    <textarea placeholder="Task description..." class="form-control" v-model="content"></textarea>
-                </div>
-                <div v-show="message!=''" class="form-group alert alert-warning" v-html="message"/>
-                <div class="form-group">
-                    <button v-show="!editing" :disabled="processing" @click="add" class="btn btn-success btn-sm">Add
-                    </button>
-
-                </div>
+                <div class="form-group text-center" v-else>There are no tasks in this project yet</div>
             </div>
         </div>
     </div>
@@ -83,12 +83,12 @@
                     this.message = 'Please describe your task'
                 } else {
                     this.processing = true
-                    this.message = 'processing...'
+                    this.message = ''
                     axios.post(`/todo/${this.data.id}/list`, {
                         description: this.content
                     })
                         .then(res => {
-                            this.message = 'Task has been added successfully'
+                            this.message = ''
                             this.processing = false
                             this.data = res.data
                             this.content = ''
@@ -100,7 +100,6 @@
                 }
             },
             update(id) {
-                this.message = 'processing...'
                 this.processing = true
                 axios.patch(`/todo/${this.data.id}/list/${id}`, {
                     list_id: id
@@ -118,6 +117,7 @@
             },
             remove(id) {
                 if (confirm('Apakah kamu ingin menghapus tugas ini?')) {
+                    this.processing = true
                     axios.delete(`/todo/${this.data.id}/list/` + id, {
                         list_id: id
                     })
@@ -149,14 +149,13 @@
                     this.message = 'Please describe your task'
                 } else {
                     this.processing = true
-                    this.message = 'processing...'
                     axios.patch(`/todo/${this.data.id}/list/${this.update_id}`, {
                         description: this.content_edit,
                         list_id: this.update_id,
                         update: true
                     })
                         .then(res => {
-                            this.message = 'Task has been updated successfully'
+                            this.message = ''
                             this.processing = false
                             this.data = res.data
                             this.content = ''

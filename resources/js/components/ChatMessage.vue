@@ -6,7 +6,7 @@
                                                                      class="fa fa-spin fa-spinner"></i> Reload
             </button>
         </div>
-        <div class="col-md-12 mb-2">
+        <div v-if="auth==='1'" class="col-md-12 mb-2">
             <div class="input-group">
                 <input id="btn-input" type="text" name="message" class="form-control input-sm"
                        placeholder="Type your message here..." v-model="message_content" @keyup.enter="sendMessage">
@@ -21,6 +21,7 @@
                 <p class="alert alert-warning"> <span v-html="warning"/></p>
             </div>
         </div>
+        <div v-else class="col-md-12 mb-2 text-center"><a href="/login">Login</a> to join this conversation</div>
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-body">
@@ -49,7 +50,7 @@
 
 <script>
     export default {
-        props: ['room'],
+        props: ['room', 'auth'],
         data() {
             return {
                 message: this.room.chats,
