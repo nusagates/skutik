@@ -378,3 +378,13 @@ if (!function_exists('sitemap_tags')) {
         }
     }
 }
+
+if(!function_exists('api_response')){
+    function api_response($code=201, $data=[], $message=''){
+        return response()->json([
+            'code'=>$code,
+            'data'=>$data,
+            'message'=>$message,
+        ]);
+    }
+}

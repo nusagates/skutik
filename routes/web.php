@@ -48,6 +48,9 @@ Route::get('/challenge/result/image/{slug}', 'ChallengeController@result_image')
 Route::resource('todo', 'TodoController')->except('show');
 Route::resource('todo.list', 'TodoListController')->only('store', 'update', 'destroy');
 Route::get('/todo/{todo_slug}', 'TodoController@show')->name('todo.show');
+Route::post('/todo/list/children' ,'TodoListChildController@store');
+Route::post('/todo/list/children/update' ,'TodoListChildController@update');
+Route::post('/todo/list/children/remove' ,'TodoListChildController@destroy');
 
 /* rooms */
 Route::resource('room', 'RoomController')->except('show');

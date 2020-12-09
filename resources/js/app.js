@@ -10,9 +10,12 @@ window.Vue = require('vue');
 
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import TextareaAutosize from 'vue-textarea-autosize'
+import VueSweetalert2 from 'vue-sweetalert2';
 
 Vue.use(TextareaAutosize)
 Vue.use( CKEditor );
+Vue.use(VueSweetalert2)
+
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 

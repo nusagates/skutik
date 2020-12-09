@@ -10,4 +10,11 @@ class TodoList extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function children(){
+        return $this->hasMany(TodoListChild::class);
+    }
+    public function todo(){
+        return $this->belongsTo(Todos::class);
+    }
 }

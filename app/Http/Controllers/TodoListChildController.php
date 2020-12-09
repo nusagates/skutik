@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TodoList;
 use App\TodoListChild;
 use Illuminate\Http\Request;
 
@@ -30,18 +31,22 @@ class TodoListChildController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $list = TodoList::find($request->list_id);
+        if ($list) {
+            $list->children()->create(['description' => $request->text]);
+        }
+        return api_response(200, $list);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\TodoListChild  $todoListChild
+     * @param \App\TodoListChild $todoListChild
      * @return \Illuminate\Http\Response
      */
     public function show(TodoListChild $todoListChild)
@@ -52,7 +57,7 @@ class TodoListChildController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\TodoListChild  $todoListChild
+     * @param \App\TodoListChild $todoListChild
      * @return \Illuminate\Http\Response
      */
     public function edit(TodoListChild $todoListChild)
@@ -63,23 +68,30 @@ class TodoListChildController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TodoListChild  $todoListChild
+     * @param \Illuminate\Http\Request $request
+     * @param \App\TodoListChild $todoListChild
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TodoListChild $todoListChild)
+    public function update(Request $request)
     {
-        //
+        $child = TodoListChild::find($request->child_id);
+        if ($child) {
+            $status = $child->status == 'assigned' ? 'finished' : 'assigned';
+            $child->update(['status' => $status]);
+        }
+        return api_response(200, $child);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\TodoListChild  $todoListChild
+     * @param \App\TodoListChild $todoListChild
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TodoListChild $todoListChild)
+    public function destroy(Request $request)
     {
-        //
+        $child = TodoListChild::find($request->child_id);
+        if ($child)
+            $child->delete();
     }
 }

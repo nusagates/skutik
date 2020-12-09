@@ -28,8 +28,8 @@ class TodoListController extends Controller
         ];
         $todos = Todos::find($todo);
         $list = $todos->lists()->create($data);
-        $todos->log()->create(['log_type' => 'list', 'list_id' => $list->id, 'log_content' => Auth::user()->name . ' Membuat tugas baru ' . $request->description]);
-        return Todos::with(['lists' => function ($q) {
+       // $todos->log()->create(['log_type' => 'list', 'list_id' => $list->id, 'log_content' => Auth::user()->name . ' Membuat tugas baru ' . $request->description]);
+        return Todos::with(['lists.children' => function ($q) {
             $q->orderBy('created_at', 'desc');
         }])->find($todo);
 
@@ -61,7 +61,7 @@ class TodoListController extends Controller
             $list->save();
             return Todos::with(['lists' => function ($q) {
                 $q->orderBy('created_at', 'desc');
-            }])->find($list->todo_id);
+            }, 'lists.children'])->find($list->todo_id);
         }
     }
 
@@ -74,10 +74,7 @@ class TodoListController extends Controller
     public function destroy(TodoList $todoList, Request $request, $todo, $list)
     {
         $list = TodoList::find($list);
-        $todo_id = $list->todo_id;
         $list->delete();
-        return Todos::with(['lists' => function ($q) {
-            $q->orderBy('created_at', 'desc');
-        }])->find($todo_id);
+        return api_response(200, []);
     }
 }

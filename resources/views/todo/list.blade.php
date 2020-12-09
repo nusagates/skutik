@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             @include('layouts._message')
             <div class="col-md-12">
-                <todo-list :todo="{{$todos}}"></todo-list>
+                <todo-list slug="{{$slug}}"></todo-list>
             </div>
         </div>
 

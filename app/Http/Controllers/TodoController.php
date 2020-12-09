@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TodoList;
 use App\TodoLog;
 use App\TodoMember;
 use App\Todos;
@@ -24,7 +25,7 @@ class TodoController extends Controller
     public function index()
     {
         $data = Auth::user()->todos;
-       return view('todo.index', compact('data'));
+        return view('todo.index', compact('data'));
     }
 
     /**
@@ -63,11 +64,15 @@ class TodoController extends Controller
      * Display the specified resource.
      *
      * @param \App\Todos $todos
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function show(Todos $todos)
+    public function show(Todos $todos, Request $request)
     {
-        return view('todo.list', compact('todos'));
+        if ($request->ajax()) {
+            $list = TodoList::with('todo', 'children')->where('todo_id', $todos->id)->paginate(20);
+            return api_response(200, ['todo' => $todos, 'list' => $list], "Sukses");
+        }
+        return view('todo.list', ['slug' => $todos->slug]);
     }
 
     /**
