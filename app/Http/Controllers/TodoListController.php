@@ -23,7 +23,8 @@ class TodoListController extends Controller
 
         $data = [
             'assigned_to' => Auth::id(),
-            'description' => $request->description
+            'description' => $request->description,
+            'start_date'=> date("Y-m-d")
         ];
         $todos = Todos::find($todo);
         $list = $todos->lists()->create($data);
