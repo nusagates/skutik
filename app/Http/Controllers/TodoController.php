@@ -69,7 +69,7 @@ class TodoController extends Controller
     public function show(Todos $todos, Request $request)
     {
         if ($request->ajax()) {
-            $list = TodoList::with('todo', 'children')->where('todo_id', $todos->id)->paginate(20);
+            $list = TodoList::with('todo', 'children')->where('todo_id', $todos->id)->paginate(30);
             return api_response(200, ['todo' => $todos, 'list' => $list], "Sukses");
         }
         return view('todo.list', ['slug' => $todos->slug]);
