@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Weather PWA">
-    <link rel="apple-touch-icon" href="images/icon_152.png">
+    <link rel="apple-touch-icon" href="/images/icon_152.png">
     <meta name="theme-color" content="#08472d"/>
 
     <!-- CSRF Token -->
