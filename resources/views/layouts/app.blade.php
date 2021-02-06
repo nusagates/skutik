@@ -105,7 +105,6 @@
     </nav>
 
     <main class="py-4">
-        <div class="mb-5"></div>
         @yield('content')
     </main>
     <div class="container">

@@ -11,13 +11,14 @@ window.Vue = require('vue');
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import TextareaAutosize from 'vue-textarea-autosize'
 import VueSweetalert2 from 'vue-sweetalert2';
-
+import { BootstrapVue} from 'bootstrap-vue'
 Vue.use(TextareaAutosize)
 Vue.use( CKEditor );
 Vue.use(VueSweetalert2)
+Vue.use(BootstrapVue)
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+ const files = require.context('./', true, /\.vue$/i)
+ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('user-info', require('./components/UserInfo.vue').default);
 Vue.component('post-content', require('./components/PostContent.vue').default);

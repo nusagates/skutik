@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoomsTable extends Migration
+class CreateCashflowProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('cashflow_projects', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
-            $table->longText('description')->nullable();
-            $table->string('slug')->index()->unique();
-            $table->string('status')->default('active');
-            $table->string('visibility')->default('public');
+            $table->string("title");
+            $table->longText("detail")->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('cashflow_projects');
     }
 }

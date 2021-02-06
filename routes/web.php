@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CashflowProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,13 +53,14 @@ Route::post('/todo/list/children' ,'TodoListChildController@store');
 Route::post('/todo/list/children/update' ,'TodoListChildController@update');
 Route::post('/todo/list/children/remove' ,'TodoListChildController@destroy');
 
-/* rooms */
-Route::resource('room', 'RoomController')->except('show');
-Route::resource('room.chat', 'RoomChatController')->only('store', 'update', 'destroy');
-Route::get('/room/{room_slug}', 'RoomController@show')->name('room.show');
-
 /* media */
 Route::group(['prefix' => 'media'], function () {
     Route::post('image/upload', 'MediaController@image_upload')->name('media.image.upload');
     Route::get('image/{filename}', 'MediaController@image')->name('media.image');
 });
+
+Route::group(['prefix'=>'cashflow', 'middleware'=>['auth', 'verified']], function (){
+    Route::get('/', [CashflowProjectController::class, 'index']);
+    Route::resource('project', 'CashflowProjectController')->except(['create']);
+});
+
