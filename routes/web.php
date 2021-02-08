@@ -64,7 +64,3 @@ Route::group(['prefix'=>'cashflow', 'middleware'=>['auth', 'verified']], functio
     Route::resource('project', 'CashflowProjectController')->except(['create']);
 });
 
-Route::get('.well-known/assetlinks.json', function (){
-   return view('wellknown');
-});
-
