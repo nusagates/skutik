@@ -10,6 +10,7 @@ window.Vue = require('vue');
 
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import TextareaAutosize from 'vue-textarea-autosize'
+import 'sweetalert2/dist/sweetalert2.min.css';
 import VueSweetalert2 from 'vue-sweetalert2';
 import { BootstrapVue} from 'bootstrap-vue'
 Vue.use(TextareaAutosize)
