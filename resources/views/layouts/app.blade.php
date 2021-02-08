@@ -30,8 +30,7 @@
 
     @yield('meta')
     @if(Request::segment(1)!='todo')
-        <script data-ad-client="ca-pub-3544553303695951" async
-                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
     @endif
 </head>
 <body>
