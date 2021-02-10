@@ -42,6 +42,6 @@
         </div>
     </div>
 @endforeach
-<div class="mx-auto mt-2">
-    {{$post->links()}}
+<div class="mx-auto mt-2 d-flex justify-content-center">
+    {{$post->onEachSide(1)->links()}}
 </div>

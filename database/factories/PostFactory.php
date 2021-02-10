@@ -1,17 +1,33 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Model;
-use Faker\Generator as Faker;
+use App\Post;
+use App\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(\App\Post::class, function (Faker $faker) {
+class PostFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Post::class;
 
-    $title = $faker->sentence(rand(3, 6));
-    return [
-        'post_title' => ucwords(str_replace('.', '', $title)),
-        'post_content' => $faker->paragraph(rand(4, 10), true),
-        'slug' => \Illuminate\Support\Str::slug($title),
-        'post_view' => rand(12, 114),
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            "user_id" => User::all()->random()->id,
+            "post_title" => $this->faker->unique()->sentence.' '.mt_rand(0,1000),
+            "post_content" => $this->faker->paragraph,
+            'post_status' => 'publish',
+            'slug' => $this->faker->slug
+        ];
+    }
+}

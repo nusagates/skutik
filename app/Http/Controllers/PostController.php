@@ -29,7 +29,7 @@ class PostController extends Controller
         $post = Post::with(['user', 'tags'])
             ->where('post_type', 'post')
             ->where('post_status', 'publish')
-            ->latest()->paginate(10);
+            ->latest()->simplePaginate(10);
         return view('post.index', ['post' => $post, 'latest' => $post]);
     }
 
