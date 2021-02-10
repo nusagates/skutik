@@ -36,7 +36,7 @@
                                     <span v-show="show_index!=index" @click="add_sub(list.id)" class="badge badge-primary badge-pill"
                                           v-html="list.children.length+' subtask'"/>
                                 </div>
-                                <ul v-show="show_index!=index" class="list-group">
+                                <ul v-show="show_index!=index && list.status==='assigned'" class="list-group">
                                     <li v-for="child of list.children"
                                         v-bind:class="{'list-group-item-success': child.status==='finished'}"
                                         class="list-group-item d-flex justify-content-between align-items-center">
