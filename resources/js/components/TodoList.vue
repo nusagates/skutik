@@ -27,7 +27,7 @@
                                    v-bind:class="{'text-success fa-check-circle':list.status==='finished', 'text-muted fa-circle':list.status!=='finished',}"
                                    class="fas fa-2x fa-li"></i>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <label class="pt-2 align-middle"
+                                    <label :disabled="list.status==='finished'" class="pt-2 align-middle"
                                            v-bind:class="show_index===index?'d-none':'d-block'"
                                            @click="edit(list.id, list.description, index)">
                                         <s v-if="list.status==='finished'" v-html="list.description"/>

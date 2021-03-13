@@ -85,7 +85,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post->increment('post_view');
-        return view('post.index', ['post' => $post]);
+        return view('post.index', ['post' => $post->load('comments')]);
     }
 
     /**
