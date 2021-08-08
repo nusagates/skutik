@@ -31,7 +31,7 @@
     <li>Menandai Sub Task selesai dikerjakan</li>
    
 </ul>
-
+<h4>Fitur Lainnya</h4>
  Selain fitur utama tersebut, Skutik juga dilengkapi dengan:
  <ul>
   <li>Pendaftaran user menggunakan email, facebook, google</li>
