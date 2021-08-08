@@ -1,3 +1,6 @@
+<h3>Tentang Skutik</h3>
+<p>Skutik adalah webapps yang dibuat untuk membuat situs User Generated Content (UGC) seperti medium.com, Challenge atau tantangan, dan Todo. Repository ini dibagikan untuk publik dengan harapan bisa menjadi referensi bagi teman-teman developer Laravel untuk membuat aplikasi.</p>
+<p>Fitur-fitur yang ada di dalam Skutik dibuat minimalis dan seadanya saja karena dibuat disela-sela kerja. Pengerjaannya banyak yang tidak sesuai dengan Best Practice pengembangan Laravel karena memang ini dibuat dalam rangka praktek kursus di Udemy.</p>
 <h3>Fitur Skutik</h3>
 <p>Skutik memiliki 3 fitur utama yaitu Pengelolaan Artikel(menulis, mengedit, menghapus), Challenge, dan Todo</p>
 
@@ -41,3 +44,8 @@
   <li>Pendaftaran user menggunakan email, facebook, google</li>
     <li>Login user menggunakan email, facebook, google</li>   
  </ul>
+ 
+ <h3>Bantuan</h3>
+ <p>
+    Jika ada pertanyaan seputar repository ini bisa dikirim melalui email budairi.contact@gmail.com atau DM ke FP https://www.facebook.com/nusagates
+    </p>
