@@ -19,8 +19,7 @@
     <li>Menghapus Pertanyaan</li>
 </ul>
 <h4>Fitur Todo</h4>
-<p>Todo berguna untuk mengelola daftar tugas yang harus dikerjakan berdasar project yang dibuat. Setiap orang bisa membuat project dan todo. Setiap project bisa dikelola oleh beberapa penguna. Sehingga todo yang ada bisa dikerjakan orang-orang yang termasuk di dalam project tersebut</p>
-<a href='https://skutik.com/challenge'>Coba Challenge</a>
+<p>Todo berguna untuk mengelola daftar tugas yang harus dikerjakan berdasar project yang dibuat. Setiap orang bisa membuat project dan todo. Setiap project bisa dikelola oleh beberapa penguna. Sehingga todo yang ada bisa dikerjakan orang-orang yang termasuk di dalam project tersebut <a href='https://skutik.com/todo'>Coba todo</a></p>
 <ul>
     <li>Membuat Project</li>
     <li>Membuat Task/Tugas pada masing-masing project</li>
